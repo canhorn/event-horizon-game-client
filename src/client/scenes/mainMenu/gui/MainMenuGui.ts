@@ -1,30 +1,30 @@
-import { translation } from "../../../../core/i18n/I18nServices";
-import { ICommandService } from "../../../../engine/command/api/ICommandService";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { activateGuiLayoutCommand } from "../../../../engine/gui/activate/ActivateLayoutCommand";
-import { createCreateGuiCommand } from "../../../../engine/gui/create/CreateGuiCommand";
-import { createDisposeOfGuiControlCommand } from "../../../../engine/gui/dispose/DisposeOfGuiControlCommand";
-import { GuiControlLayout, GuiTemplate } from "../../../../engine/gui/model";
-import { GuiControlType } from "../../../../engine/gui/model/GuiControlType";
+import { translation } from '../../../../core/i18n/I18nServices';
+import { ICommandService } from '../../../../engine/command/api/ICommandService';
+import { IEventService } from '../../../../engine/event/IEventService';
+import { activateGuiLayoutCommand } from '../../../../engine/gui/activate/ActivateLayoutCommand';
+import { createCreateGuiCommand } from '../../../../engine/gui/create/CreateGuiCommand';
+import { createDisposeOfGuiControlCommand } from '../../../../engine/gui/dispose/DisposeOfGuiControlCommand';
+import { GuiControlLayout, GuiTemplate } from '../../../../engine/gui/model';
+import { GuiControlType } from '../../../../engine/gui/model/GuiControlType';
 import {
     RegisterControlCommandData,
     registerGuiControlCommand,
-} from "../../../../engine/gui/register/RegisterControlCommand";
-import { createUpdateGuiControlCommand } from "../../../../engine/gui/update/UpdateGuiControlCommand";
-import { Inject } from "../../../../engine/ioc/Create";
-import { LifeCycleEntity } from "../../../../engine/lifecycle/model/LifeCycleEntity";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
-import { IQueryService } from "../../../../engine/query/IQueryService";
-import { ACCOUNT_CHANGED_EVENT } from "../../../account/changed/AccountChangedEvent";
-import { createGetAccountQuery } from "../../../account/get/GetAccountQuery";
-import { ZONE_CHANGED_EVENT } from "../../../zone/changed/ZoneChangedEvent";
-import { createZoneDetailsQuery } from "../../../zone/query/ZoneDetailsQuery";
-import { createStartSceneCommand } from "../../start/StartSceneCommand";
+} from '../../../../engine/gui/register/RegisterControlCommand';
+import { createUpdateGuiControlCommand } from '../../../../engine/gui/update/UpdateGuiControlCommand';
+import { Inject } from '../../../../engine/ioc/Create';
+import { LifeCycleEntity } from '../../../../engine/lifecycle/model/LifeCycleEntity';
+import { createLogger } from '../../../../engine/logger/InjectLoggerDecorator';
+import { ILogger } from '../../../../engine/logger/LoggerFactory';
+import { IQueryService } from '../../../../engine/query/IQueryService';
+import { ACCOUNT_CHANGED_EVENT } from '../../../account/changed/AccountChangedEvent';
+import { createGetAccountQuery } from '../../../account/get/GetAccountQuery';
+import { ZONE_CHANGED_EVENT } from '../../../zone/changed/ZoneChangedEvent';
+import { createZoneDetailsQuery } from '../../../zone/query/ZoneDetailsQuery';
+import { createStartSceneCommand } from '../../start/StartSceneCommand';
 
 export class MainMenuGui extends LifeCycleEntity {
     constructor(
-        private readonly _logger: ILogger = createLogger("MainMenuGui"),
+        private readonly _logger: ILogger = createLogger('MainMenuGui'),
         private readonly _queryService: IQueryService = Inject(IQueryService),
         private readonly _commandService: ICommandService = Inject(
             ICommandService
@@ -43,7 +43,7 @@ export class MainMenuGui extends LifeCycleEntity {
             createZoneDetailsQuery({})
         );
         // Create Main Menu GUI
-        this._logger.debug("Main Menu Gui Initialize");
+        this._logger.debug('Main Menu Gui Initialize');
         this._commandService.send(
             createCreateGuiCommand({
                 layoutList: this.createGuiLayout(),
@@ -60,7 +60,7 @@ export class MainMenuGui extends LifeCycleEntity {
 
         this._commandService.send(
             activateGuiLayoutCommand({
-                layoutId: "main_menu",
+                layoutId: 'main_menu',
             })
         );
 
@@ -80,7 +80,7 @@ export class MainMenuGui extends LifeCycleEntity {
     public onDispose(): void {
         this._commandService.send(
             createDisposeOfGuiControlCommand({
-                controlId: "main_menu-grid",
+                controlId: 'main_menu-grid',
             })
         );
 
@@ -99,7 +99,7 @@ export class MainMenuGui extends LifeCycleEntity {
     private onAccountChanged() {
         this._commandService.send(
             createUpdateGuiControlCommand({
-                controlId: "main_menu-account_details-button",
+                controlId: 'main_menu-account_details-button',
                 options: {
                     isDisabled: false,
                 },
@@ -109,7 +109,7 @@ export class MainMenuGui extends LifeCycleEntity {
     private onZoneChanged() {
         this._commandService.send(
             createUpdateGuiControlCommand({
-                controlId: "main_menu-start_game-button",
+                controlId: 'main_menu-start_game-button',
                 options: {
                     isDisabled: false,
                 },
@@ -119,12 +119,12 @@ export class MainMenuGui extends LifeCycleEntity {
 
     private createGuiTemplates() {
         const layoutTemplate: GuiTemplate = {
-            id: "main_menu-grid",
+            id: 'main_menu-grid',
             type: GuiControlType.Grid,
             options: {
                 column: 3,
                 row: 3,
-                backgroundColor: "transparent",
+                backgroundColor: 'transparent',
                 paddingBottom: 5,
                 paddingTop: 5,
                 paddingLeft: 5,
@@ -132,7 +132,7 @@ export class MainMenuGui extends LifeCycleEntity {
             },
         };
         const skillPanel: GuiTemplate = {
-            id: "main_menu-panel",
+            id: 'main_menu-panel',
             type: GuiControlType.Panel,
             gridLocation: {
                 row: 1,
@@ -152,14 +152,14 @@ export class MainMenuGui extends LifeCycleEntity {
             type: GuiControlType.Button,
             options: {
                 isDisabled: true,
-                width: "130px",
-                height: "35px",
-                text: "",
+                width: '130px',
+                height: '35px',
+                text: '',
                 textSize: 16,
-                textColor: "white",
-                backgroundColor: "black",
-                disabledColor: "gray",
-                disabledHoverCursor: "mouse",
+                textColor: 'white',
+                backgroundColor: 'black',
+                disabledColor: 'gray',
+                disabledHoverCursor: 'mouse',
                 alignment: 2,
                 vAlignment: 2,
                 borderThickness: 0,
@@ -178,27 +178,45 @@ export class MainMenuGui extends LifeCycleEntity {
     }): RegisterControlCommandData[] {
         return [
             {
-                controlId: "main_menu-grid",
-                templateId: "main_menu-grid",
+                controlId: 'main_menu-grid',
+                templateId: 'main_menu-grid',
             },
             {
-                controlId: "main_menu-panel",
-                templateId: "main_menu-panel",
+                controlId: 'main_menu-panel',
+                templateId: 'main_menu-panel',
             },
             {
-                controlId: "main_menu-spacer",
-                templateId: "main_menu-spacer",
+                controlId: 'main_menu-spacer',
+                templateId: 'main_menu-spacer',
+            },
+            {
+                controlId: 'main_menu-spacer_2',
+                templateId: 'main_menu-spacer',
             },
             {
                 controlId: `main_menu-start_game-button`,
                 templateId: `main_menu-button`,
                 options: {
                     isDisabled: !zoneDetailsAvailable,
-                    text: translation("mainMenu_StartGame"),
+                    text: translation('mainMenu_StartGame'),
                     onClick: () =>
                         this._commandService.send(
                             createStartSceneCommand({
-                                sceneId: "zone",
+                                sceneId: 'zone',
+                            })
+                        ),
+                },
+            },
+            {
+                controlId: `main_menu-gui_editor-button`,
+                templateId: `main_menu-button`,
+                options: {
+                    isDisabled: false,
+                    text: translation('mainMenu_OpenGuiEditor'),
+                    onClick: () =>
+                        this._commandService.send(
+                            createStartSceneCommand({
+                                sceneId: 'gui-editor',
                             })
                         ),
                 },
@@ -208,11 +226,11 @@ export class MainMenuGui extends LifeCycleEntity {
                 templateId: `main_menu-button`,
                 options: {
                     isDisabled: accountDetailsDisabled,
-                    text: translation("mainMenu_AccountDetails"),
+                    text: translation('mainMenu_AccountDetails'),
                     onClick: () =>
                         this._commandService.send(
                             createStartSceneCommand({
-                                sceneId: "account-details",
+                                sceneId: 'account-details',
                             })
                         ),
                 },
@@ -223,28 +241,36 @@ export class MainMenuGui extends LifeCycleEntity {
     private createGuiLayout(): GuiControlLayout[] {
         return [
             {
-                id: "main_menu",
+                id: 'main_menu',
                 sort: 0,
                 controlList: [
                     {
-                        id: "main_menu-grid",
+                        id: 'main_menu-grid',
                         sort: 0,
                         controlList: [
                             {
-                                id: "main_menu-panel",
+                                id: 'main_menu-panel',
                                 sort: 0,
                                 controlList: [
                                     {
-                                        id: "main_menu-start_game-button",
+                                        id: 'main_menu-start_game-button',
                                         sort: 0,
                                     },
                                     {
-                                        id: "main_menu-spacer",
+                                        id: 'main_menu-spacer',
                                         sort: 1,
                                     },
                                     {
-                                        id: "main_menu-account_details-button",
+                                        id: 'main_menu-gui_editor-button',
                                         sort: 2,
+                                    },
+                                    {
+                                        id: 'main_menu-spacer_2',
+                                        sort: 3,
+                                    },
+                                    {
+                                        id: 'main_menu-account_details-button',
+                                        sort: 4,
                                     },
                                 ],
                             },

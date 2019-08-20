@@ -1,0 +1,144 @@
+{
+    "layout": 
+    {
+        "id": "gui_editor",
+        "sort": 0,
+        "controlList": [
+            {
+                "id": "gui_editor-grid",
+                "sort": 0,
+                "controlList": [
+                    {
+                        "id": "gui_editor-container",
+                        "sort": 0,
+                        "controlList": []
+                    },
+                    {
+                        "id": "gui_editor-container_top_left",
+                        "sort": 1,
+                        "controlList": []
+                    },
+                    {
+                        "id": "gui_editor-panel",
+                        "sort": 2,
+                        "controlList": [
+                            {
+                                "id": "gui_editor-start_game-button",
+                                "sort": 0
+                            },
+                            {
+                                "id": "gui_editor-spacer",
+                                "sort": 1
+                            },
+                            {
+                                "id": "gui_editor-account_details-button",
+                                "sort": 2
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "templateList": [{
+        "id": "gui_editor-grid",
+        "type": "Grid",
+        "options": {
+            "column": 3,
+            "row": 3,
+            "backgroundColor": "white",
+            "paddingBottom": 5,
+            "paddingTop": 5,
+            "paddingLeft": 5,
+            "paddingRight": 5
+        }
+    },
+    {
+        "id": "gui_editor-container",
+        "type": "Container",
+        "gridLocation": {
+            "row": 1,
+            "column": 1
+        },
+        "options": {
+            "background": "green"
+        }
+    },
+    {
+        "id": "gui_editor-container_top_left",
+        "type": "Container",
+        "gridLocation": {
+            "row": 0,
+            "column": 0
+        },
+        "options": {
+            "background": "red"
+        }
+    },
+    {
+        "id": "gui_editor-panel",
+        "type": "Panel",
+        "gridLocation": {
+            "row": 1,
+            "column": 1
+        },
+        "options": {
+            "background": "transparent"
+        }
+    },
+    {
+        "id": "gui_editor-spacer",
+        "type": "Spacer",
+        "options": {
+            "padding": 10
+        }
+    },
+    {
+        "id": "gui_editor-button",
+        "type": "Button",
+        "options": {
+            "width": "130px",
+            "height": "35px",
+            "text": "",
+            "textSize": 16,
+            "textColor": "white",
+            "backgroundColor": "black",
+            "disabledColor": "gray",
+            "disabledHoverCursor": "mouse",
+            "alignment": 2,
+            "vAlignment": 2,
+            "borderThickness": 0,
+            "onClickScript": "ScriptToCall.js" 
+        }
+    }],
+    "controlList": [
+        {
+            "controlId": "gui_editor-grid",
+            "templateId": "gui_editor-grid"
+        },
+        {
+            "controlId": "gui_editor-panel",
+            "templateId": "gui_editor-panel"
+        },
+        {
+            "controlId": "gui_editor-container",
+            "templateId": "gui_editor-container"
+        },
+        {
+            "controlId": "gui_editor-container_top_left",
+            "templateId": "gui_editor-container_top_left"
+        },
+        {
+            "controlId": "gui_editor-spacer",
+            "templateId": "gui_editor-spacer"
+        },
+        {
+            "controlId": "gui_editor-start_game-button",
+            "templateId": "gui_editor-button"
+        },
+        {
+            "controlId": "gui_editor-account_details-button",
+            "templateId": "gui_editor-button"
+        }
+    ]
+}

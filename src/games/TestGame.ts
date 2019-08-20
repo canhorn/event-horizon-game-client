@@ -13,6 +13,7 @@ import { createSingletonProviderService, Inject } from '../engine/ioc/Create';
 import { createLogger } from '../engine/logger/InjectLoggerDecorator';
 import { ILogger } from '../engine/logger/LoggerFactory';
 import { useLocalShimServices } from '../_localShim/UseLocalShimServices';
+import { GuiEditorGui } from '../client/scenes/gui/gui/GuiEditorGui';
 
 export class TestGame implements Game {
     public _startupCamera!: WorldFreeCamera;
@@ -45,10 +46,13 @@ export class TestGame implements Game {
         this._commandService.send(
             createCreateGameSceneOrchestratorCommand({
                 sceneOrchestrationOptions: {
-                    defaultSceneId: 'main-menu',
+                    defaultSceneId: 'gui-editor',
                     scenes: Dictionary.fromJSON({
                         'main-menu': {
                             build: MainMenuScene,
+                        },
+                        'gui-editor': {
+                            build: GuiEditorGui,
                         },
                         'account-details': {
                             build: AccountDetailsScene,

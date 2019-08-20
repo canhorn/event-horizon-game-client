@@ -41,3 +41,5 @@ export type ITranslationResolver = (
     key: string,
     ...replaces: Array<string | number>
 ) => string;
+
+setResourceBundle(defaultJson);

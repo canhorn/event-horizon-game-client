@@ -8,6 +8,7 @@
     "logout": "Logout",
     "gameHeader": "Game",
     "mainMenu_StartGame": "Start Game",
+    "mainMenu_OpenGuiEditor": "GUI Editor",
     "mainMenu_AccountDetails": "Account Details",
     "account_BackToMainMenu": "Back to Main Menu",
     "account_AccountNotLoaded": "Account not Loaded",
