@@ -1,7 +1,7 @@
 {
   "include": [
-    "./src/*"
-  ],
+    "src/**/*"
+],
   "compilerOptions": {
     "lib": [
       "dom",

@@ -1,5 +1,5 @@
 import { Mesh } from "babylonjs";
-import { StackPanel } from "babylonjs-gui";
+import { Control, Rectangle, StackPanel } from "babylonjs-gui";
 import { isObjectDefined } from "../../../core/object/ObjectCheck";
 import objectMerge from "../../../core/object/ObjectMerge";
 import { Inject } from "../../ioc/Create";
@@ -11,7 +11,7 @@ import {
     GuiGridLocation,
 } from "../model";
 
-let _pointerPointerOver: boolean = false;
+const _pointerPointerOver: boolean = false;
 
 /**
  * BUG: Issue with buttons on animation transition.
@@ -49,7 +49,8 @@ export class GuiPanel implements GuiControl {
     }
     public id: string;
     public options: GuiPanelControlOptions;
-    public control: StackPanel;
+    public control: Control;
+    public innerControl: StackPanel;
     public parentId?: string;
     public gridLocation?: GuiGridLocation;
 
@@ -63,11 +64,13 @@ export class GuiPanel implements GuiControl {
     ) {
         this.id = id;
         this.options = options as GuiPanelControlOptions;
-        this.control = createControl(this.id, this.options);
+        const [control, stackPanel] = createControl(this.id, this.options);
+        this.control = control;
+        this.innerControl = stackPanel;
         this.gridLocation = gridLocation;
     }
     public addControl(guiControl: GuiControl) {
-        this.control.addControl(guiControl.control);
+        this.innerControl.addControl(guiControl.control);
     }
     public update(options: GuiControlOptions) {
         throw new Error("Method not implemented.");
@@ -76,6 +79,7 @@ export class GuiPanel implements GuiControl {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
+        this.innerControl.dispose();
         this.control.dispose();
     }
 
@@ -108,50 +112,54 @@ export class GuiPanel implements GuiControl {
 const createControl = (
     idPrefix: string,
     options: GuiPanelControlOptions
-): StackPanel => {
+): [Control, StackPanel] => {
     const panel = new StackPanel();
     panel.isHitTestVisible = false;
+    panel.horizontalAlignment = 0;
+    panel.verticalAlignment = 0;
 
     objectMerge(panel, options);
 
     if (options.enableScrolling) {
-        const onMouseWheelEvent: EventListenerOrEventListenerObject = event => {
-            const wheelEvent = event as WheelEvent;
-            if (_pointerPointerOver) {
-                if (wheelEvent.deltaY > 0) {
-                    // Scroll Text Area Up
-                    const lessThan = panel.heightInPixels - panel.topInPixels;
-                    if (
-                        panel.parent &&
-                        panel.parent.heightInPixels < lessThan
-                    ) {
-                        panel.top = panel.topInPixels + 5;
-                    }
-                }
-                if (wheelEvent.deltaY < 0) {
-                    // Push Text Area Down
-                    panel.top = panel.topInPixels - 5;
-                    if (panel.topInPixels < (options.top || 0)) {
-                        panel.top = options.top as number;
-                    }
-                }
-            }
-        };
-
-        panel.onPointerEnterObservable.add(() => {
-            _pointerPointerOver = true;
-            document.addEventListener("mousewheel", onMouseWheelEvent, false);
-        });
-        panel.onPointerOutObservable.add(() => {
-            _pointerPointerOver = false;
-            document.removeEventListener(
-                "mousewheel",
-                onMouseWheelEvent,
-                false
-            );
-        });
+        // Will need to update BabylonJS version
+        // TODO: Implement: https://doc.babylonjs.com/how_to/scrollviewer
+        // // To enable scrolling we also need to force hit detection to true.
+        // rectangle.isHitTestVisible = true;
+        // const onMouseWheelEvent: EventListenerOrEventListenerObject = event => {
+        //     const wheelEvent = event as WheelEvent;
+        //     if (_pointerPointerOver && isObjectDefined(panel.parent)) {
+        //         if (wheelEvent.deltaY > 0) {
+        //             // Scroll Text Area Down
+        //             if (
+        //                 panel.heightInPixels + panel.topInPixels >
+        //                 panel.parent.heightInPixels
+        //             ) {
+        //                 panel.top = panel.topInPixels - 5;
+        //             }
+        //         }
+        //         if (wheelEvent.deltaY < 0) {
+        //             // Push Text Area Up
+        //             panel.top = panel.topInPixels + 5;
+        //             if (panel.topInPixels >= 0) {
+        //                 panel.top = 0;
+        //             }
+        //         }
+        //     }
+        // };
+        // rectangle.onPointerEnterObservable.add(() => {
+        //     _pointerPointerOver = true;
+        //     document.addEventListener("mousewheel", onMouseWheelEvent, false);
+        // });
+        // rectangle.onPointerOutObservable.add(() => {
+        //     _pointerPointerOver = false;
+        //     document.removeEventListener(
+        //         "mousewheel",
+        //         onMouseWheelEvent,
+        //         false
+        //     );
+        // });
     }
-    return panel;
+    return [panel, panel];
 };
 
 export interface GuiPanelControlOptions extends GuiControlOptions {
