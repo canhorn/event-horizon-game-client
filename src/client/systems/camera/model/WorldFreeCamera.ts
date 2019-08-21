@@ -1,4 +1,4 @@
-import { FreeCamera } from "babylonjs";
+import { FreeCamera, Vector3 } from "babylonjs";
 import { ICanvas } from "../../../../engine/canvas/ICanvas";
 import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleEntity } from "../../../../engine/lifecycle/model/LifeCycleEntity";
@@ -27,11 +27,11 @@ export class WorldFreeCamera extends LifeCycleEntity implements ICamera {
         // This creates and positions a free camera (non-mesh)
         this.camera = new FreeCamera(
             `player_camera_${this._guid.guid()}`,
-            new BABYLON.Vector3(0, 10, -30),
+            new Vector3(0, 10, -30),
             this._renderingScene.scene
         );
         // This targets the camera to scene origin
-        this.camera.setTarget(BABYLON.Vector3.Zero());
+        this.camera.setTarget(Vector3.Zero());
         // This attaches the camera to the canvas
         // this.camera.keysUp.push(87);    //W
         // this.camera.keysDown.push(83)   //D

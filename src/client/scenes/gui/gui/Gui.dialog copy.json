@@ -78,46 +78,36 @@
                             }
                         },
                         {
-                            "id": "gui_editor-other_button-button",
-                            "sort": 3,
-                            "templateId": "platform-text",
+                            "id": "gui_dialog-dialog_scroll_view",
+                            "sort": 2,
+                            "templateId": "platform-scroll_viewer",
                             "options": {
-                                "width": "100%",
-                                "height": "600px",
-                                "textKey": "dialog::bodyText",
-                                "fontSize": 16,
-                                "color": "white",
-                                "textHorizontalAlignment": 0,
-                                "textVerticalAlignment": 0,
-                                "onClickScript": "Local_GuiLayout_GoToGame.js"
-                            }
-                        },
-                        {
-                            "id": "gui_editor-spacer",
-                            "sort": 3,
-                            "templateId": "platform-spacer",
-                            "options": {
-                                "padding": 10
-                            }
-                        },
-                        {
-                            "id": "gui_editor-account_details-button",
-                            "sort": 4,
-                            "templateId": "platform-button",
-                            "options": {
-                                "width": "130px",
-                                "height": "35px",
-                                "textKey": "mainMenu_AccountDetails",
-                                "textSize": 16,
-                                "textColor": "white",
-                                "backgroundColor": "black",
-                                "disabledColor": "gray",
-                                "disabledHoverCursor": "mouse",
-                                "alignment": 2,
-                                "vAlignment": 2,
-                                "borderThickness": 0,
-                                "onClickScript": "Local_GuiLayout_GoToAccountDetails.js"
-                            }
+                                "thickness": 7,
+                                "color": "green",
+                                "height": 1,
+                                "width": 1,
+                                "background": "black"
+                            },
+                            "controlList": [
+                                {
+                                    "id": "gui_editor-body_text",
+                                    "sort": 3,
+                                    "templateId": "platform-text",
+                                    "options": {
+                                        "textWrapping": 1,
+                                        "resizeToFit": true,
+                                        "paddingTop": 100,
+                                        "paddingLeft": "30px",
+                                        "paddingRight": "20px",
+                                        "paddingBottom": "15px",
+                                        "textHorizontalAlignment": 0,
+                                        "textVerticalAlignment": 0,
+                                        "color": "red",
+                                        "textKey": "dialog::bodyText",
+                                        "fontSize": 16
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }

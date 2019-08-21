@@ -53,11 +53,11 @@ const createControl = (
     options: GuiTextControlOptions
 ): TextBlock => {
     const text = new TextBlock(`${idPrefix}-Text`);
-    text.verticalAlignment = 0;
-    text.horizontalAlignment = 0;
-    text.isHitTestVisible = false;
-    text.isPointerBlocker = false;
-    text.textWrapping = true;
+    // text.verticalAlignment = 0;
+    // text.horizontalAlignment = 0;
+    // text.isHitTestVisible = false;
+    // text.isPointerBlocker = false;
+    // text.textWrapping = 2;
 
     objectMerge(text, options);
 

@@ -9,6 +9,7 @@ export const initializePlatformGuiState = () => {
     createPlatformInputControl();
     createPlatformLabelControl();
     createPlatformPanelControl();
+    createPlatformScrollViewerControl();
     createPlatformSpacerControl();
     createPlatformTextControl();
 };
@@ -98,8 +99,16 @@ const createPlatformPanelControl = () => {
         id: "platform-panel",
         type: GuiControlType.Panel,
         options: {
-            background: "gray",
+            isHitTestVisible: true,
         },
+    });
+};
+
+const createPlatformScrollViewerControl = () => {
+    addGuiTemplate({
+        id: "platform-scroll_viewer",
+        type: GuiControlType.ScrollViewer,
+        options: {},
     });
 };
 
@@ -119,8 +128,6 @@ const createPlatformTextControl = () => {
         type: GuiControlType.Text,
         options: {
             color: "white",
-            width: "50px",
-            height: "50px",
             fontSize: "1em",
             text: "------",
         },

@@ -18,6 +18,7 @@ import {
     GuiSpacer,
     GuiText,
 } from "../type";
+import { GuiScrollViewer } from "../type/GuiScrollViewer";
 
 export const buildGuiControl = (
     id: string,
@@ -50,6 +51,8 @@ export const buildGuiControl = (
             return new GuiInput(id, mergedOptions, mergedGridLocation);
         case GuiControlType.Text:
             return new GuiText(id, mergedOptions, mergedGridLocation);
+        case GuiControlType.ScrollViewer:
+            return new GuiScrollViewer(id, mergedOptions, mergedGridLocation);
     }
 
     throw {

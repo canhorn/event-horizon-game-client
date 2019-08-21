@@ -1,5 +1,5 @@
 import { Mesh } from "babylonjs";
-import { Control, Rectangle, StackPanel } from "babylonjs-gui";
+import { Control, Rectangle, ScrollViewer, StackPanel } from "babylonjs-gui";
 import { isObjectDefined } from "../../../core/object/ObjectCheck";
 import objectMerge from "../../../core/object/ObjectMerge";
 import { Inject } from "../../ioc/Create";
@@ -17,7 +17,7 @@ const _pointerPointerOver: boolean = false;
  * BUG: Issue with buttons on animation transition.
  * They get stuck after the first open/close transition
  */
-export class GuiPanel implements GuiControl {
+export class GuiScrollViewer implements GuiControl {
     get type(): GuiControlType {
         return GuiControlType.Panel;
     }
@@ -48,8 +48,8 @@ export class GuiPanel implements GuiControl {
         }
     }
     public id: string;
-    public options: GuiPanelControlOptions;
-    public control: StackPanel;
+    public options: GuiScrollViewerControlOptions;
+    public control: ScrollViewer;
     public parentId?: string;
     public gridLocation?: GuiGridLocation;
 
@@ -62,7 +62,7 @@ export class GuiPanel implements GuiControl {
         private readonly _window: ISystemWindow = Inject(ISystemWindow)
     ) {
         this.id = id;
-        this.options = options as GuiPanelControlOptions;
+        this.options = options as GuiScrollViewerControlOptions;
         this.control = createControl(this.options);
         this.gridLocation = gridLocation;
     }
@@ -105,20 +105,17 @@ export class GuiPanel implements GuiControl {
     }
 }
 
-const createControl = (options: GuiPanelControlOptions): StackPanel => {
-    const panel = new StackPanel();
+const createControl = (
+    options: GuiScrollViewerControlOptions
+): ScrollViewer => {
+    const control = new ScrollViewer();
 
-    objectMerge(panel, options);
+    objectMerge(control, options);
 
-    return panel;
+    return control;
 };
 
-export interface GuiPanelControlOptions extends GuiControlOptions {
-    top?: number;
-    isVertical?: boolean;
-    enableScrolling?: boolean;
-    horizontalAlignment: 0 | 1 | 2;
-    verticalAlignment?: 0 | 1 | 2;
+export interface GuiScrollViewerControlOptions extends GuiControlOptions {
     animation?: IGuiAnimationOptions;
 }
 

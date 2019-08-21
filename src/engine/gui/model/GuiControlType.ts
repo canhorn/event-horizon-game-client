@@ -1,5 +1,6 @@
 export class GuiControlType {
     public static Panel = "Panel";
+    public static ScrollViewer = "ScrollViewer";
     public static Label = "Label";
     public static Button = "Button";
     public static Bar = "Bar";

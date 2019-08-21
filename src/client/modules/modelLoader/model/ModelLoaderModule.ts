@@ -1,5 +1,5 @@
-import { BoundingBoxGizmo, Mesh, Space, Vector3 } from "babylonjs";
-import { SceneLoader } from "babylonjs-loaders";
+import { BoundingBoxGizmo, Mesh, SceneLoader, Space, Vector3 } from "babylonjs";
+import "babylonjs-loaders";
 import { ICommandService } from "../../../../engine/command/api/ICommandService";
 import { IEventService } from "../../../../engine/event/IEventService";
 import { Inject } from "../../../../engine/ioc/Create";
