@@ -1,28 +1,28 @@
-import { ICommandHandler } from '../../engine/command/api/ICommandHandler';
-import { ICommandResult } from '../../engine/command/api/ICommandResult';
-import { ICommandType } from '../../engine/command/api/ICommandType';
-import { Inject } from '../../engine/ioc/Create';
-import { IQueryService } from '../../engine/query/IQueryService';
-import { START_ZONE_PLAYER_CONNECTION_COMMAND } from '../../client/server/zone/start/StartZonePlayerConnectionCommand';
-import { createZoneDetailsQuery } from '../../client/zone/query/ZoneDetailsQuery';
-import { createGetAccountQuery } from '../../client/account/get/GetAccountQuery';
-import { createZonePlayerInfoReceivedEvent } from '../../client/server/zone/info/ZonePlayerInfoReceivedEvent';
-import { IEventService } from '../../engine/event/IEventService';
-import { createLogger } from '../../engine/logger/InjectLoggerDecorator';
-import { ILogger } from '../../engine/logger/LoggerFactory';
-import { IZonePlayerInfo } from '../../client/server/zone/api/IZonePlayerInfo';
-import { Vector3, Color4 } from 'babylonjs';
+import { Color4, Vector3 } from "babylonjs";
+import { createGetAccountQuery } from "../../client/account/get/GetAccountQuery";
+import { IZonePlayerInfo } from "../../client/server/zone/api/IZonePlayerInfo";
+import { createZonePlayerInfoReceivedEvent } from "../../client/server/zone/info/ZonePlayerInfoReceivedEvent";
+import { START_ZONE_PLAYER_CONNECTION_COMMAND } from "../../client/server/zone/start/StartZonePlayerConnectionCommand";
+import { createZoneDetailsQuery } from "../../client/zone/query/ZoneDetailsQuery";
+import { ICommandHandler } from "../../engine/command/api/ICommandHandler";
+import { ICommandResult } from "../../engine/command/api/ICommandResult";
+import { ICommandType } from "../../engine/command/api/ICommandType";
+import { IEventService } from "../../engine/event/IEventService";
+import { Inject } from "../../engine/ioc/Create";
+import { createLogger } from "../../engine/logger/InjectLoggerDecorator";
+import { ILogger } from "../../engine/logger/LoggerFactory";
+import { IQueryService } from "../../engine/query/IQueryService";
 
 /**
-/* Name: StartCoreServerConnectionCommand
-/* Type: Command
+ * Name: StartCoreServerConnectionCommand
+ * Type: Command
  */
 export class StartZonePlayerConnectionCommandHandler
     implements ICommandHandler {
     public type: ICommandType = START_ZONE_PLAYER_CONNECTION_COMMAND;
     constructor(
         private readonly _logger: ILogger = createLogger(
-            'StartZonePlayerConnectionCommandHandler'
+            "StartZonePlayerConnectionCommandHandler"
         ),
         private readonly _eventService: IEventService = Inject(IEventService),
         private readonly _queryService: IQueryService = Inject(IQueryService)
@@ -35,7 +35,7 @@ export class StartZonePlayerConnectionCommandHandler
             createGetAccountQuery({})
         );
 
-        this._logger.debug('Zone Player Info: ', zonePlayerInfo);
+        this._logger.debug("Zone Player Info: ", zonePlayerInfo);
         this._eventService.publish(
             createZonePlayerInfoReceivedEvent({ zonePlayerInfo })
         );
@@ -69,7 +69,7 @@ const createColor4 = ({
 }) => new Color4(r, g, b, a);
 const zonePlayerInfo: IZonePlayerInfo = {
     player: {
-        playerId: 'player-id',
+        playerId: "player-id",
         id: 0,
         position: {
             currentPosition: {
@@ -80,17 +80,17 @@ const zonePlayerInfo: IZonePlayerInfo = {
         },
         data: {
             ownerState: {
-                ownerId: '7eba45d5-dbf6-4f82-bcb2-c96214be4ad2',
+                ownerId: "7eba45d5-dbf6-4f82-bcb2-c96214be4ad2",
                 canBeCaptured: false,
             },
             movementState: {
                 speed: 1.0,
             },
             routine: {
-                name: 'MOVE',
+                name: "MOVE",
             },
             defaultRoutine: {
-                name: 'IDLE',
+                name: "IDLE",
             },
             wander: {
                 lookDistance: 25,
@@ -100,7 +100,7 @@ const zonePlayerInfo: IZonePlayerInfo = {
             },
             lifeState: {
                 condition: {
-                    name: 'ALIVE',
+                    name: "ALIVE",
                 },
                 healthPoints: 7173,
                 maxHealthPoints: 10000,
@@ -118,30 +118,30 @@ const zonePlayerInfo: IZonePlayerInfo = {
             skillState: {
                 skillList: {
                     fire_ball: {
-                        cooldownFinishes: '2019-06-14T18:04:14.0149854Z',
+                        cooldownFinishes: "2019-06-14T18:04:14.0149854Z",
                     },
                 },
             },
             modelState: {
                 AnimationList: [],
                 mesh: {
-                    type: 'SPHERE',
-                    assetId: 'SPHERE-cc0d-4094-aecf',
+                    type: "SPHERE",
+                    assetId: "SPHERE-cc0d-4094-aecf",
                 },
             },
             behavior: {
-                treeId: 'Behaviors_Idle.json',
+                treeId: "Behaviors_Idle.json",
             },
             actorMoveToPosition: null,
-            nextRunTime: '2019-07-04T08:58:21.2081773-05:00',
+            nextRunTime: "2019-07-04T08:58:21.2081773-05:00",
         },
     },
     i18nMap: {},
     lighting: {
-        name: 'main_light',
+        name: "main_light",
         tags: [],
         enableDayNightCycle: false,
-        type: 'point',
+        type: "point",
     },
     map: {
         numberOfNodes: 1,
@@ -149,9 +149,9 @@ const zonePlayerInfo: IZonePlayerInfo = {
         edgeList: [],
     },
     mapMesh: {
-        name: 'some-mesh',
-        lightTag: 'main_light',
-        heightMapUrl: '/Game/Level/Home/Assets/HomeLevel.png',
+        name: "some-mesh",
+        lightTag: "main_light",
+        heightMapUrl: "/Game/Level/Home/Assets/HomeLevel.png",
         width: 128,
         height: 128,
         subdivisions: 200,
@@ -162,13 +162,13 @@ const zonePlayerInfo: IZonePlayerInfo = {
     },
     particleTemplateList: [
         {
-            id: 'Particle_Flame',
-            name: 'Particle_Flame',
-            type: 'POSITION',
+            id: "Particle_Flame",
+            name: "Particle_Flame",
+            type: "POSITION",
             defaultSettings: {
                 emitter: Vector3.Zero(),
                 capacity: 2000,
-                particleTexture: '/Assets/Textures/flare.png',
+                particleTexture: "/Assets/Textures/flare.png",
                 minEmitBox: createVector3({
                     x: -0.5,
                     y: 1,
@@ -226,13 +226,13 @@ const zonePlayerInfo: IZonePlayerInfo = {
             },
         },
         {
-            id: 'Particle_SelectedIndicator',
-            name: 'selected_indicator',
-            type: 'POSITION',
+            id: "Particle_SelectedIndicator",
+            name: "selected_indicator",
+            type: "POSITION",
             defaultSettings: {
                 emitter: Vector3.Zero(),
                 capacity: 100,
-                particleTexture: '/Assets/Textures/identifier.png',
+                particleTexture: "/Assets/Textures/identifier.png",
                 minEmitBox: createVector3({
                     x: 0,
                     y: 2,
@@ -293,15 +293,15 @@ const zonePlayerInfo: IZonePlayerInfo = {
     guiLayout: {
         layoutList: [
             {
-                id: 'onscreen_skill_selection',
+                id: "onscreen_skill_selection",
                 sort: 0,
                 controlList: [
                     {
-                        id: 'onscreen_skill_selection-grid',
+                        id: "onscreen_skill_selection-grid",
                         sort: 0,
                         controlList: [
                             {
-                                id: 'onscreen_skill_selection-panel',
+                                id: "onscreen_skill_selection-panel",
                                 sort: 0,
                                 controlList: [],
                             },
@@ -312,12 +312,12 @@ const zonePlayerInfo: IZonePlayerInfo = {
         ],
         templateList: [
             {
-                id: 'onscreen_skill_selection-grid',
-                type: 'Grid',
+                id: "onscreen_skill_selection-grid",
+                type: "Grid",
                 options: {
                     column: 3,
                     row: 3,
-                    backgroundColor: 'transparent',
+                    backgroundColor: "transparent",
                     paddingBottom: 5,
                     paddingTop: 5,
                     paddingLeft: 5,
@@ -325,8 +325,8 @@ const zonePlayerInfo: IZonePlayerInfo = {
                 },
             },
             {
-                id: 'onscreen_skill_selection-panel',
-                type: 'Panel',
+                id: "onscreen_skill_selection-panel",
+                type: "Panel",
                 gridLocation: {
                     row: 2,
                     column: 0,
@@ -334,23 +334,23 @@ const zonePlayerInfo: IZonePlayerInfo = {
                 options: {},
             },
             {
-                id: 'onscreen_skill_selection-skill-spacer',
-                type: 'Spacer',
+                id: "onscreen_skill_selection-skill-spacer",
+                type: "Spacer",
                 options: {
                     padding: 5,
                 },
             },
             {
-                id: 'onscreen_skill_selection-skill-button',
-                type: 'Button',
+                id: "onscreen_skill_selection-skill-button",
+                type: "Button",
                 options: {
-                    text: '25 / 100',
+                    text: "25 / 100",
                     linkOffsetY: -50,
-                    width: '120px',
-                    height: '20px',
+                    width: "120px",
+                    height: "20px",
                     textSize: 12,
-                    textColor: 'white',
-                    backgroundColor: 'red',
+                    textColor: "white",
+                    backgroundColor: "red",
                     alignment: 2,
                     vAlignment: 0,
                     borderThickness: 0,
@@ -360,11 +360,11 @@ const zonePlayerInfo: IZonePlayerInfo = {
     },
     clientAssetList: [
         {
-            id: 'SPHERE-cc0d-4094-aecf',
-            type: 'MESH',
-            name: 'A Sphere',
+            id: "SPHERE-cc0d-4094-aecf",
+            type: "MESH",
+            name: "A Sphere",
             data: {
-                type: 'SPHERE',
+                type: "SPHERE",
                 segments: 16,
                 diameter: 2,
                 heightOffset: -1.2,
@@ -374,9 +374,9 @@ const zonePlayerInfo: IZonePlayerInfo = {
     clientEntityInstanceList: [],
     clientScriptList: [
         {
-            name: 'SkillSelection_Initialize.js',
-            scriptFileName: 'Initialize.js',
-            scriptPath: 'SkillSelection',
+            name: "SkillSelection_Initialize.js",
+            scriptFileName: "Initialize.js",
+            scriptPath: "SkillSelection",
             scriptString:
                 '/** \
         * This the internal "state" of the script, only accessible by the script. \

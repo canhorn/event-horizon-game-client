@@ -11,6 +11,7 @@ import { HideLayoutCommandHandler } from "./hide/HideLayoutCommandHandler";
 import { LinkGuiControlWithMeshHandler } from "./link/LinkGuiControlWithMeshHandler";
 import { RegisterControlHandler } from "./register/RegisterControlHandler";
 import { ShowLayoutCommandHandler } from "./show/ShowLayoutCommandHandler";
+import { initializePlatformGuiState } from "./store/InitializePlatformGuiState";
 import { UpdateGuiControlHandler } from "./update/UpdateGuiControlHandler";
 
 export const preInitializeGui = (
@@ -30,4 +31,6 @@ export const preInitializeGui = (
     commandHandlerRegister.register(CreateGuiCommandHandler);
     commandHandlerRegister.register(ShowLayoutCommandHandler);
     commandHandlerRegister.register(HideLayoutCommandHandler);
+
+    initializePlatformGuiState();
 };

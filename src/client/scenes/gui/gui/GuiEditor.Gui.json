@@ -1,6 +1,5 @@
 {
-    "layout": 
-    {
+    "layout": {
         "id": "gui_editor",
         "sort": 0,
         "controlList": [
@@ -9,7 +8,7 @@
                 "sort": 0,
                 "controlList": [
                     {
-                        "id": "gui_editor-container",
+                        "id": "gui_editor-container_mid_mid",
                         "sort": 0,
                         "controlList": []
                     },
@@ -40,105 +39,96 @@
             }
         ]
     },
-    "templateList": [{
-        "id": "gui_editor-grid",
-        "type": "Grid",
-        "options": {
-            "column": 3,
-            "row": 3,
-            "backgroundColor": "white",
-            "paddingBottom": 5,
-            "paddingTop": 5,
-            "paddingLeft": 5,
-            "paddingRight": 5
-        }
-    },
-    {
-        "id": "gui_editor-container",
-        "type": "Container",
-        "gridLocation": {
-            "row": 1,
-            "column": 1
-        },
-        "options": {
-            "background": "green"
-        }
-    },
-    {
-        "id": "gui_editor-container_top_left",
-        "type": "Container",
-        "gridLocation": {
-            "row": 0,
-            "column": 0
-        },
-        "options": {
-            "background": "red"
-        }
-    },
-    {
-        "id": "gui_editor-panel",
-        "type": "Panel",
-        "gridLocation": {
-            "row": 1,
-            "column": 1
-        },
-        "options": {
-            "background": "transparent"
-        }
-    },
-    {
-        "id": "gui_editor-spacer",
-        "type": "Spacer",
-        "options": {
-            "padding": 10
-        }
-    },
-    {
-        "id": "gui_editor-button",
-        "type": "Button",
-        "options": {
-            "width": "130px",
-            "height": "35px",
-            "text": "",
-            "textSize": 16,
-            "textColor": "white",
-            "backgroundColor": "black",
-            "disabledColor": "gray",
-            "disabledHoverCursor": "mouse",
-            "alignment": 2,
-            "vAlignment": 2,
-            "borderThickness": 0,
-            "onClickScript": "ScriptToCall.js" 
-        }
-    }],
+    "templateList": [],
     "controlList": [
         {
             "controlId": "gui_editor-grid",
-            "templateId": "gui_editor-grid"
+            "templateId": "platform-grid",
+            "options": {
+                "column": 3,
+                "row": 3,
+                "backgroundColor": "gray",
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "paddingLeft": 5,
+                "paddingRight": 5
+            }
         },
         {
             "controlId": "gui_editor-panel",
-            "templateId": "gui_editor-panel"
+            "templateId": "platform-panel",
+            "gridLocation": {
+                "row": 1,
+                "column": 1
+            },
+            "options": {
+                "background": "transparent"
+            }
         },
         {
-            "controlId": "gui_editor-container",
-            "templateId": "gui_editor-container"
+            "controlId": "gui_editor-container_mid_mid",
+            "templateId": "platform-container",
+            "gridLocation": {
+                "row": 1,
+                "column": 1
+            },
+            "options": {
+                "background": "blue"
+            }
         },
         {
             "controlId": "gui_editor-container_top_left",
-            "templateId": "gui_editor-container_top_left"
+            "templateId": "platform-container",
+            "gridLocation": {
+                "row": 0,
+                "column": 0
+            },
+            "options": {
+                "background": "red"
+            }
         },
         {
             "controlId": "gui_editor-spacer",
-            "templateId": "gui_editor-spacer"
+            "templateId": "platform-spacer",
+            "options": {
+                "padding": 5
+            }
         },
         {
             "controlId": "gui_editor-start_game-button",
-            "templateId": "gui_editor-button"
+            "templateId": "platform-button",
+            "options": {
+                "width": "130px",
+                "height": "35px",
+                "text": "",
+                "textSize": 16,
+                "textColor": "white",
+                "backgroundColor": "black",
+                "disabledColor": "gray",
+                "disabledHoverCursor": "mouse",
+                "alignment": 2,
+                "vAlignment": 2,
+                "borderThickness": 0,
+                "onClickScript": "ScriptToCall.js"
+            }
         },
         {
             "controlId": "gui_editor-account_details-button",
-            "templateId": "gui_editor-button"
+            "templateId": "platform-button",
+            "options": {
+                "width": "130px",
+                "height": "35px",
+                "text": "",
+                "textSize": 16,
+                "textColor": "white",
+                "backgroundColor": "black",
+                "disabledColor": "gray",
+                "disabledHoverCursor": "mouse",
+                "alignment": 2,
+                "vAlignment": 2,
+                "borderThickness": 0,
+                "onClickScript": "ScriptToCall.js"
+            }
         }
     ]
 }

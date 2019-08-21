@@ -1,9 +1,9 @@
-import { MoveDirection } from '../../../client/systems/move/model/MoveDirection';
-import { IObjectEntity } from '../../../client/entity/api/IObjectEntity';
-import { Vector3 } from 'babylonjs';
-import { entityClientMove } from '../../clientActions/entityClientMove/EntityClientMove';
+import { Vector3 } from "babylonjs";
+import { IObjectEntity } from "../../../client/entity/api/IObjectEntity";
+import { MoveDirection } from "../../../client/systems/move/model/MoveDirection";
+import { entityClientMove } from "../../clientActions/entityClientMove/EntityClientMove";
 
-const MOVE_DISTANCE: number = 1;
+const MOVE_DISTANCE: number = 3;
 
 export const moveEntityDirection = (
     entity: IObjectEntity,

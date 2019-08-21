@@ -1,0 +1,127 @@
+{
+    "id": "gui_dialog",
+    "sort": 0,
+    "layer": 99,
+    "initializeScript": "Local_GuiLayout_Initialize.js",
+    "controlList": [
+        {
+            "id": "gui_dialog-overlay",
+            "sort": 0,
+            "templateId": "platform-container",
+            "options": {
+                "background": "black",
+                "alpha": 0.7
+            },
+            "controlList": []
+        },
+        {
+            "id": "gui_dialog-grid",
+            "sort": 1,
+            "templateId": "platform-grid",
+            "options": {
+                "column": 1,
+                "row": 3,
+                "backgroundColor": "transparent",
+                "paddingBottom": 0,
+                "paddingTop": 0,
+                "paddingLeft": 0,
+                "paddingRight": 0
+            },
+            "controlList": [
+                {
+                    "id": "gui_dialog-dialog_area",
+                    "sort": 0,
+                    "templateId": "platform-container",
+                    "options": {
+                        "background": "black",
+                        "alpha": 0.7
+                    },
+                    "gridLocation": {
+                        "row": 2,
+                        "column": 0
+                    },
+                    "controlList": []
+                },
+                {
+                    "id": "gui_dialog-dialog_text_area",
+                    "sort": 2,
+                    "templateId": "platform-panel",
+                    "options": {
+                        "enableScrolling": true,
+                        "background": "transparent",
+                        "heigh": "100%",
+                        "horizontalAlignment": 0,
+                        "verticalAlignment": 0,
+                        "paddingBottom": 15,
+                        "paddingTop": 15,
+                        "paddingLeft": 15,
+                        "paddingRight": 15
+                    },
+                    "gridLocation": {
+                        "row": 2,
+                        "column": 0
+                    },
+                    "controlList": [
+                        {
+                            "id": "gui_dialog-start_game-button",
+                            "sort": 0,
+                            "templateId": "platform-text",
+                            "options": {
+                                "width": "100%",
+                                "height": "35px",
+                                "textKey": "dialog::titleText",
+                                "fontSize": 16,
+                                "color": "white",
+                                "textHorizontalAlignment": 0,
+                                "textVerticalAlignment": 0,
+                                "onClickScript": "Local_GuiLayout_GoToGame.js"
+                            }
+                        },
+                        {
+                            "id": "gui_editor-other_button-button",
+                            "sort": 3,
+                            "templateId": "platform-text",
+                            "options": {
+                                "width": "100%",
+                                "height": "250px",
+                                "textKey": "dialog::bodyText",
+                                "fontSize": 16,
+                                "color": "white",
+                                "textHorizontalAlignment": 0,
+                                "textVerticalAlignment": 0,
+                                "onClickScript": "Local_GuiLayout_GoToGame.js"
+                            }
+                        },
+                        {
+                            "id": "gui_editor-spacer",
+                            "sort": 3,
+                            "templateId": "platform-spacer",
+                            "options": {
+                                "padding": 10
+                            }
+                        },
+                        {
+                            "id": "gui_editor-account_details-button",
+                            "sort": 4,
+                            "templateId": "platform-button",
+                            "options": {
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_AccountDetails",
+                                "textSize": 16,
+                                "textColor": "white",
+                                "backgroundColor": "black",
+                                "disabledColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0,
+                                "onClickScript": "Local_GuiLayout_GoToAccountDetails.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

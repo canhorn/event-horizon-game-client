@@ -28,8 +28,8 @@ export class ActivateLayoutHandler implements ICommandHandler {
             const layout = layoutMap.getValue(layoutId);
             ((layout && layout.controlList) || [])
                 .sort((current, next) => current.sort - next.sort)
-                .forEach(layoutControl =>
-                    this.addControlToLayout(layoutControl, parent)
+                .forEach((layoutChildControl: GuiControlLayout) =>
+                    this.addControlToLayout(layoutChildControl, parent)
                 );
         }
 
@@ -47,6 +47,9 @@ export class ActivateLayoutHandler implements ICommandHandler {
         if (!control) {
             return;
         }
+        if (layoutControl.layer) {
+            control.control.zIndex = layoutControl.layer;
+        }
         if (!parent) {
             this._renderingGui.canvas.root.addControl(control.control);
         } else {
@@ -55,8 +58,8 @@ export class ActivateLayoutHandler implements ICommandHandler {
 
         (layoutControl.controlList || [])
             .sort((current, next) => current.sort - next.sort)
-            .forEach(layoutControl =>
-                this.addControlToLayout(layoutControl, control)
+            .forEach((layoutChildControl: GuiControlLayout) =>
+                this.addControlToLayout(layoutChildControl, control)
             );
     };
 }

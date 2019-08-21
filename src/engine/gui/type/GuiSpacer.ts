@@ -1,5 +1,6 @@
 import { Mesh } from "babylonjs";
 import { Control, Rectangle } from "babylonjs-gui";
+import objectMerge from "../../../core/object/ObjectMerge";
 import {
     GuiControl,
     GuiControlOptions,
@@ -53,6 +54,9 @@ const createControl = (options: GuiSpacerControlOptions): Control => {
     padding.width = `${options.padding}px`;
     padding.thickness = 0;
     padding.isHitTestVisible = false;
+
+    objectMerge(padding, options);
+
     return padding;
 };
 

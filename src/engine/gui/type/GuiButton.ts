@@ -1,16 +1,16 @@
-import { EventState, Mesh, Observer } from 'babylonjs';
-import { Button, Rectangle, TextBlock, Vector2WithInfo } from 'babylonjs-gui';
+import { EventState, Mesh, Observer } from "babylonjs";
+import { Button, Rectangle, TextBlock, Vector2WithInfo } from "babylonjs-gui";
 import {
     isObjectDefined,
     returnIfDefined,
-} from '../../../core/object/ObjectCheck';
-import objectMerge from '../../../core/object/ObjectMerge';
+} from "../../../core/object/ObjectCheck";
+import objectMerge from "../../../core/object/ObjectMerge";
 import {
     GuiControl,
     GuiControlOptions,
     GuiControlType,
     GuiGridLocation,
-} from '../model';
+} from "../model";
 
 // TODO: Clean up create and update
 export class GuiButton implements GuiControl {
@@ -44,7 +44,7 @@ export class GuiButton implements GuiControl {
         this.gridLocation = gridLocation;
     }
     public addControl(guiControl: GuiControl) {
-        throw new Error('GuiButton does not support adding of child Controls.');
+        throw new Error("GuiButton does not support adding of child Controls.");
     }
     public update(options: GuiButtonControlOptions) {
         if (isObjectDefined(options.text)) {
@@ -132,10 +132,10 @@ const updateControl = (
     button.background = button.isEnabled
         ? options.backgroundColor || button.background
         : options.disabledColor || button.disabledColor;
-    button.thickness = options.borderThickness;
+    button.thickness = options.borderThickness || 0;
     button.hoverCursor = button.isEnabled
-        ? options.hoverCursor || button.hoverCursor || 'pointer'
-        : options.disabledHoverCursor || button.hoverCursor || 'default';
+        ? options.hoverCursor || button.hoverCursor || "pointer"
+        : options.disabledHoverCursor || button.hoverCursor || "default";
 
     return background;
 };
@@ -152,7 +152,7 @@ const createControl = (
     background.addControl(button);
 
     const text1 = new TextBlock(`${idPrefix}-Text`);
-    text1.width = '100%';
+    text1.width = "100%";
     // text1.height = "100%";
     text1.text = options.text;
     text1.color = options.textColor;

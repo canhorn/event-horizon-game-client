@@ -1,0 +1,152 @@
+{
+    "id": "gui_editor",
+    "sort": 0,
+    "layer": 99,
+    "initializeScript": "Local_GuiLayout_Initialize.js",
+    "updateScript": "Local_GuiLayout_Layout.js",
+    "controlList": [
+        {
+            "id": "gui_editor-grid",
+            "sort": 0,
+            "templateId": "platform-grid",
+            "options": {
+                "column": 3,
+                "row": 3,
+                "backgroundColor": "gray",
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "paddingLeft": 5,
+                "paddingRight": 5
+            },
+            "controlList": [
+                {
+                    "id": "gui_editor-container",
+                    "sort": 0,
+                    "templateId": "platform-container",
+                    "options": {
+                        "background": "green"
+                    },
+                    "gridLocation": {
+                        "row": 1,
+                        "column": 1
+                    },
+                    "controlList": []
+                },
+                {
+                    "id": "gui_editor-container_top_left",
+                    "sort": 1,
+                    "templateId": "platform-container",
+                    "options": {
+                        "background": "blue"
+                    },
+                    "gridLocation": {
+                        "row": 0,
+                        "column": 0
+                    },
+                    "controlList": []
+                },
+                {
+                    "id": "gui_editor-container_top_right",
+                    "sort": 1,
+                    "templateId": "platform-container",
+                    "options": {
+                        "background": "black"
+                    },
+                    "gridLocation": {
+                        "row": 0,
+                        "column": 2
+                    },
+                    "controlList": []
+                },
+                {
+                    "id": "gui_editor-panel",
+                    "sort": 2,
+                    "templateId": "platform-panel",
+                    "options": {
+                        "background": "gray"
+                    },
+                    "gridLocation": {
+                        "row": 0,
+                        "column": 2
+                    },
+                    "controlList": [
+                        {
+                            "id": "gui_editor-start_game-button",
+                            "sort": 0,
+                            "templateId": "platform-button",
+                            "options": {
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_StartGame",
+                                "textSize": 16,
+                                "textColor": "white",
+                                "backgroundColor": "blue",
+                                "disabledColor": "gray",
+                                "hoverColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0,
+                                "onClickScript": "Local_GuiLayout_GoToGame.js"
+                            }
+                        },
+                        {
+                            "id": "gui_editor-spacer_top",
+                            "sort": 1,
+                            "templateId": "platform-spacer",
+                            "options": {
+                                "padding": 10
+                            }
+                        },
+                        {
+                            "id": "gui_editor-other_button-button",
+                            "sort": 2,
+                            "templateId": "platform-button",
+                            "options": {
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_OpenGuiEditor",
+                                "textSize": 16,
+                                "textColor": "white",
+                                "backgroundColor": "black",
+                                "disabledColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0,
+                                "onClickScript": "ScriptToCall.js"
+                            }
+                        },
+                        {
+                            "id": "gui_editor-spacer",
+                            "sort": 3,
+                            "templateId": "platform-spacer",
+                            "options": {
+                                "padding": 10
+                            }
+                        },
+                        {
+                            "id": "gui_editor-account_details-button",
+                            "sort": 4,
+                            "templateId": "platform-button",
+                            "options": {
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_AccountDetails",
+                                "textSize": 16,
+                                "textColor": "white",
+                                "backgroundColor": "black",
+                                "disabledColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0,
+                                "onClickScript": "Local_GuiLayout_GoToAccountDetails.js"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

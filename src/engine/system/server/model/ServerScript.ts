@@ -31,7 +31,7 @@ export class ServerScript implements IServerScript {
         scriptServices: IScriptServices = Inject(IScriptServices)
     ) {
         this._scriptString = scriptString;
-        if (this._scriptString) {
+        if (isObjectDefined(this._scriptString)) {
             this._utils = scriptUtils;
             this._services = scriptServices;
             this._runner = new Function(
