@@ -105,15 +105,8 @@ export class GuiScrollViewer implements GuiControl {
     }
 }
 
-const createControl = (
-    options: GuiScrollViewerControlOptions
-): ScrollViewer => {
-    const control = new ScrollViewer();
-
-    objectMerge(control, options);
-
-    return control;
-};
+const createControl = (options: GuiScrollViewerControlOptions): ScrollViewer =>
+    objectMerge(new ScrollViewer(), options);
 
 export interface GuiScrollViewerControlOptions extends GuiControlOptions {
     animation?: IGuiAnimationOptions;

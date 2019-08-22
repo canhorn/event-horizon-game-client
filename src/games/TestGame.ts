@@ -46,7 +46,7 @@ export class TestGame implements Game {
         this._commandService.send(
             createCreateGameSceneOrchestratorCommand({
                 sceneOrchestrationOptions: {
-                    defaultSceneId: "gui-editor",
+                    defaultSceneId: "main-menu",
                     scenes: Dictionary.fromJSON({
                         "main-menu": {
                             build: MainMenuScene,

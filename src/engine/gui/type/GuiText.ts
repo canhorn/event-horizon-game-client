@@ -52,17 +52,9 @@ const createControl = (
     idPrefix: string,
     options: GuiTextControlOptions
 ): TextBlock => {
-    const text = new TextBlock(`${idPrefix}-Text`);
-    // text.verticalAlignment = 0;
-    // text.horizontalAlignment = 0;
-    // text.isHitTestVisible = false;
-    // text.isPointerBlocker = false;
-    // text.textWrapping = 2;
-
-    objectMerge(text, options);
-
-    return text;
+    return objectMerge(new TextBlock(`${idPrefix}-Text`), options);
 };
+
 export interface GuiTextControlOptions extends GuiControlOptions {
     width: string;
     height: string;

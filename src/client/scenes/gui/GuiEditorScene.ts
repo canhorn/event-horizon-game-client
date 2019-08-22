@@ -49,6 +49,13 @@ export class GuiEditorScene extends LifeCycleEntity implements IGameScene {
             scriptString:
                 '$services.commandService.send($utils.createEvent("ClientScenes.START_SCENE_COMMAND",{ sceneId: "account-details" } ))',
         });
+        setClientScriptTemplate({
+            name: "Local_GuiLayout_GoToMainMenu.js",
+            scriptFileName: "GoToMainMenu.js",
+            scriptPath: "Local_GuiLayout",
+            scriptString:
+                '$services.commandService.send($utils.createEvent("ClientScenes.START_SCENE_COMMAND",{ sceneId: "main-menu" } ))',
+        });
 
         this.gui = new DataDrivenGuiLayout(GuiLayoutData);
         this.gui.activate();
