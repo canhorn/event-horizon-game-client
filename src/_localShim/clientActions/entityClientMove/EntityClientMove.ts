@@ -1,7 +1,7 @@
-import { CLIENT_ACTION_ENTITY_MOVE_EVENT } from '../../../client/action/api/ClientActions';
-import { Vector3 } from 'babylonjs';
-import { IEventService } from '../../../engine/event/IEventService';
-import { Inject } from '../../../engine/ioc/Create';
+import { CLIENT_ACTION_ENTITY_MOVE_EVENT } from "../../../client/action/api/ClientActions";
+import { Vector3 } from "babylonjs";
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 
 export const entityClientMove = (
     entityId: number,

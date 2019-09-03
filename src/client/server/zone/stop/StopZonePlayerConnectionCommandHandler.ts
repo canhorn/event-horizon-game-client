@@ -1,17 +1,21 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
 import { stopZonePlayerConnection } from "../state/ZoneConnectionState";
-import { STOP_ZONE_PLAYER_CONNECTION_COMMAND } from "./StopZonePlayerConnectionCommand";
+import {
+    STOP_ZONE_PLAYER_CONNECTION_COMMAND,
+    StopZonePlayerConnectionCommandResultType,
+} from "./StopZonePlayerConnectionCommand";
 
 /**
-/* Name: StopCoreServerConnectionCommand
-/* Type: Command
+ * Name: StopCoreServerConnectionCommand
+ * Type: Command
  */
 export class StopZonePlayerConnectionCommandHandler implements ICommandHandler {
     public type: ICommandType = STOP_ZONE_PLAYER_CONNECTION_COMMAND;
-    constructor() {}
-    public handle(): ICommandResult {
+    public handle(): ICommandResult<StopZonePlayerConnectionCommandResultType> {
         stopZonePlayerConnection();
 
         return {

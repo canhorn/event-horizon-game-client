@@ -7,12 +7,11 @@ import { createStartCoreServerConnectionCommand } from '../client/server/core/st
 import { useClientService } from '../client/UseClientService';
 import { ZoneScene } from '../client/zone/scene/ZoneScene';
 import { Dictionary } from '../core/collection/Dictionary';
-import { ICommandService } from '../engine/command/api/ICommandService';
 import { Game } from '../engine/Game';
-import { createSingletonProviderService, Inject } from '../engine/ioc/Create';
-import { createLogger } from '../engine/logger/InjectLoggerDecorator';
-import { ILogger } from '../engine/logger/LoggerFactory';
 import { useLocalShimServices } from '../_localShim/UseLocalShimServices';
+import { ILogger, createLogger } from "../core/logger";
+import { ICommandService } from "../core/command";
+import { Inject, createSingletonProviderService } from "../core/ioc";
 
 export class TestGame implements Game {
     public _startupCamera!: WorldFreeCamera;

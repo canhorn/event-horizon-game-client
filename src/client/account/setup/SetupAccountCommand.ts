@@ -1,11 +1,11 @@
-import { ICommand } from "../../../engine/command/api/ICommand";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
-import { CommandType } from "../../../engine/command/model/CommandType";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
 
 export const SETUP_ACCOUNT_COMMAND = new CommandType(
     "Account.SETUP_ACCOUNT_COMMAND"
 );
-export class SetupAccountCommand implements ICommand {
+export class SetupAccountCommand
+    implements
+        ICommand<SetupAccountCommandData, SetupAccountCommandResultType> {
     public type: ICommandType = SETUP_ACCOUNT_COMMAND;
     public data?: SetupAccountCommandData;
 }
@@ -18,3 +18,4 @@ export const createSetupAccountCommand = (data: SetupAccountCommandData) => {
 };
 
 export interface SetupAccountCommandData {}
+export type SetupAccountCommandResultType = undefined;

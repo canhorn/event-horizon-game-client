@@ -1,6 +1,4 @@
-import { CommandType } from '../../engine/command/model/CommandType';
-import { ICommand } from '../../engine/command/api/ICommand';
-import { ICommandType } from '../../engine/command/api/ICommandType';
+import { CommandType, ICommand, ICommandType } from "../../core/command";
 
 /**
  * Name: LocalPlayerActionCommand
@@ -8,16 +6,24 @@ import { ICommandType } from '../../engine/command/api/ICommandType';
  * Type: Command
  */
 export const LOCAL_PLAYER_ACTION_COMMAND = new CommandType(
-    'LocalShim.LOCAL_PLAYER_ACTION_COMMAND'
+    "LocalShim.LOCAL_PLAYER_ACTION_COMMAND"
 );
-class CommandClass implements ICommand {
+class CommandClass
+    implements
+        ICommand<
+            LocalPlayerActionCommandData,
+            LocalPlayerActionCommandResultType
+        > {
     type: ICommandType = LOCAL_PLAYER_ACTION_COMMAND;
     data?: LocalPlayerActionCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createLocalPlayerActionCommand = (
     data: LocalPlayerActionCommandData
-): ICommand => {
+): ICommand<
+    LocalPlayerActionCommandData,
+    LocalPlayerActionCommandResultType
+> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
@@ -25,3 +31,4 @@ export interface LocalPlayerActionCommandData {
     method: string;
     args: any[];
 }
+export type LocalPlayerActionCommandResultType = undefined;

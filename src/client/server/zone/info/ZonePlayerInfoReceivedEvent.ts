@@ -1,8 +1,4 @@
-import {
-    EventType,
-    IEvent,
-    IEventType,
-} from "../../../../engine/event/EventType";
+import { EventType, IEvent, IEventType } from "../../../../core/event";
 import { IZonePlayerInfo } from "../api/IZonePlayerInfo";
 /**
  * Type: ZonePlayerInfoReceivedEvent

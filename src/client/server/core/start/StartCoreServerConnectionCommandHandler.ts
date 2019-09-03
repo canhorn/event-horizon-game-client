@@ -1,19 +1,24 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
-import { Inject } from "../../../../engine/ioc/Create";
-import { IQueryService } from "../../../../engine/query/IQueryService";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
+import { Inject } from "../../../../core/ioc";
+import { IQueryService } from "../../../../core/query";
 import {
     getConfigurationProperty,
     IGameConfiguration,
 } from "../../../../engine/settings/IGameSettings";
 import { createGetAccountQuery } from "../../../account/get/GetAccountQuery";
 import { startCoreConnection } from "../state/CoreConnectionState";
-import { START_CORE_SERVER_CONNECTION_COMMAND } from "./StartCoreServerConnectionCommand";
+import {
+    START_CORE_SERVER_CONNECTION_COMMAND,
+    StartCoreServerConnectionCommandResultType,
+} from "./StartCoreServerConnectionCommand";
 
 /**
-/* Name: StartCoreServerConnectionCommand
-/* Type: Command
+ * Name: StartCoreServerConnectionCommandHandler
+ * Type: Command
  */
 export class StartCoreServerConnectionCommandHandler
     implements ICommandHandler {
@@ -24,7 +29,9 @@ export class StartCoreServerConnectionCommandHandler
             IGameConfiguration
         )
     ) {}
-    public handle(): ICommandResult {
+    public handle(): ICommandResult<
+        StartCoreServerConnectionCommandResultType
+    > {
         const accountQuery = this._queryService.query(
             createGetAccountQuery({})
         );

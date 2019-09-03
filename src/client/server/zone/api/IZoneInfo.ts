@@ -1,5 +1,5 @@
-import { CreateGuiCommandData } from "../../../../engine/gui/create/CreateGuiCommand";
-import { II18nMap } from "../../../../engine/i18n/model/II18nMap";
+import { II18nMap } from "../../../../core/i18n/model/II18nMap";
+import { IGuiLayoutData } from "../../../../engine/gui/api/IGuiLayoutData";
 import { ParticleTemplate } from "../../../../engine/particle/model/ParticleTemplate";
 import { IClientAsset } from "../../../../engine/system/client/assets/api/IClientAsset";
 import { IClientEntityInstance } from "../../../../engine/system/client/entityInstance/api/IClientEntityInstance";
@@ -17,7 +17,7 @@ export interface IZoneInfo {
     map: IMapGraph;
     mapMesh: IMapMeshSettings;
     particleTemplateList: ParticleTemplate[];
-    guiLayout: CreateGuiCommandData;
+    guiLayoutList: IGuiLayoutData[];
     clientAssetList: IClientAsset[];
     clientEntityInstanceList: IClientEntityInstance[];
     clientScriptList: IClientScriptTemplate[];

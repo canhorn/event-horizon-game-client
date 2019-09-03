@@ -1,13 +1,18 @@
-import { ICommandHandler } from "../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
-import { Inject } from "../../../engine/ioc/Create";
 import {
     getConfigurationProperty,
     IGameConfiguration,
 } from "../../../engine/settings/IGameSettings";
 import { setAccountAccessToken } from "../state/AccountState";
-import { SETUP_ACCOUNT_COMMAND } from "./SetupAccountCommand";
+import {
+    SETUP_ACCOUNT_COMMAND,
+    SetupAccountCommandResultType,
+} from "./SetupAccountCommand";
+import {
+    ICommandHandler,
+    ICommandType,
+    ICommandResult,
+} from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 
 export class SetupAccountCommandHandler implements ICommandHandler {
     public type: ICommandType = SETUP_ACCOUNT_COMMAND;
@@ -18,7 +23,7 @@ export class SetupAccountCommandHandler implements ICommandHandler {
         )
     ) {}
 
-    public handle(): ICommandResult {
+    public handle(): ICommandResult<SetupAccountCommandResultType> {
         setAccountAccessToken(
             getConfigurationProperty<{ accessToken: string }>(
                 this._gameSettings,

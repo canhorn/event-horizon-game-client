@@ -1,18 +1,17 @@
-import { MoveDirection } from '../../../client/systems/move/model/MoveDirection';
-import { ILogger } from '../../../engine/logger/LoggerFactory';
-import { createLogger } from '../../../engine/logger/InjectLoggerDecorator';
-import { moveEntityDirection } from '../../logic/entityMove/MoveEntityDirection';
-import { getClientPlayer } from '../../../client/player/state/PlayerState';
-import { isObjectNotDefined } from '../../../core/object/ObjectCheck';
+import { MoveDirection } from "../../../client/systems/move/model/MoveDirection";
+import { moveEntityDirection } from "../../logic/entityMove/MoveEntityDirection";
+import { getClientPlayer } from "../../../client/player/state/PlayerState";
+import { isObjectNotDefined } from "../../../core/object/ObjectCheck";
+import { ILogger, createLogger } from "../../../core/logger";
 
 export const localePlayerActionMove = (
     args: any[],
-    logger: ILogger = createLogger('localePlayerActionMove')
+    logger: ILogger = createLogger("localePlayerActionMove")
 ) => {
     const direction: MoveDirection = args[0];
     const player = getClientPlayer();
     if (isObjectNotDefined(player)) {
-        logger.error('Player Not Found.');
+        logger.error("Player Not Found.");
         return;
     }
     moveEntityDirection(player, direction);

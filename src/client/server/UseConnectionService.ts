@@ -1,5 +1,5 @@
-import { ICommandHandlerRegister } from "../../engine/command/api/ICommandHandlerRegister";
-import { Inject } from "../../engine/ioc/Create";
+import { ICommandHandlerRegister } from "../../core/command";
+import { Inject } from "../../core/ioc";
 import { StartCoreServerConnectionCommandHandler } from "./core/start/StartCoreServerConnectionCommandHandler";
 import { InvokeMethodOnZoneConnectionCommandHandler } from "./zone/invoke/InvokeMethodOnZoneConnectionCommandHandler";
 import { StartZonePlayerConnectionCommandHandler } from "./zone/start/StartZonePlayerConnectionCommandHandler";
