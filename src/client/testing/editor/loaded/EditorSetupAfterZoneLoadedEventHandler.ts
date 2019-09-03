@@ -1,18 +1,17 @@
-import { ICommandService } from "../../../../engine/command/api/ICommandService";
-import { IEventType } from "../../../../engine/event/EventType";
+import { ICommandService } from "../../../../core/command";
 import {
     IEventHandler,
     IEventService,
-} from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+    IEventType,
+} from "../../../../core/event";
+import { IGuid } from "../../../../core/guid/IGuid";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
+import { IQueryService } from "../../../../core/query";
 import { IInitializable } from "../../../../engine/lifecycle/IInitializable";
 import { IRegisterInitializable } from "../../../../engine/lifecycle/register/IRegisterInitializable";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
-import { IGuid } from "../../../../engine/math/guid/IGuid";
 import { IModule } from "../../../../engine/module/IModule";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { createQueryForEntity } from "../../../entity/tracked/query/QueryForEntity";
 import { createTypeTag } from "../../../entity/tracked/tagTypes/CreateTypeTag";
 import { IPlayerEntity } from "../../../player/api/IPlayerEntity";

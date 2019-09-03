@@ -1,5 +1,5 @@
-import { IEventHandlerRegister } from "../../engine/event/IEventService";
-import { Inject } from "../../engine/ioc/Create";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
 import { TrackClientActionsPerSecondHandler } from "./debugging/clientActions/TrackClientActionsPerSecond";
 import { EditorSetupAfterZoneLoadedEventHandler } from "./editor/loaded/EditorSetupAfterZoneLoadedEventHandler";
 import { ZoneLoadedEventHandler } from "./loaded/ZoneLoadedEventHandler";

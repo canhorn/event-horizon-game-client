@@ -1,6 +1,6 @@
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { Entity } from "../../../engine/entity/model/Entity";
-import { IEventService } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
 import { IDisposable } from "../../../engine/lifecycle/IDisposable";
 import { IInitializable } from "../../../engine/lifecycle/IInitializable";
 import { IRegisterDisposable } from "../../../engine/lifecycle/register/IRegisterDisposable";
@@ -44,11 +44,7 @@ export class ServerParticle extends Entity
         this._particleId = this._indexPool.nextIndex();
         this._registerInitializable.register(this);
         this._registerDisposable.register(this);
-        this._eventService.addEventListener(
-            MESH_SET_EVENT,
-            this.onMeshSet,
-            this
-        );
+        this._eventService.on(MESH_SET_EVENT, this.onMeshSet, this);
     }
     public initialize(): void {
         this.setup();
@@ -70,11 +66,7 @@ export class ServerParticle extends Entity
         this._eventService.publish(
             createDisposeParticleModuleEvent(this._particleId)
         );
-        this._eventService.removeEventListener(
-            MESH_SET_EVENT,
-            this.onMeshSet,
-            this
-        );
+        this._eventService.off(MESH_SET_EVENT, this.onMeshSet, this);
     }
 
     private setup(): void {

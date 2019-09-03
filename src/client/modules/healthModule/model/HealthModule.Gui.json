@@ -1,0 +1,26 @@
+{
+    "id": "GUI_Module_HealthModule.json",
+    "sort": 0,
+    "controlList": [
+        {
+            "id": "gui_health_module-bar",
+            "sort": 0,
+            "templateId": "platform-bar",
+            "options": {
+                "width": 80,
+                "height": 20,
+                "alignment": 1,
+                "textSize": 12,
+                "textColor": "white",
+                "backgroundColor": "green",
+                "barColor": "#CD5C5C",
+                "barDirection": "paddingLeft",
+                "borderColor": "white",
+                "borderThickness": 0,
+                "linkOffsetY": -80,
+                "percent": 25,
+                "text": "25 / 100"
+            }
+        }
+    ]
+}

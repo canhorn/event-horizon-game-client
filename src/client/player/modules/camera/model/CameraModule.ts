@@ -1,5 +1,5 @@
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { IInitializable } from "../../../../../engine/lifecycle/IInitializable";
 import { IRegisterInitializable } from "../../../../../engine/lifecycle/register/IRegisterInitializable";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
@@ -44,24 +44,24 @@ export class CameraModule extends LifeCycleModule
     }
 
     private setupEvents() {
-        this._eventService.addEventListener(
+        this._eventService.on(
             SET_CAMERA_TO_FOLLOW_EVENT,
             this.onSetCameraToFollow,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             SET_CAMERA_TO_FREE_EVENT,
             this.onSetCameraToFree,
             this
         );
     }
     private removeEvents() {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             SET_CAMERA_TO_FOLLOW_EVENT,
             this.onSetCameraToFollow,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             SET_CAMERA_TO_FREE_EVENT,
             this.onSetCameraToFree,
             this

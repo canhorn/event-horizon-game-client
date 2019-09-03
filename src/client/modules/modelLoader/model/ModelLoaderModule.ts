@@ -1,13 +1,12 @@
-import { BoundingBoxGizmo, Mesh, Space, Vector3 } from "babylonjs";
-import { SceneLoader } from "babylonjs-loaders";
-import { ICommandService } from "../../../../engine/command/api/ICommandService";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
-import { IGuid } from "../../../../engine/math/guid/IGuid";
+import { BoundingBoxGizmo, Mesh, SceneLoader, Space, Vector3 } from "babylonjs";
+import "babylonjs-loaders";
+import { ICommandService } from "../../../../core/command";
+import { IEventService } from "../../../../core/event";
+import { IGuid } from "../../../../core/guid/IGuid";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
+import { IQueryService } from "../../../../core/query";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { convertToEngineMesh } from "../../../../engine/renderer/EngineMesh";
 import { IGLTFMeshConfig } from "../../../../engine/system/client/assets/api/configs/IGLTFMeshConfig";
@@ -57,7 +56,7 @@ export class ModelLoaderModule extends LifeCycleModule
                 this.setGLTF(assetId, modelState);
                 break;
             case "SPHERE":
-                this._eventService.addEventListener(
+                this._eventService.on(
                     CLIENT_ASSET_INSTANCE_REGISTERED_EVENT,
                     this.onClientAssetInstanceRegistered,
                     this
@@ -70,7 +69,7 @@ export class ModelLoaderModule extends LifeCycleModule
         // Nothing to update.
     }
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLIENT_ASSET_INSTANCE_REGISTERED_EVENT,
             this.onClientAssetInstanceRegistered,
             this

@@ -1,6 +1,5 @@
-import { ICommandHandlerRegister } from "../../../engine/command/api/ICommandHandlerRegister";
-import { IEventHandlerRegister } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandHandlerRegister } from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 import { RegisterAllBaseModulesCommandHandler } from "./register/RegisterAllBaseModulesCommandHandler";
 import { RegisterAllPlayerModulesCommandHandler } from "./register/RegisterAllPlayerModulesCommandHandler";
 

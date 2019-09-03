@@ -1,12 +1,17 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
-import { Inject } from "../../../../engine/ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
+import { Inject } from "../../../../core/ioc";
 import {
     IEntityTrackerDisposableService,
     IEntityTrackerService,
 } from "../IEntityTrackerServices";
-import { DISPOSE_OF_TRACKED_ENTITIES_COMMAND } from "./DisposeOfTrackedEntitiesCommand";
+import {
+    DISPOSE_OF_TRACKED_ENTITIES_COMMAND,
+    DisposeOfTrackedEntitiesCommandResultType,
+} from "./DisposeOfTrackedEntitiesCommand";
 
 /**
  * Name: DisposeOfTrackedEntitiesCommand
@@ -19,7 +24,7 @@ export class DisposeOfTrackedEntitiesCommandHandler implements ICommandHandler {
             IEntityTrackerService
         )
     ) {}
-    public handle(): ICommandResult {
+    public handle(): ICommandResult<DisposeOfTrackedEntitiesCommandResultType> {
         this._entityTrackerDisposableService.disposeOfTracked();
         return {
             success: true,

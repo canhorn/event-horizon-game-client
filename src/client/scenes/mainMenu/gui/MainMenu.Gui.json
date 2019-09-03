@@ -1,0 +1,79 @@
+{
+    "id": "main_menu",
+    "sort": 0,
+    "controlList": [
+        {
+            "id": "main_menu-grid",
+            "sort": 0,
+            "templateId": "platform-grid",
+            "options": {
+                "column": 3,
+                "row": 3,
+                "backgroundColor": "transparent",
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "paddingLeft": 5,
+                "paddingRight": 5
+            },
+            "controlList": [
+                {
+                    "id": "main_menu-panel",
+                    "sort": 0,
+                    "templateId": "platform-panel",
+                    "gridLocation": {
+                        "row": 1,
+                        "column": 1
+                    },
+                    "controlList": [
+                        {
+                            "id": "main_menu-start_game-button",
+                            "sort": 0,
+                            "templateId": "platform-button",
+                            "options": {
+                                "isDisabled": true,
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_StartGame",
+                                "fontSize": 16,
+                                "color": "white",
+                                "background": "black",
+                                "disabledColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0
+                            }
+                        },
+                        {
+                            "id": "main_menu-spacer",
+                            "sort": 1,
+                            "templateId": "platform-spacer",
+                            "options": {
+                                "padding": 10
+                            }
+                        },
+                        {
+                            "id": "main_menu-account_details-button",
+                            "sort": 2,
+                            "templateId": "platform-button",
+                            "options": {
+                                "isDisabled": true,
+                                "width": "130px",
+                                "height": "35px",
+                                "textKey": "mainMenu_AccountDetails",
+                                "fontSize": 16,
+                                "color": "white",
+                                "background": "black",
+                                "disabledColor": "gray",
+                                "disabledHoverCursor": "mouse",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

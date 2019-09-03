@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../../../engine/event/EventType";
+import { EventType, IEvent } from "../../../../core/event";
 
 export const POINTER_HIT_ENTITY_EVENT: EventType = new EventType(
     "POINTER_HIT_ENTITY_EVENT"

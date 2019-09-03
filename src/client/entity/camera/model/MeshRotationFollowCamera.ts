@@ -1,10 +1,9 @@
 import { ArcFollowCamera } from "babylonjs";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { ICanvas } from "../../../../engine/canvas/ICanvas";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleEntity } from "../../../../engine/lifecycle/model/LifeCycleEntity";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import {
     IMeshModule,
@@ -14,7 +13,6 @@ import {
     MESH_SET_EVENT,
     MeshSetEventData,
 } from "../../../modules/mesh/set/MeshSetEvent";
-import { MeshLoadedEventData } from "../../../modules/modelLoader/loaded/MeshLoadedEvent";
 import { IObjectEntity } from "../../api/IObjectEntity";
 
 export class MeshRotationFollowCamera extends LifeCycleEntity {
@@ -36,11 +34,7 @@ export class MeshRotationFollowCamera extends LifeCycleEntity {
         private readonly _canvas: ICanvas = Inject(ICanvas)
     ) {
         super();
-        this._eventService.addEventListener(
-            MESH_SET_EVENT,
-            this.onMeshSet,
-            this
-        );
+        this._eventService.on(MESH_SET_EVENT, this.onMeshSet, this);
     }
 
     public initialize(): void {
@@ -61,11 +55,7 @@ export class MeshRotationFollowCamera extends LifeCycleEntity {
 
     public onDispose(): void {
         this.camera.dispose();
-        this._eventService.removeEventListener(
-            MESH_SET_EVENT,
-            this.onMeshSet,
-            this
-        );
+        this._eventService.off(MESH_SET_EVENT, this.onMeshSet, this);
     }
     public update(): void {}
     public draw(): void {}

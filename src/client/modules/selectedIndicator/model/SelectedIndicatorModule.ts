@@ -1,7 +1,6 @@
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { ServerParticle } from "../../../particle/model/ServerParticle";
@@ -30,12 +29,12 @@ export default class SelectedIndicatorModule extends LifeCycleModule
             this._entity,
             SELECTED_INDICATOR_TEMPLATE_ID
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this
@@ -43,12 +42,12 @@ export default class SelectedIndicatorModule extends LifeCycleModule
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this

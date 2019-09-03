@@ -1,11 +1,14 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
-import { Inject } from "../../../../engine/ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
+import { Inject } from "../../../../core/ioc";
 import { ISetHeightResolver } from "../api/IHeightResolver";
 import {
     SET_HEIGHT_RESOLVER_COORDINATES_COMMAND,
     SetHeightResolverCoordinatesCommandData,
+    SetHeightResolverCoordinatesCommandResultType,
 } from "./SetHeightResolverCoordinatesCommand";
 
 /**
@@ -22,7 +25,9 @@ export class SetHeightResolverCoordinatesCommandHandler
     ) {}
     public handle({
         heightCoordinates,
-    }: SetHeightResolverCoordinatesCommandData): ICommandResult {
+    }: SetHeightResolverCoordinatesCommandData): ICommandResult<
+        SetHeightResolverCoordinatesCommandResultType
+    > {
         this._setHeightResolver.setCoordinates(heightCoordinates);
         return {
             success: true,

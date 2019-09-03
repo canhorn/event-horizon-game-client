@@ -8,7 +8,7 @@ import {
     SubMesh,
     Texture,
 } from "babylonjs";
-import { Inject } from "../../../../engine/ioc/Create";
+import { Inject } from "../../../../core/ioc";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { createAssetLocationUrl } from "../../../assetServer/api/CreateAssetLocationUrl";
 

@@ -1,6 +1,6 @@
 import { Vector3 } from "babylonjs";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { ClientActionEntityMoveEventData } from "../../../action/api/ClientActions";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";

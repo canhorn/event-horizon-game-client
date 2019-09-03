@@ -1,10 +1,13 @@
-import { ICommandHandler } from "../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../core/command";
 import { sendCoreAdminAction } from "../core/state/CoreAdminConnectionState";
 import {
     RUN_ADMIN_ACTION_ON_SERVER_COMMAND,
     RunAdminActionOnServerCommandData,
+    RunAdminActionOnServerCommandResultType,
 } from "./RunAdminActionOnServerCommand";
 
 /**
@@ -17,7 +20,9 @@ export class RunAdminActionOnServerCommandHandler implements ICommandHandler {
     public handle({
         action,
         data,
-    }: RunAdminActionOnServerCommandData): ICommandResult {
+    }: RunAdminActionOnServerCommandData): ICommandResult<
+        RunAdminActionOnServerCommandResultType
+    > {
         return {
             success: true,
             result: sendCoreAdminAction(action, data),

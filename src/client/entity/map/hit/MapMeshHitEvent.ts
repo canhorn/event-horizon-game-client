@@ -1,9 +1,6 @@
 import { Vector3 } from "babylonjs";
-import {
-    EventType,
-    IEvent,
-    IEventType,
-} from "../../../../engine/event/EventType";
+import { EventType, IEvent, IEventType } from "../../../../core/event";
+
 /**
  * Type: MapMeshHitEvent
  * NameSpace: Entity.Map

@@ -1,6 +1,6 @@
 import { Mesh, Vector3 } from "babylonjs";
+import { Inject } from "../../../../core/ioc";
 import { Entity } from "../../../../engine/entity/model/Entity";
-import { Inject } from "../../../../engine/ioc/Create";
 import { IRenderingTime } from "../../../../engine/renderer/api/IRenderingTime";
 import { IHeightResolver } from "../../../systems/height/api/IHeightResolver";
 import { IState } from "../api/IState";

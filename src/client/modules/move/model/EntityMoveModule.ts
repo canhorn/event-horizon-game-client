@@ -8,14 +8,14 @@ import { MoveModule } from "./MoveModule";
 export class EntityMoveModule extends MoveModule {
     constructor(entity: IObjectEntity) {
         super(entity, 1);
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLIENT_ACTION_ENTITY_MOVE_EVENT,
             this.onMove,
             this
         );
     }
     public dispose() {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLIENT_ACTION_ENTITY_MOVE_EVENT,
             this.onMove,
             this

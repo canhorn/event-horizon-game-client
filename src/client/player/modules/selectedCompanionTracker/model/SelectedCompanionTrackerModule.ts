@@ -1,8 +1,8 @@
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { isObjectDefined } from "../../../../../core/object/ObjectCheck";
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
+import { IQueryService } from "../../../../../core/query";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
-import { IQueryService } from "../../../../../engine/query/IQueryService";
 import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
 import { createQueryForEntity } from "../../../../entity/tracked/query/QueryForEntity";
 import { createIdTag } from "../../../../entity/tracked/tagTypes/CreateIdTag";
@@ -33,12 +33,12 @@ export default class SelectedCompanionTrackerModule extends LifeCycleModule
         private readonly _queryService: IQueryService = Inject(IQueryService)
     ) {
         super();
-        this._eventService.addEventListener(
+        this._eventService.on(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this
@@ -46,12 +46,12 @@ export default class SelectedCompanionTrackerModule extends LifeCycleModule
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this

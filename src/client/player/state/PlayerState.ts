@@ -1,4 +1,5 @@
 import { IPlayerEntity } from "../api/IPlayerEntity";
+
 const STATE: IPlayerState = {
     player: undefined,
 };

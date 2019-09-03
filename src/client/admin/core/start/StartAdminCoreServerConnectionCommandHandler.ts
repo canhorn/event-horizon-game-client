@@ -1,13 +1,16 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
-import { Inject } from "../../../../engine/ioc/Create";
-import { IQueryService } from "../../../../engine/query/IQueryService";
-import { IAccountState } from "../../../account/api/IAccountState";
-import { createGetAccountQuery } from "../../../account/get/GetAccountQuery";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
+import { Inject } from "../../../../core/ioc";
+import { IQueryService } from "../../../../core/query";
 import { startCoreAdminConnection } from "../state/CoreAdminConnectionState";
-import { START_ADMIN_CORE_SERVER_CONNECTION_COMMAND } from "./StartAdminCoreServerConnectionCommand";
-import { StartAdminCoreServerConnectionCommandData } from "./StartAdminCoreServerConnectionCommand";
+import {
+    START_ADMIN_CORE_SERVER_CONNECTION_COMMAND,
+    StartAdminCoreServerConnectionCommandData,
+    StartAdminCoreServerConnectionCommandResultType,
+} from "./StartAdminCoreServerConnectionCommand";
 
 /**
  * Name: StartAdminCoreServerConnectionCommand
@@ -22,7 +25,9 @@ export class StartAdminCoreServerConnectionCommandHandler
     public handle({
         serverUrl,
         accessToken,
-    }: StartAdminCoreServerConnectionCommandData): ICommandResult {
+    }: StartAdminCoreServerConnectionCommandData): ICommandResult<
+        StartAdminCoreServerConnectionCommandResultType
+    > {
         startCoreAdminConnection(serverUrl, accessToken);
         return {
             success: true,

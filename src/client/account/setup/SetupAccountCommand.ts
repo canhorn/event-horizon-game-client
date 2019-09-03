@@ -1,21 +1,25 @@
 import { CommandType, ICommand, ICommandType } from "../../../core/command";
 
+/**
+ * Name: SetupAccountCommand
+ * NameSpace: Account
+ * Type: Command
+ */
 export const SETUP_ACCOUNT_COMMAND = new CommandType(
     "Account.SETUP_ACCOUNT_COMMAND"
 );
-export class SetupAccountCommand
+class CommandClass
     implements
         ICommand<SetupAccountCommandData, SetupAccountCommandResultType> {
     public type: ICommandType = SETUP_ACCOUNT_COMMAND;
     public data?: SetupAccountCommandData;
 }
-
-const setupAccountCommand = new SetupAccountCommand();
-
-export const createSetupAccountCommand = (data: SetupAccountCommandData) => {
-    setupAccountCommand.data = data;
-    return setupAccountCommand;
+const instanceOfCommand = new CommandClass();
+export const createSetupAccountCommand = (
+    data: SetupAccountCommandData
+): ICommand<SetupAccountCommandData, SetupAccountCommandResultType> => {
+    instanceOfCommand.data = data;
+    return instanceOfCommand;
 };
-
 export interface SetupAccountCommandData {}
 export type SetupAccountCommandResultType = undefined;

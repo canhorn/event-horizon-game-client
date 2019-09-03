@@ -1,5 +1,5 @@
 import { Vector3 } from "babylonjs";
-import { EventType, IEventType } from "../../../engine/event/EventType";
+import { EventType, IEventType } from "../../../core/event";
 import { IObjectEntityDetails } from "../../entity/api/IObjectEntityDetails";
 
 export const CLIENT_ACTION_ENTITY_CHANGED: string = "EntityClientChanged";

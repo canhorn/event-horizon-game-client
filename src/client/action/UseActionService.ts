@@ -1,5 +1,5 @@
-import { IEventHandlerRegister } from "../../engine/event/IEventService";
-import { Inject } from "../../engine/ioc/Create";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
 import { ClientActionReceivedEventHandler } from "./received/ClientActionReceivedEventHandler";
 
 export const useActionService = (

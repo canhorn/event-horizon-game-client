@@ -1,23 +1,27 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
 import { EntityModule } from "../model/EntityModule";
 import { getBaseScriptModules } from "../state/EntityScriptModuleState";
 import {
     REGISTER_ALL_BASE_MODULES_COMMAND,
     RegisterAllBaseModulesCommandData,
+    RegisterAllBaseModulesCommandResultType,
 } from "./RegisterAllBaseModulesCommand";
 
 /**
- * Name: RegisterAllBaseModulesCommand
+ * Name: RegisterAllBaseModulesCommandHandler
  * Type: Command
  */
 export class RegisterAllBaseModulesCommandHandler implements ICommandHandler {
     public type: ICommandType = REGISTER_ALL_BASE_MODULES_COMMAND;
-    constructor() {}
     public handle({
         entity,
-    }: RegisterAllBaseModulesCommandData): ICommandResult {
+    }: RegisterAllBaseModulesCommandData): ICommandResult<
+        RegisterAllBaseModulesCommandResultType
+    > {
         getBaseScriptModules()
             .map(
                 baseEntityScriptModule =>

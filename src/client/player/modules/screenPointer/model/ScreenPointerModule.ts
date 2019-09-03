@@ -6,11 +6,10 @@ import {
     PointerInfo,
 } from "babylonjs";
 import { autobind } from "../../../../../core/autobind/autobind";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../../core/logger";
 import { isObjectDefined } from "../../../../../core/object/ObjectCheck";
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
-import { createLogger } from "../../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../../engine/logger/LoggerFactory";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
 import { IRenderingScene } from "../../../../../engine/renderer/api/IRenderingScene";
 import { shadowAsEngineMesh } from "../../../../../engine/renderer/EngineMesh";

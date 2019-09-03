@@ -1,6 +1,6 @@
 import { Mesh, Vector3 } from "babylonjs";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { IInitializable } from "../../../../engine/lifecycle/IInitializable";
 import { IRegisterInitializable } from "../../../../engine/lifecycle/register/IRegisterInitializable";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
@@ -47,22 +47,14 @@ export class EntityMeshModule extends LifeCycleModule
     ) {
         super();
         this._startingPosition = this._entity.position;
-        this._eventService.addEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
-        this._eventService.addEventListener(
-            MESH_LOADED_EVENT,
-            this.onMeshLoaded,
-            this
-        );
-        this._eventService.addEventListener(
+        this._eventService.on(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
+        this._eventService.on(MESH_LOADED_EVENT, this.onMeshLoaded, this);
+        this._eventService.on(
             ENTITY_ENTERING_VIEW_EVENT,
             this.onEnteringView,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             ENTITY_EXITING_VIEW_EVENT,
             this.onExitingView,
             this
@@ -74,22 +66,14 @@ export class EntityMeshModule extends LifeCycleModule
     }
     public postInitialize(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
-        this._eventService.removeEventListener(
-            MESH_LOADED_EVENT,
-            this.onMeshLoaded,
-            this
-        );
-        this._eventService.removeEventListener(
+        this._eventService.off(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
+        this._eventService.off(MESH_LOADED_EVENT, this.onMeshLoaded, this);
+        this._eventService.off(
             ENTITY_ENTERING_VIEW_EVENT,
             this.onEnteringView,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             ENTITY_EXITING_VIEW_EVENT,
             this.onExitingView,
             this

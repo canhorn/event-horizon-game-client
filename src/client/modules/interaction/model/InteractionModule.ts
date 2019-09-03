@@ -1,12 +1,11 @@
 import { autobind } from "../../../../core/autobind/autobind";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { isObjectNotDefined } from "../../../../core/object/ObjectCheck";
+import { IQueryService } from "../../../../core/query";
 import { throttle } from "../../../../core/throttle/Throttle";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { createEntityLeftInteractionDistanceEvent } from "../../../player/modules/playerInteraction/withIn/EntityLeftInteractionDistanceEvent";
 import { createEntityWithinInteractionDistanceEvent } from "../../../player/modules/playerInteraction/withIn/EntityWithinInteractionDistanceEvent";

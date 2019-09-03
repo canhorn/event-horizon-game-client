@@ -1,6 +1,6 @@
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { throttle } from "../../../../core/throttle/Throttle";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";

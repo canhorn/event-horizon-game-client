@@ -1,13 +1,16 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { createAdminChangedEvent } from "../../changed/AdminChangedEvent";
 import { setZoneServerList } from "../../state/AdminState";
 import {
     SET_ADMIN_ZONE_LIST_COMMAND,
     SetAdminZoneListCommandData,
+    SetAdminZoneListCommandResultType,
 } from "./SetAdminZoneListCommand";
 
 /**
@@ -19,7 +22,11 @@ export class SetAdminZoneListCommandHandler implements ICommandHandler {
     constructor(
         private readonly _eventService: IEventService = Inject(IEventService)
     ) {}
-    public handle({ zoneList }: SetAdminZoneListCommandData): ICommandResult {
+    public handle({
+        zoneList,
+    }: SetAdminZoneListCommandData): ICommandResult<
+        SetAdminZoneListCommandResultType
+    > {
         setZoneServerList(zoneList);
         this._eventService.publish(createAdminChangedEvent({}));
         return {

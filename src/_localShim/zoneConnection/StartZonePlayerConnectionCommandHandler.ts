@@ -16,6 +16,7 @@ import { ILogger, createLogger } from "../../core/logger";
 import { IEventService } from "../../core/event";
 import { Inject } from "../../core/ioc";
 import { IQueryService } from "../../core/query";
+import { createNameTag } from "../../client/entity/tracked/tagTypes/CreateNameTag";
 
 /**
 /* Name: StartCoreServerConnectionCommand
@@ -156,7 +157,7 @@ const zonePlayerInfo: IZonePlayerInfo = {
     },
     mapMesh: {
         name: "some-mesh",
-        lightTag: "main_light",
+        lightTag: createNameTag("global_light"),
         heightMapUrl: "/Game/Level/Home/Assets/HomeLevel.png",
         width: 128,
         height: 128,

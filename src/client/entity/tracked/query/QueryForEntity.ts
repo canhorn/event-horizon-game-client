@@ -1,4 +1,5 @@
-import { IQuery } from "../../../../engine/query/IQueryService";
+import { IQuery } from "../../../../core/query";
+
 /**
  * Type: QueryForEntity
  * NameSpace: Entity.Tracked

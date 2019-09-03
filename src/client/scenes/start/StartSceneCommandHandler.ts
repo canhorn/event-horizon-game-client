@@ -1,10 +1,11 @@
-import { ICommandHandler } from "../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../engine/command/api/ICommandResult";
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandHandler } from "../../../core/command";
+import { ICommandResult } from "../../../core/command";
+import { ICommandService } from "../../../core/command";
+import { ICommandType } from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 import { createDisposeOfTrackedEntitiesCommand } from "../../entity/tracked/dispose/DisposeOfTrackedEntitiesCommand";
 import { setRunningOrchestratorScene } from "../state/SceneOrchestratorState";
+import { StartSceneCommandResultType } from "./StartSceneCommand";
 import {
     START_SCENE_COMMAND,
     StartSceneCommandData,
@@ -21,7 +22,9 @@ export class StartSceneCommandHandler implements ICommandHandler {
             ICommandService
         )
     ) {}
-    public handle({ sceneId }: StartSceneCommandData): ICommandResult {
+    public handle({
+        sceneId,
+    }: StartSceneCommandData): ICommandResult<StartSceneCommandResultType> {
         this._commandService.send(createDisposeOfTrackedEntitiesCommand({}));
         setRunningOrchestratorScene(sceneId);
         return {

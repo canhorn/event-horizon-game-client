@@ -1,19 +1,13 @@
-import { autobind } from "../../../../../core/autobind/autobind";
 import { Dictionary } from "../../../../../core/collection/Dictionary";
 import { IDictionary } from "../../../../../core/collection/IDictionary";
-import {
-    isObjectDefined,
-    isObjectNotDefined,
-} from "../../../../../core/object/ObjectCheck";
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
-import { createLogger } from "../../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../../engine/logger/LoggerFactory";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../../core/logger";
+import { isObjectNotDefined } from "../../../../../core/object/ObjectCheck";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
 import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
 import { createClearInteractionIndicatorEvent } from "../../../../modules/interactionIndicator/clear/ClearInteractionIndicatorEvent";
 import { createShowInteractionIndicatorEvent } from "../../../../modules/interactionIndicator/show/ShowInteractionIndicatorEvent";
-import { ServerParticle } from "../../../../particle/model/ServerParticle";
 import { PlayerEntity } from "../../../model/PlayerEntity";
 import { IPlayerInteractionModule } from "../api/IPlayerInteractionModule";
 import {
@@ -39,13 +33,13 @@ export default class PlayerInteractionModule extends LifeCycleModule
         private readonly _eventService: IEventService = Inject(IEventService)
     ) {
         super();
-        _eventService.addEventListener(
+        _eventService.on(
             ENTITY_WITHIN_INTERACTION_DISTANCE_EVENT,
             this.onEntityWithinDistance,
             this
         );
 
-        _eventService.addEventListener(
+        _eventService.on(
             ENTITY_LEFT_INTERACTION_DISTANCE_EVENT,
             this.onEntityLeft,
             this
@@ -53,7 +47,7 @@ export default class PlayerInteractionModule extends LifeCycleModule
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             ENTITY_WITHIN_INTERACTION_DISTANCE_EVENT,
             this.onEntityWithinDistance,
             this

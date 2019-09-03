@@ -1,8 +1,9 @@
-import { ICommandHandler } from "../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
+import { ICommandHandler } from "../../../core/command";
+import { ICommandResult } from "../../../core/command";
+import { ICommandType } from "../../../core/command";
 import { PlayerEntity } from "../model/PlayerEntity";
 import { setClientPlayer } from "../state/PlayerState";
+import { RegisterPlayerCommandResultType } from "./RegisterPlayerCommand";
 import {
     REGISTER_PLAYER_COMMAND,
     RegisterPlayerCommandData,
@@ -17,7 +18,9 @@ export class RegisterPlayerCommandHandler implements ICommandHandler {
     constructor() {}
     public handle({
         playerDetails,
-    }: RegisterPlayerCommandData): ICommandResult {
+    }: RegisterPlayerCommandData): ICommandResult<
+        RegisterPlayerCommandResultType
+    > {
         setClientPlayer(new PlayerEntity(playerDetails));
         return {
             success: true,

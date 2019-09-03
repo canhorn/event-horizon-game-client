@@ -1,4 +1,4 @@
-import { IQuery } from "../../../engine/query/IQueryService";
+import { IQuery } from "../../../core/query";
 import { IZoneDetails } from "../api/IZoneDetails";
 
 /**

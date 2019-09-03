@@ -1,8 +1,8 @@
-import { getI18nState } from "../../../../engine/i18n/store/I18nStore";
-import { Inject } from "../../../../engine/ioc/Create";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
+import { getI18nState } from "../../../../core/i18n/store/I18nStore";
+import { Inject } from "../../../../core/ioc";
+import { ILogger } from "../../../../core/logger";
+import { IQueryService } from "../../../../core/query";
 import { ServerVector3 } from "../../../../engine/math/ServerVectors";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { createQueryForEntity } from "../../../entity/tracked/query/QueryForEntity";
 import { createIdTag } from "../../../entity/tracked/tagTypes/CreateIdTag";

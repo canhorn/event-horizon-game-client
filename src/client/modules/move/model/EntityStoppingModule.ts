@@ -1,5 +1,5 @@
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { CLIENT_ACTION_ENTITY_STOPPING_EVENT } from "../../../action/api/ClientAction_EntityStopping";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
@@ -13,7 +13,7 @@ export class EntityStoppingModule extends LifeCycleModule {
         protected readonly _eventService: IEventService = Inject(IEventService)
     ) {
         super();
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLIENT_ACTION_ENTITY_STOPPING_EVENT,
             this.emitEntityMovingEvent,
             this
@@ -24,7 +24,7 @@ export class EntityStoppingModule extends LifeCycleModule {
         // Nothing to keep track of here
     }
     public dispose(): void {
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLIENT_ACTION_ENTITY_STOPPING_EVENT,
             this.emitEntityMovingEvent,
             this

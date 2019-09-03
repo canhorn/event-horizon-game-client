@@ -1,9 +1,5 @@
-import { IEventType } from "../../../engine/event/EventType";
-import {
-    IEventHandler,
-    IEventService,
-} from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { IEventHandler, IEventService, IEventType } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import {
     ACCOUNT_CONNECTED_EVENT,
     AccountConnectedEventData,

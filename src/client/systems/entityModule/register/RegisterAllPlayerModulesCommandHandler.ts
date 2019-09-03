@@ -1,11 +1,14 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
 import { EntityModule } from "../model/EntityModule";
 import { getPlayerScriptModules } from "../state/EntityScriptModuleState";
 import {
     REGISTER_ALL_PLAYER_MODULES_COMMAND,
     RegisterAllPlayerModulesCommandData,
+    RegisterAllPlayerModulesCommandResultType,
 } from "./RegisterAllPlayerModulesCommand";
 
 /**
@@ -17,7 +20,9 @@ export class RegisterAllPlayerModulesCommandHandler implements ICommandHandler {
     constructor() {}
     public handle({
         playerEntity,
-    }: RegisterAllPlayerModulesCommandData): ICommandResult {
+    }: RegisterAllPlayerModulesCommandData): ICommandResult<
+        RegisterAllPlayerModulesCommandResultType
+    > {
         getPlayerScriptModules()
             .map(
                 baseEntityScriptModule =>

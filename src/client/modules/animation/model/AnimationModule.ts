@@ -1,9 +1,9 @@
 import { AnimationGroup } from "babylonjs";
 import { Dictionary } from "../../../../core/collection/Dictionary";
 import { IDictionary } from "../../../../core/collection/IDictionary";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { IEntity } from "../../../../engine/entity/api/IEntity";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import {
     ENTITY_ENTERING_VIEW_EVENT,
@@ -36,37 +36,43 @@ export class AnimationModule extends LifeCycleModule
     ) {
         super();
         this._entity = entity;
-        this._eventService.addEventListener(
+        this._eventService.on(
             ANIMATION_LIST_LOADED_EVENT,
             this.onAnimationListLoaded,
             this
         );
         // Add play animation listener
-        this._eventService.addEventListener(
-            PLAY_ANIMATION_EVENT,
-            this.onPlayAnimation,
-            this
-        );
-        this._eventService.addEventListener(
+        this._eventService.on(PLAY_ANIMATION_EVENT, this.onPlayAnimation, this);
+        this._eventService.on(
             ENTITY_ENTERING_VIEW_EVENT,
             this.onEnteringView,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             ENTITY_EXITING_VIEW_EVENT,
             this.onExitingView,
             this
         );
     }
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             ANIMATION_LIST_LOADED_EVENT,
             this.onAnimationListLoaded,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             PLAY_ANIMATION_EVENT,
             this.onPlayAnimation,
+            this
+        );
+        this._eventService.off(
+            ENTITY_ENTERING_VIEW_EVENT,
+            this.onEnteringView,
+            this
+        );
+        this._eventService.off(
+            ENTITY_EXITING_VIEW_EVENT,
+            this.onExitingView,
             this
         );
     }

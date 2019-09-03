@@ -1,6 +1,6 @@
-import { ICommandHandlerRegister } from "../../../engine/command/api/ICommandHandlerRegister";
-import { IEventHandlerRegister } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandHandlerRegister } from "../../../core/command";
+import { IEventHandlerRegister } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { ClientRunSkillActionEventHandler } from "./run/ClientRunSkillActionEventHandle";
 import { setupSkillScriptServices } from "./setup/SetupSkillScriptServices";
 

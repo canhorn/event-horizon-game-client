@@ -1,5 +1,5 @@
-import { Inject } from "../../../../engine/ioc/Create";
-import { ILoggerFactory } from "../../../../engine/logger/LoggerFactory";
+import { Inject } from "../../../../core/ioc";
+import { ILoggerFactory } from "../../../../core/logger";
 import { ISkillActionScriptServices } from "../api/ISkillActionScriptServices";
 import { ISkillActionScriptUtils } from "../api/ISkillActionScriptUtils";
 import { buildSkillActionScriptServices } from "../services/SkillActionScriptServices";

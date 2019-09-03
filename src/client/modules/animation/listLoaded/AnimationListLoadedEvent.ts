@@ -1,5 +1,5 @@
 import { AnimationGroup } from "babylonjs";
-import { EventType, IEvent } from "../../../../engine/event/EventType";
+import { EventType, IEvent } from "../../../../core/event";
 
 export const ANIMATION_LIST_LOADED_EVENT: EventType = new EventType(
     "ANIMATION_LIST_LOADED_EVENT"

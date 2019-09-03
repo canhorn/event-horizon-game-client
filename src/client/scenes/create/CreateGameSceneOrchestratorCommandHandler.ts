@@ -1,10 +1,13 @@
-import { ICommandHandler } from "../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../core/command";
 import { ClientGameSceneOrchestrator } from "../model/ClientGameSceneOrchestrator";
 import {
     CREATE_GAME_SCENE_ORCHESTRATOR_COMMAND,
     CreateGameSceneOrchestratorCommandData,
+    CreateGameSceneOrchestratorCommandResultType,
 } from "./CreateGameSceneOrchestratorCommand";
 
 /**
@@ -17,7 +20,9 @@ export class CreateGameSceneOrchestratorCommandHandler
     constructor() {}
     public handle({
         sceneOrchestrationOptions,
-    }: CreateGameSceneOrchestratorCommandData): ICommandResult {
+    }: CreateGameSceneOrchestratorCommandData): ICommandResult<
+        CreateGameSceneOrchestratorCommandResultType
+    > {
         new ClientGameSceneOrchestrator(sceneOrchestrationOptions);
         return {
             success: true,

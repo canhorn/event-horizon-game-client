@@ -1,10 +1,13 @@
-import { ICommandHandler } from "../../../../engine/command/api/ICommandHandler";
-import { ICommandResult } from "../../../../engine/command/api/ICommandResult";
-import { ICommandType } from "../../../../engine/command/api/ICommandType";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../core/command";
 import { MapMeshFromHeightMapEntity } from "../model/MapMeshFromHeightMapEntity";
 import {
     CREATE_MAP_FROM_MESH_SETTINGS_COMMAND,
     CreateMapFromMeshSettingsCommandData,
+    CreateMapFromMeshSettingsCommandResultType,
 } from "./CreateMapFromMeshSettingsCommand";
 
 /**
@@ -17,7 +20,9 @@ export class CreateMapFromMeshSettingsCommandHandler
     constructor() {}
     public handle({
         mapMeshSettings,
-    }: CreateMapFromMeshSettingsCommandData): ICommandResult {
+    }: CreateMapFromMeshSettingsCommandData): ICommandResult<
+        CreateMapFromMeshSettingsCommandResultType
+    > {
         new MapMeshFromHeightMapEntity(mapMeshSettings);
         return {
             success: true,

@@ -1,16 +1,14 @@
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { debugEnabled } from "../../../engine/debugging/DebuggingActions";
+import { ICommandService } from "../../../core/command";
+import { debugEnabled } from "../../../core/debugging/DebuggingActions";
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
+import { createLogger, ILogger } from "../../../core/logger";
 import { DebuggingGui } from "../../../engine/debugging/gui/DebuggingGui";
-import { IEventService } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
 import { LifeCycleEntity } from "../../../engine/lifecycle/model/LifeCycleEntity";
 import { createShowLoadingUiEvent } from "../../../engine/loading/show/ShowLoadingUiEvent";
-import { createLogger } from "../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../engine/logger/LoggerFactory";
 import { IGameScene } from "../../../engine/scene/GameScene";
 import { createStartZonePlayerConnectionCommand } from "../../server/zone/start/StartZonePlayerConnectionCommand";
 import { createStopZonePlayerConnectionCommand } from "../../server/zone/stop/StopZonePlayerConnectionCommand";
-import { ZoneRootGui } from "./gui/ZoneRootGui";
 
 export class ZoneScene extends LifeCycleEntity implements IGameScene {
     constructor(
@@ -26,8 +24,6 @@ export class ZoneScene extends LifeCycleEntity implements IGameScene {
         this._logger.debug("Zone Scene Initialize");
         // Show Loading UI
         this._eventService.publish(createShowLoadingUiEvent({}));
-        // Load in root GUI
-        new ZoneRootGui();
         // Start the Zone Connection
         this._commandService.send(createStartZonePlayerConnectionCommand({}));
         // Load in Debugging GUI

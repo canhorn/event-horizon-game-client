@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../../../engine/event/EventType";
+import { EventType, IEvent } from "../../../../core/event";
 
 export const PLAY_ANIMATION_EVENT: EventType = new EventType(
     "PLAY_ANIMATION_EVENT"

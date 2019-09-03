@@ -1,26 +1,26 @@
-import { ICommand } from "../../../engine/command/api/ICommand";
-import { ICommandType } from "../../../engine/command/api/ICommandType";
-import { CommandType } from "../../../engine/command/model/CommandType";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
 
 /**
- * Type: StartSceneCommand
- * NameSpace: ClientScenes
+ * Name: StartSceneCommand
+ * NameSpace: Scenes
  * Type: Command
  */
 export const START_SCENE_COMMAND = new CommandType(
-    "ClientScenes.START_SCENE_COMMAND"
+    "Scenes.START_SCENE_COMMAND"
 );
-export class CommandClass implements ICommand {
+class CommandClass
+    implements ICommand<StartSceneCommandData, StartSceneCommandResultType> {
     public type: ICommandType = START_SCENE_COMMAND;
     public data?: StartSceneCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createStartSceneCommand = (
     data: StartSceneCommandData
-): ICommand => {
+): ICommand<StartSceneCommandData, StartSceneCommandResultType> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
 export interface StartSceneCommandData {
     sceneId: string;
 }
+export type StartSceneCommandResultType = undefined;

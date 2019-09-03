@@ -1,0 +1,117 @@
+import { ICommandService } from "../../../../../core/command";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
+import { createLogger } from "../../../../../core/logger";
+import { ILogger } from "../../../../../core/logger";
+import { createCreateGuiCommand } from "../../../../../engine/gui/create/CreateGuiCommand";
+import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
+import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
+import { ISandboxModule } from "../api/ISandboxModule";
+import DialogGuiJson from "./gui/Dialog.Gui.json";
+
+
+export class SandboxModule extends LifeCycleModule implements ISandboxModule {
+    private $data: any = {};
+    constructor(
+        private readonly _entity: IObjectEntity,
+        private readonly _eventService: IEventService = Inject(IEventService),
+        private readonly _commandService: ICommandService = Inject(
+            ICommandService
+        ),
+        private readonly _logger: ILogger = createLogger("SandboxModule")
+    ) {
+        super();
+        this.initialize();
+    }
+    public update(): void {}
+    public dispose(): void {
+        const $entity = this._entity;
+        const $services = {
+            eventService: this._eventService,
+            commandService: this._commandService,
+            logger: this._logger,
+        };
+        const $data = this.$data;
+        const eventsToRemove = $data.eventsToDispose || [];
+        eventsToRemove.forEach((eventData: any) => {
+            $services.eventService.off(
+                {
+                    key: eventData.name,
+                },
+                eventData.handler,
+                eventData.context
+            );
+        });
+
+        $services.commandService.send({
+            type: {
+                key: "GUI.DISPOSE_OF_GUI_CONTROL_COMMAND",
+            },
+            data: {
+                controlId: $data.guiControlId,
+            },
+        });
+    }
+    private initialize() {
+        this.registerGui();
+        this.moduleInitialize();
+    }
+    private registerGui() {
+        const templateList = DialogGuiJson.templateList;
+        const layoutList: any = [];
+        this._commandService.send(
+            createCreateGuiCommand({
+                templateList,
+                layoutList,
+            })
+        );
+    }
+    private moduleInitialize() {
+        const $entity = this._entity;
+        const $services = {
+            eventService: this._eventService,
+            commandService: this._commandService,
+            logger: this._logger,
+        };
+        const $data = this.$data;
+
+        function guiLayoutId() {
+            return "dialog_module-layout";
+        }
+        // Add eventsToRemove to the $data, will be called by the Dispose script
+        $data.eventsToRemove = [];
+
+        $services.commandService.send({
+            type: {
+                key: "GUI.ADD_LAYOUT_COMMAND",
+            },
+            data: {
+                layout: DialogGuiJson.layout,
+            },
+        });
+
+        // Register the control with the provided template and options.
+        DialogGuiJson.controlList.forEach(control => {
+            $services.commandService.send({
+                type: {
+                    key: "GUI.REGISTER_CONTROL_COMMAND",
+                },
+                data: {
+                    controlId: control.controlId,
+                    templateId: control.templateId,
+                    options: control.options,
+                },
+            });
+        });
+
+        // Activate the layout
+        $services.commandService.send({
+            type: {
+                key: "GUI.ACTIVATE_LAYOUT_COMMAND",
+            },
+            data: {
+                layoutId: guiLayoutId(),
+            },
+        });
+    }
+}

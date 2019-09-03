@@ -1,7 +1,4 @@
-import {
-    IQueryHandler,
-    IQueryResult,
-} from "../../../../engine/query/IQueryService";
+import { IQueryHandler, IQueryResult } from "../../../../core/query";
 import { getClientPlayer } from "../../state/PlayerState";
 import {
     GET_CLIENT_PLAYER,

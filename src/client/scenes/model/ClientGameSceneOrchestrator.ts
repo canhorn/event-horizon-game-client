@@ -1,5 +1,5 @@
-import { ICommandHandlerRegister } from "../../../engine/command/api/ICommandHandlerRegister";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandHandlerRegister } from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 import { LifeCycleEntity } from "../../../engine/lifecycle/model/LifeCycleEntity";
 import { IGameScene } from "../../../engine/scene/GameScene";
 import { ISceneOrchestrationOptions } from "../api/ISceneOrchestrationOptions";

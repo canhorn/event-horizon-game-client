@@ -1,7 +1,7 @@
+import { ErrorCode } from "../../../../core/assert/Assert";
 import { Dictionary } from "../../../../core/collection/Dictionary";
 import { IDictionary } from "../../../../core/collection/IDictionary";
 import { isObjectDefined } from "../../../../core/object/ObjectCheck";
-import { ErrorCode } from "../../../../engine/assert/Assert";
 import { IZoneInfo } from "../../../server/zone/api/IZoneInfo";
 import { IZoneAdminCommand } from "../api/IZoneAdminCommand";
 import { ZoneAdminConnection } from "../connection/ZoneAdminConnection";
@@ -38,7 +38,7 @@ export const stopCoreAdminConnection = (zoneId: string) => {
 export const sendCoreAdminAction = (
     zoneId: string,
     command: IZoneAdminCommand
-) => {
+): Promise<void> => {
     const zoneConnection = STATE.connectionMap.getValue(zoneId);
     if (isObjectDefined(zoneConnection)) {
         return zoneConnection.adminAction(command);

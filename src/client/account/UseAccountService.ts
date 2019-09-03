@@ -1,7 +1,7 @@
-import { ICommandHandlerRegister } from "../../engine/command/api/ICommandHandlerRegister";
-import { IEventHandlerRegister } from "../../engine/event/IEventService";
-import { Inject } from "../../engine/ioc/Create";
-import { IQueryHandlerRegister } from "../../engine/query/IQueryService";
+import { ICommandHandlerRegister } from "../../core/command";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
+import { IQueryHandlerRegister } from "../../core/query";
 import { AccountConnectedUpdateUserEventHandler } from "./connected/AccountConnectedUpdateUserEventHandler";
 import { GetAccountQueryHandler } from "./get/GetAccountQueryHandler";
 import { SetupAccountCommandHandler } from "./setup/SetupAccountCommandHandler";

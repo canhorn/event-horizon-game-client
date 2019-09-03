@@ -1,15 +1,15 @@
 import { autobind } from "../../../../../core/autobind/autobind";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
+import { ILogger } from "../../../../../core/logger";
+import { createLogger } from "../../../../../core/logger";
+import { IQueryService } from "../../../../../core/query";
 import { throttle } from "../../../../../core/throttle/Throttle";
 import { takeScreenshotEvent } from "../../../../../engine/debugging/screenshot/TakeScreenshotEvent";
-import { IEventService } from "../../../../../engine/event/IEventService";
 import { InputOptions } from "../../../../../engine/input/InputModel";
 import { IRegisterInput } from "../../../../../engine/input/IRegisterInput";
 import { IUnregisterInput } from "../../../../../engine/input/IUnregisterInput";
-import { Inject } from "../../../../../engine/ioc/Create";
-import { createLogger } from "../../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../../engine/logger/LoggerFactory";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
-import { IQueryService } from "../../../../../engine/query/IQueryService";
 import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
 import { createQueryForEntity } from "../../../../entity/tracked/query/QueryForEntity";
 import { createTypeTag } from "../../../../entity/tracked/tagTypes/CreateTypeTag";
@@ -316,7 +316,7 @@ export class InputModule extends LifeCycleModule implements IInputModule {
                         data: {
                             casterId: this.player.entityId,
                             targetId: entity.entityId,
-                            skillId: "fire_ball",
+                            skillId: "fireball",
                         },
                     })
                 )

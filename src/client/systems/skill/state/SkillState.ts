@@ -1,6 +1,6 @@
+import { ErrorCode } from "../../../../core/assert/Assert";
 import { Dictionary } from "../../../../core/collection/Dictionary";
 import { isObjectNotDefined } from "../../../../core/object/ObjectCheck";
-import { ErrorCode } from "../../../../engine/assert/Assert";
 import { IClientScript } from "../../../../engine/system/client/scripts/api/IClientScript";
 import { createClientScriptFromTemplate } from "../../../../engine/system/client/scripts/create/CreateScriptFromTemplate";
 

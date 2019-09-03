@@ -1,7 +1,4 @@
-import {
-    IQueryHandler,
-    IQueryResult,
-} from "../../../engine/query/IQueryService";
+import { IQueryHandler, IQueryResult } from "../../../core/query";
 import { IAccountState } from "../api/IAccountState";
 import { getAccountState } from "../state/AccountState";
 import { GET_ACCOUNT_QUERY } from "./GetAccountQuery";

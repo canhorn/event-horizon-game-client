@@ -1,9 +1,9 @@
 import { Vector3 } from "babylonjs";
 import { Dictionary } from "../../../core/collection/Dictionary";
 import { IDictionary } from "../../../core/collection/IDictionary";
+import { ICommandService } from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 import { isObjectDefined } from "../../../core/object/ObjectCheck";
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { Inject } from "../../../engine/ioc/Create";
 import { IModule } from "../../../engine/module/IModule";
 import { ANIMATION_MODULE_NAME } from "../../modules/animation/api/IAnimationModule";
 import { AnimationModule } from "../../modules/animation/model/AnimationModule";
@@ -36,6 +36,8 @@ import { positionFromDetails } from "../position/PositionFromDetails";
 import { TrackedEntity } from "../tracked/model/TrackedEntity";
 import { createIdTag } from "../tracked/tagTypes/CreateIdTag";
 import { createTypeTag } from "../tracked/tagTypes/CreateTypeTag";
+import { HEALTH_MODULE_NAME } from "../../modules/healthModule/api/IHealthModule";
+import { HealthModule } from "../../modules/healthModule/model/HealthModule";
 
 export class ObjectEntity extends TrackedEntity implements IObjectEntity {
     public get globalId(): string {
@@ -112,6 +114,7 @@ export class ObjectEntity extends TrackedEntity implements IObjectEntity {
             INTERACTION_INDICATOR_MODULE_NAME,
             new InteractionIndicatorModule(this)
         );
+        this.registerModule(HEALTH_MODULE_NAME, new HealthModule(this));
         this._commandService.send(
             createRegisterAllBaseModulesCommand({
                 entity: this,

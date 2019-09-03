@@ -1,4 +1,8 @@
-import { getI18nState } from "../../../engine/i18n/store/I18nStore";
+import { getI18nState } from "../../../core/i18n/store/I18nStore";
+import { createShowDebuggingMessageEvent } from "../../../engine/debugging/message/ShowDebuggingMessageEvent";
+import { createCloseDebuggingWindowCommand } from "../../../engine/debugging/open/CloseDebuggingWindowCommand";
+import { createOpenDebuggingWindowCommand } from "../../../engine/debugging/open/OpenDebuggingWindowCommand";
+import { createShowGuiCommand } from "../../../engine/gui/show/ShowGuiCommand";
 import { runClientScript } from "../../../engine/system/client/scripts/run/RunClientScript";
 import { ObjectEntity } from "../../entity/model/ObjectEntity";
 import { createTypeTag } from "../../entity/tracked/tagTypes/CreateTypeTag";
@@ -12,6 +16,8 @@ import { MOVE_SELECTED_MODULE_NAME } from "../modules/moveSelected/api/IMoveSele
 import MoveSelectedModule from "../modules/moveSelected/model/MoveSelectedModule";
 import { PLAYER_INTERACTION_MODULE_NAME } from "../modules/playerInteraction/api/IPlayerInteractionModule";
 import PlayerInteractionModule from "../modules/playerInteraction/model/PlayerInteractionModule";
+import { SANDBOX_MODULE_NAME } from "../modules/sandbox/api/ISandboxModule";
+import { SandboxModule } from "../modules/sandbox/model/SandboxModule";
 import { SCREEN_POINTER_MODULE_NAME } from "../modules/screenPointer/api/IScreenPointerModule";
 import ScreenPointerModule from "../modules/screenPointer/model/ScreenPointerModule";
 import { SELECTED_COMPANION_TRACKER_MODULE_NAME } from "../modules/selectedCompanionTracker/api/ISelectedCompanionTrackerModule";
@@ -53,12 +59,14 @@ export class PlayerEntity extends ObjectEntity {
             PLAYER_INTERACTION_MODULE_NAME,
             new PlayerInteractionModule(this)
         );
+        this.registerModule(SANDBOX_MODULE_NAME, new SandboxModule(this));
         this._commandService.send(
             createRegisterAllPlayerModulesCommand({
                 playerEntity: this,
             })
         );
 
+        // TODO: Put this into a Player Module
         runClientScript("player_script", "SkillSelection_Initialize.js", {
             skillList: [
                 {
@@ -71,20 +79,50 @@ export class PlayerEntity extends ObjectEntity {
                         ),
                 },
                 {
-                    skillName: "Show Chat",
+                    skillName: "Open Debugging",
+                    onClick: () =>
+                        this._commandService.send(
+                            createOpenDebuggingWindowCommand({})
+                        ),
+                },
+                {
+                    skillName: "Close Debugging",
+                    onClick: () =>
+                        this._commandService.send(
+                            createCloseDebuggingWindowCommand({})
+                        ),
+                },
+                {
+                    skillName: "Test Debugging Message",
+                    onClick: () =>
+                        this._eventService.publish(
+                            createShowDebuggingMessageEvent({
+                                message: "Am A TEST!!",
+                            })
+                        ),
+                },
+                {
+                    skillName: "Open Dialog",
+                    onClick: () =>
+                        this._commandService.send(
+                            createShowGuiCommand({ id: "gui_dialog" })
+                        ),
+                },
+                {
+                    skillName: "Show System Log",
                     onClick: () =>
                         runClientScript(
                             "skill.clear_selection",
-                            "Chat_ShowSystemChat.js",
+                            "Log_ShowSystemLog.js",
                             this
                         ),
                 },
                 {
-                    skillName: "Hide Chat",
+                    skillName: "Hide System Log",
                     onClick: () =>
                         runClientScript(
                             "skill.clear_selection",
-                            "Chat_HideSystemChat.js",
+                            "Log_HideSystemLog.js",
                             this
                         ),
                 },
@@ -93,7 +131,7 @@ export class PlayerEntity extends ObjectEntity {
                     keyboardShortcut: "k",
                     onClick: () =>
                         runClientScript(
-                            "skill.fire_ball",
+                            "skill.fireball",
                             "Skill_Player_FireBall.js",
                             this
                         ),
@@ -116,7 +154,7 @@ export class PlayerEntity extends ObjectEntity {
                             "Skill_Runners_RunSelectedCompanionTargetedSkill.js",
                             {
                                 entity: this,
-                                skillId: "fire_ball",
+                                skillId: "fireball",
                                 noSelectionsMessage: getI18nState()
                                     .noSelectionsMessage,
                             }

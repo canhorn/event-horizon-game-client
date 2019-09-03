@@ -1,6 +1,6 @@
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { resolveTemplate } from "../../../../core/string/ResolveTemplate";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { ISkillActionScriptUtils } from "../api/ISkillActionScriptUtils";
 
 export const buildSkillActionScriptUtils = (

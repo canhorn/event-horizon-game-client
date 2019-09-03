@@ -1,8 +1,8 @@
 import { Mesh, MeshBuilder, Scene } from "babylonjs";
-import { Inject } from "../../../engine/ioc/Create";
+import { IGuid } from "../../../core/guid/IGuid";
+import { Inject } from "../../../core/ioc";
 import { IInitializable } from "../../../engine/lifecycle/IInitializable";
 import { IRegisterInitializable } from "../../../engine/lifecycle/register/IRegisterInitializable";
-import { IGuid } from "../../../engine/math/guid/IGuid";
 import { IRenderingScene } from "../../../engine/renderer/api/IRenderingScene";
 import { IObjectEntityDetails } from "../../entity/api/IObjectEntityDetails";
 import { BasicEntity } from "../../entity/model/BasicEntity";

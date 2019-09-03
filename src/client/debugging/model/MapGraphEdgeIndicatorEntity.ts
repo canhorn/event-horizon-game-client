@@ -1,12 +1,12 @@
 import { AbstractMesh, MeshBuilder, Vector3 } from "babylonjs";
+import { IEventService } from "../../../core/event";
+import { IGuid } from "../../../core/guid/IGuid";
+import { Inject } from "../../../core/ioc";
 import { Entity } from "../../../engine/entity/model/Entity";
-import { IEventService } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
 import { IDisposable } from "../../../engine/lifecycle/IDisposable";
 import { IInitializable } from "../../../engine/lifecycle/IInitializable";
 import { IRegisterDisposable } from "../../../engine/lifecycle/register/IRegisterDisposable";
 import { IRegisterInitializable } from "../../../engine/lifecycle/register/IRegisterInitializable";
-import { IGuid } from "../../../engine/math/guid/IGuid";
 import { ServerVector3Mapper } from "../../../engine/math/ServerVectors";
 import { IRenderingScene } from "../../../engine/renderer/api/IRenderingScene";
 import { MAP_MESH_READY_EVENT } from "../../entity/map/ready/MapMeshReadyEvent";
@@ -36,11 +36,7 @@ export class MapGraphEdgeIndicatorEntity extends Entity
     ) {
         super();
         _registerDisposable.register(this);
-        _eventService.addEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
+        _eventService.on(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
     }
     public initialize(): void {}
     public postInitialize(): void {
@@ -89,11 +85,7 @@ export class MapGraphEdgeIndicatorEntity extends Entity
     public dispose(): void {
         this._registerDisposable.unregister(this);
         this._meshOfNavGraph.forEach(mesh => mesh.dispose());
-        this._eventService.addEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
+        this._eventService.off(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
     }
 
     private onMapMeshReady() {

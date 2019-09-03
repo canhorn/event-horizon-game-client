@@ -1,8 +1,7 @@
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { IEventType } from "../../../engine/event/EventType";
-import { IEventHandler } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
-import { IGuid } from "../../../engine/math/guid/IGuid";
+import { ICommandService } from "../../../core/command";
+import { IEventHandler, IEventType } from "../../../core/event";
+import { IGuid } from "../../../core/guid/IGuid";
+import { Inject } from "../../../core/ioc";
 import { IRenderingScene } from "../../../engine/renderer/api/IRenderingScene";
 import { createSetClientEntityInstanceCommand } from "../../../engine/system/client/entityInstance/set/SetClientEntityInstanceCommand";
 import { MapGraphEdgeIndicatorEntity } from "../../debugging/model/MapGraphEdgeIndicatorEntity";

@@ -1,5 +1,4 @@
-import { IEventType } from "../../../../engine/event/EventType";
-import { IEventHandler } from "../../../../engine/event/IEventService";
+import { IEventHandler, IEventType } from "../../../../core/event";
 import {
     CLIENT_ENTITY_INSTANCE_REGISTERED_EVENT,
     ClientEntityInstanceRegisteredEventData,

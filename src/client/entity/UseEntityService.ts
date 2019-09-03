@@ -1,7 +1,7 @@
-import { ICommandHandlerRegister } from "../../engine/command/api/ICommandHandlerRegister";
-import { IEventHandlerRegister } from "../../engine/event/IEventService";
-import { createSingletonService, Inject } from "../../engine/ioc/Create";
-import { IQueryHandlerRegister } from "../../engine/query/IQueryService";
+import { ICommandHandlerRegister } from "../../core/command";
+import { IEventHandlerRegister } from "../../core/event";
+import { createSingletonService, Inject } from "../../core/ioc";
+import { IQueryHandlerRegister } from "../../core/query";
 import { ClientEntityInstanceRegisteredEventHandler } from "./instanced/registered/ClientEntityInstanceRegisteredEventHandler";
 import { CreateLightFromSettingsCommandHandler } from "./light/create/CreateLightFromSettingsCommandHandler";
 import { CreateMapFromMeshSettingsCommandHandler } from "./map/create/CreateMapFromMeshSettingsCommandHandler";

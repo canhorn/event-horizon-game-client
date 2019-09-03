@@ -1,5 +1,6 @@
-import { ErrorCode } from "../../../../engine/assert/Assert";
+import { ErrorCode } from "../../../../core/assert/Assert";
 import { IZoneDetails } from "../../../zone/api/IZoneDetails";
+import { IAdminActionResponse } from "../api/IAdminActionResponse";
 import { CoreAdminConnection } from "../connection/CoreAdminConnection";
 
 const STATE: {
@@ -45,7 +46,10 @@ export const getCoreAdminConnectionGetAllZones = (): Promise<
     );
 };
 
-export const sendCoreAdminAction = (action: string, data: any) => {
+export const sendCoreAdminAction = (
+    action: string,
+    data: any
+): Promise<IAdminActionResponse> => {
     if (STATE.connection) {
         return STATE.connection.adminAction(action, data);
     }

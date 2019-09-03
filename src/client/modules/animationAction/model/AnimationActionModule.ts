@@ -1,8 +1,8 @@
 import { autobind } from "../../../../core/autobind/autobind";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { throttle } from "../../../../core/throttle/Throttle";
 import { IEntity } from "../../../../engine/entity/api/IEntity";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import {
     ENTITY_MOVING_EVENT,
@@ -31,12 +31,12 @@ export class AnimationActionModule extends LifeCycleModule
         this.onEntityMovingHandle = throttle(this.onEntityMoving, 100, this);
         this.onEntityStoppingHandle = throttle(this.onEntityStopping, 50, this);
 
-        this._eventService.addEventListener(
+        this._eventService.on(
             ENTITY_MOVING_EVENT,
             this.onEntityMovingHandle,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             ENTITY_STOPPING_EVENT,
             this.onEntityStoppingHandle,
             this
@@ -44,12 +44,12 @@ export class AnimationActionModule extends LifeCycleModule
         this._handler = window.setInterval(this.checkStopMovement, 100);
     }
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             ENTITY_MOVING_EVENT,
             this.onEntityMovingHandle,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             ENTITY_STOPPING_EVENT,
             this.onEntityStoppingHandle,
             this

@@ -1,6 +1,6 @@
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import objectMerge from "../../../../core/object/ObjectMerge";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { CLIENT_ACTION_ENTITY_CHANGED_EVENT } from "../../../action/api/ClientActions";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
@@ -14,7 +14,7 @@ export class DetailsModule extends LifeCycleModule implements IDetailsModule {
         private readonly _eventService: IEventService = Inject(IEventService)
     ) {
         super();
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLIENT_ACTION_ENTITY_CHANGED_EVENT,
             this.onChanged,
             this
@@ -23,7 +23,7 @@ export class DetailsModule extends LifeCycleModule implements IDetailsModule {
 
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLIENT_ACTION_ENTITY_CHANGED_EVENT,
             this.onChanged,
             this

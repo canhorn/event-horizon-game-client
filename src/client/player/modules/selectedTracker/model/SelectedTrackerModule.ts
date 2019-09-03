@@ -1,5 +1,5 @@
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
 import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
 import { CLEAR_POINTER_HIT_ENTITY_EVENT } from "../../../../systems/screenPointer/clear/ClearPointerHitEntityEvent";
@@ -27,12 +27,12 @@ export class SelectedTrackerModule extends LifeCycleModule
         private readonly _eventService: IEventService = Inject(IEventService)
     ) {
         super();
-        this._eventService.addEventListener(
+        this._eventService.on(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this
@@ -40,12 +40,12 @@ export class SelectedTrackerModule extends LifeCycleModule
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             POINTER_HIT_ENTITY_EVENT,
             this.onPickHitEntity,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLEAR_POINTER_HIT_ENTITY_EVENT,
             this.onClearPickHitEntity,
             this

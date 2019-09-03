@@ -1,5 +1,5 @@
-import { ICommandHandlerRegister } from "../../../engine/command/api/ICommandHandlerRegister";
-import { createSingletonService, Inject } from "../../../engine/ioc/Create";
+import { ICommandHandlerRegister } from "../../../core/command";
+import { createSingletonService, Inject } from "../../../core/ioc";
 import { IHeightResolver, ISetHeightResolver } from "./api/IHeightResolver";
 import { HeightResolver } from "./model/HeightResolver";
 import { SetHeightResolverCoordinatesCommandHandler } from "./set/SetHeightResolverCoordinatesCommandHandler";

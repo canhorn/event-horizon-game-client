@@ -1,8 +1,5 @@
-import { Inject } from "../../../../engine/ioc/Create";
-import {
-    IQueryHandler,
-    IQueryResult,
-} from "../../../../engine/query/IQueryService";
+import { Inject } from "../../../../core/ioc";
+import { IQueryHandler, IQueryResult } from "../../../../core/query";
 import { ITrackedEntity } from "../../api/ITrackedEntity";
 import { IEntityTrackerQueryService } from "../IEntityTrackerServices";
 import { QUERY_FOR_ENTITY, QueryForEntityData } from "./QueryForEntity";

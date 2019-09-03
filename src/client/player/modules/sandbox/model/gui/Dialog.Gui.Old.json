@@ -1,0 +1,160 @@
+{
+    "layout": {
+        "id": "dialog_module-layout",
+        "sort": 0,
+        "controlList": [
+            {
+                "id": "dialog_module-grid-click_disable",
+                "sort": 0,
+                "layer": 98,
+                "controlList": []
+            },
+            {
+                "id": "dialog_module-grid",
+                "sort": 0,
+                "layer": 99,
+                "controlList": [
+                    {
+                        "id": "dialog_module-main_panel",
+                        "sort": 0,
+                        "comment": "This is where the main dialog text will be located",
+                        "controlList": [
+                            {
+                                "id": "dialog_module-title",
+                                "sort": 1,
+                                "controlList": []
+                            },
+                            {
+                                "id": "dialog_module-body_text-text",
+                                "sort": 2,
+                                "controlList": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": "dialog_module-selection_area",
+                        "sort": 3,
+                        "comment": "This will contain the selection buttons, if any, does not need to have any. If empty will just show close action.",
+                        "controlList": []
+                    }
+                ]
+            }
+        ]
+    },
+    "templateList": [
+        {
+            "id": "dialog_module-grid",
+            "type": "Grid",
+            "options": {
+                "column": 0,
+                "row": 3,
+                "backgroundColor": "transparent",
+                "paddingBottom": 0,
+                "paddingTop": 0,
+                "paddingLeft": 0,
+                "paddingRight": 0
+            }
+        },
+        {
+            "id": "dialog_module-panel",
+            "type": "Panel",
+            "gridLocation": {
+                "row": 3,
+                "column": 0
+            },
+            "options": {
+                "horizontalAlignment": 0,
+                "verticalAlignment": 1,
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "paddingLeft": 5,
+                "paddingRight": 5,
+                "background": "black"
+            }
+        },
+        {
+            "id": "dialog_module-text",
+            "type": "Text",
+            "options": {
+                "horizontalAlignment": 0,
+                "verticalAlignment": 1,
+                "color": "white",
+                "fontSize": "12px",
+                "height": "50px"
+            }
+        },
+        {
+            "id": "dialog_module-skill-spacer",
+            "type": "Spacer",
+            "options": {
+                "padding": 5
+            }
+        },
+        {
+            "id": "dialog_module-skill-button",
+            "type": "Button",
+            "options": {
+                "text": "25 / 100",
+                "linkOffsetY": -50,
+                "width": "120px",
+                "height": "20px",
+                "fontSize": 12,
+                "color": "white",
+                "background": "red",
+                "alignment": 2,
+                "vAlignment": 0,
+                "borderThickness": 0
+            }
+        }
+    ],
+    "controlList": [
+        {
+            "controlId": "dialog_module-grid-click_disable",
+            "templateId": "dialog_module-grid",
+            "options": {
+                "alpha": 0.3,
+                "backgroundColor": "black",
+                "isHitTestVisible": true
+            }
+        },
+        {
+            "controlId": "dialog_module-grid",
+            "templateId": "dialog_module-grid",
+            "options": {}
+        },
+        {
+            "controlId": "dialog_module-main_panel",
+            "templateId": "dialog_module-panel",
+            "options": {
+                "height": "100%",
+                "width": "100%",
+                "alpha": 0.3,
+                "backgroundColor": "black"
+            }
+        },
+        {
+            "controlId": "dialog_module-title",
+            "templateId": "dialog_module-text",
+            "options": {
+                "text": "Hello"
+            }
+        },
+        {
+            "controlId": "dialog_module-body_text_area",
+            "templateId": "dialog_module-panel",
+            "options": {}
+        },
+        {
+            "controlId": "dialog_module-body_text-text",
+            "templateId": "dialog_module-text",
+            "options": {
+                "text": "Something other"
+            }
+        },
+        {
+            "controlId": "dialog_module-selection_area",
+            "templateId": "dialog_module-panel",
+            "options": {}
+        }
+    ]
+}

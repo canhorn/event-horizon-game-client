@@ -1,6 +1,5 @@
+import { createLogger, ILogger } from "../../../core/logger";
 import { LifeCycleEntity } from "../../../engine/lifecycle/model/LifeCycleEntity";
-import { createLogger } from "../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../engine/logger/LoggerFactory";
 import { IGameScene } from "../../../engine/scene/GameScene";
 import { MainMenuGui } from "./gui/MainMenuGui";
 

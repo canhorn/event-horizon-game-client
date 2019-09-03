@@ -1,7 +1,6 @@
 import { Curve3, Light, PointLight, Vector3 } from "babylonjs";
-import { Inject } from "../../../../engine/ioc/Create";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { ILightEntity } from "../../api/ILightEntity";
 import { ILightSettings } from "../../api/ILightSettings";

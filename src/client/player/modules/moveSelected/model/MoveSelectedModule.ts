@@ -1,5 +1,5 @@
-import { IEventService } from "../../../../../engine/event/IEventService";
-import { Inject } from "../../../../../engine/ioc/Create";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { LifeCycleModule } from "../../../../../engine/module/model/LifeCycleModule";
 import { IObjectEntity } from "../../../../entity/api/IObjectEntity";
 import {
@@ -20,19 +20,11 @@ export default class MoveSelectedModule extends LifeCycleModule
         private readonly _eventService: IEventService = Inject(IEventService)
     ) {
         super();
-        this._eventService.addEventListener(
-            MAP_MESH_HIT_EVENT,
-            this.onMapMeshHit,
-            this
-        );
+        this._eventService.on(MAP_MESH_HIT_EVENT, this.onMapMeshHit, this);
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
-            MAP_MESH_HIT_EVENT,
-            this.onMapMeshHit,
-            this
-        );
+        this._eventService.off(MAP_MESH_HIT_EVENT, this.onMapMeshHit, this);
     }
 
     private onMapMeshHit({ position }: MapMeshHitEventData) {
@@ -49,7 +41,7 @@ export default class MoveSelectedModule extends LifeCycleModule
                         targetId:
                             selectedCompanionTrackerModule.selectedEntityId,
                         targetPosition: position,
-                        skillId: "move_to",
+                        skillId: "moveto",
                     },
                 })
             );

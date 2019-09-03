@@ -1,7 +1,6 @@
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { ServerParticle } from "../../../particle/model/ServerParticle";
@@ -33,17 +32,17 @@ export default class InteractionIndicatorModule extends LifeCycleModule
             this._entity,
             INTERACTION_INDICATOR_TEMPLATE_ID
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             SHOW_INTERACTION_INDICATOR_EVENT,
             this.onShow,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLEAR_INTERACTION_INDICATOR_EVENT,
             this.onClear,
             this
         );
-        this._eventService.addEventListener(
+        this._eventService.on(
             RUN_INTERACTION_EVENT,
             this.onRunInteractionCalled,
             this
@@ -51,17 +50,17 @@ export default class InteractionIndicatorModule extends LifeCycleModule
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             SHOW_INTERACTION_INDICATOR_EVENT,
             this.onShow,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLEAR_INTERACTION_INDICATOR_EVENT,
             this.onClear,
             this
         );
-        this._eventService.removeEventListener(
+        this._eventService.off(
             RUN_INTERACTION_EVENT,
             this.onRunInteractionCalled,
             this

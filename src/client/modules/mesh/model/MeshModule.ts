@@ -1,6 +1,6 @@
 import { Mesh, Vector3 } from "babylonjs";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { IEventService } from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
 import { LifeCycleModule } from "../../../../engine/module/model/LifeCycleModule";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { MAP_MESH_READY_EVENT } from "../../../entity/map/ready/MapMeshReadyEvent";
@@ -27,20 +27,12 @@ export class MeshModule extends LifeCycleModule implements IMeshModule {
         )
     ) {
         super();
-        this._eventService.addEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
+        this._eventService.on(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
         this.initializeMesh();
     }
     public update(): void {}
     public dispose(): void {
-        this._eventService.addEventListener(
-            MAP_MESH_READY_EVENT,
-            this.onMapMeshReady,
-            this
-        );
+        this._eventService.on(MAP_MESH_READY_EVENT, this.onMapMeshReady, this);
         this._mesh.dispose();
     }
 

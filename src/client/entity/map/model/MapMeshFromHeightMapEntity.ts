@@ -1,12 +1,12 @@
 import { GroundMesh, MeshBuilder, PointLight } from "babylonjs";
 import { autobind } from "../../../../core/autobind/autobind";
+import { ICommandService } from "../../../../core/command";
+import { IEventService } from "../../../../core/event";
+import { IGuid } from "../../../../core/guid/IGuid";
+import { Inject } from "../../../../core/ioc";
 import { isObjectDefined } from "../../../../core/object/ObjectCheck";
-import { ICommandService } from "../../../../engine/command/api/ICommandService";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { IQueryService } from "../../../../core/query";
 import { LifeCycleEntity } from "../../../../engine/lifecycle/model/LifeCycleEntity";
-import { IGuid } from "../../../../engine/math/guid/IGuid";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { IRenderingScene } from "../../../../engine/renderer/api/IRenderingScene";
 import { createAssetLocationUrl } from "../../../assetServer/api/CreateAssetLocationUrl";
 import { createSetHeightResolverCoordinatesCommand } from "../../../systems/height/set/SetHeightResolverCoordinatesCommand";
@@ -54,7 +54,7 @@ export class MapMeshFromHeightMapEntity extends LifeCycleEntity {
             this._mesh.isPickable = this._settings.isPickable;
         }
         if (this._mesh.isPickable) {
-            this._eventService.addEventListener(
+            this._eventService.on(
                 POINTER_HIT_MESH_EVENT,
                 this.onPointerHitMeshEvent,
                 this
@@ -62,7 +62,7 @@ export class MapMeshFromHeightMapEntity extends LifeCycleEntity {
         }
     }
     public onDispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             POINTER_HIT_MESH_EVENT,
             this.onPointerHitMeshEvent,
             this

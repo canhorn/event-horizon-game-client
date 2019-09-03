@@ -1,15 +1,10 @@
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { IEventType } from "../../../engine/event/EventType";
-import {
-    IEventHandler,
-    IEventService,
-} from "../../../engine/event/IEventService";
-import { createCreateGuiCommand } from "../../../engine/gui/create/CreateGuiCommand";
-import { setI18nState } from "../../../engine/i18n/store/I18nStore";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandService } from "../../../core/command";
+import { IEventHandler, IEventService, IEventType } from "../../../core/event";
+import { setI18nState } from "../../../core/i18n/store/I18nStore";
+import { Inject } from "../../../core/ioc";
+import { createLogger, ILogger } from "../../../core/logger";
+import { createRegisterGuiLayoutDataCommand } from "../../../engine/gui/register/RegisterGuiLayoutDataCommand";
 import { gameLoadedEvent } from "../../../engine/loading/loaded/GameLoadedEvent";
-import { createLogger } from "../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../engine/logger/LoggerFactory";
 import { createAddParticleTemplateEvent } from "../../../engine/particle/add/AddParticleTemplateEvent";
 import { setClientAsset } from "../../../engine/system/client/assets/store/ClientAssetStore";
 import { createSetClientEntityInstanceCommand } from "../../../engine/system/client/entityInstance/set/SetClientEntityInstanceCommand";
@@ -57,7 +52,7 @@ export class ZonePlayerInfoReceivedEventHandler implements IEventHandler {
             clientEntityInstanceList,
             clientScriptList,
             particleTemplateList,
-            guiLayout,
+            guiLayoutList,
             entityList,
             serverModuleScriptList,
             baseEntityScriptModuleList,
@@ -93,7 +88,7 @@ export class ZonePlayerInfoReceivedEventHandler implements IEventHandler {
                 },
             })
         );
-        
+
         // Create Map of Level
         this._commandService.send(
             createCreateMapFromMeshSettingsCommand({
@@ -114,7 +109,13 @@ export class ZonePlayerInfoReceivedEventHandler implements IEventHandler {
         );
 
         // Create Zone Gui
-        this._commandService.send(createCreateGuiCommand(guiLayout));
+        guiLayoutList.forEach(layoutData =>
+            this._commandService.send(
+                createRegisterGuiLayoutDataCommand({
+                    layoutData,
+                })
+            )
+        );
 
         // Add Client Script Templates
         clientScriptList.forEach(clientScriptTemplate =>

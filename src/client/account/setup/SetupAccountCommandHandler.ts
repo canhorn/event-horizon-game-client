@@ -1,4 +1,10 @@
 import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../core/command";
+import { Inject } from "../../../core/ioc";
+import {
     getConfigurationProperty,
     IGameConfiguration,
 } from "../../../engine/settings/IGameSettings";
@@ -7,12 +13,6 @@ import {
     SETUP_ACCOUNT_COMMAND,
     SetupAccountCommandResultType,
 } from "./SetupAccountCommand";
-import {
-    ICommandHandler,
-    ICommandType,
-    ICommandResult,
-} from "../../../core/command";
-import { Inject } from "../../../core/ioc";
 
 export class SetupAccountCommandHandler implements ICommandHandler {
     public type: ICommandType = SETUP_ACCOUNT_COMMAND;

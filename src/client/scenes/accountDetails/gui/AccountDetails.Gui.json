@@ -1,0 +1,93 @@
+{
+    "id": "account_details",
+    "sort": 0,
+    "controlList": [
+        {
+            "id": "account_details-grid",
+            "sort": 0,
+            "templateId": "platform-grid",
+            "options": {
+                "column": 3,
+                "row": 3,
+                "backgroundColor": "transparent",
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "paddingLeft": 5,
+                "paddingRight": 5
+            },
+            "controlList": [
+                {
+                    "id": "account_details-topleft-panel",
+                    "sort": 0,
+                    "templateId": "platform-panel",
+                    "gridLocation": {
+                        "row": 0,
+                        "column": 0
+                    },
+                    "options": {
+                        "verticalAlignment": 0,
+                        "horizontalAlignment": 0,
+                        "top": 15,
+                        "left": 15
+                    },
+                    "controlList": [
+                        {
+                            "id": "account_details-start_game-button",
+                            "sort": 0,
+                            "templateId": "platform-button",
+                            "options": {
+                                "width": 1,
+                                "textKey": "account_BackToMainMenu",
+                                "fontSize": 16,
+                                "color": "white",
+                                "background": "black",
+                                "disabledColor": "gray",
+                                "hoverCursor": "pointer",
+                                "disabledHoverCursor": "not-allowed",
+                                "alignment": 2,
+                                "vAlignment": 2,
+                                "borderThickness": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "account_details-middle-panel",
+                    "sort": 1,
+                    "templateId": "platform-panel",
+                    "options": {
+                        "isVertical": true
+                    },
+                    "gridLocation": {
+                        "row": 1,
+                        "column": 1
+                    },
+                    "controlList": [
+                        {
+                            "id": "account_details-username",
+                            "sort": 0,
+                            "templateId": "platform-text",
+                            "options": {
+                                "width": "250px",
+                                "height": "50px",
+                                "textKey": "account_NameNotSet",
+                                "fontSize": 16,
+                                "color": "white",
+                                "backgroundColor": "green",
+                                "alignment": 0
+                            }
+                        },
+                        {
+                            "id": "account_details-spacer",
+                            "sort": 1,
+                            "templateId": "platform-spacer",
+                            "options": {
+                                "padding": 5
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

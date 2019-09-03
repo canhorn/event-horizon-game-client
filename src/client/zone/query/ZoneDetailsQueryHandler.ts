@@ -1,11 +1,9 @@
 import { isObjectDefined } from "../../../core/object/ObjectCheck";
-import {
-    IQueryHandler,
-    IQueryResult,
-} from "../../../engine/query/IQueryService";
+import { IQueryHandler, IQueryResult } from "../../../core/query";
 import { IZoneDetails } from "../api/IZoneDetails";
 import { getZoneDetails } from "../state/ZoneState";
 import { ZONE_DETAILS_QUERY } from "./ZoneDetailsQuery";
+
 /**
  * Name: ZoneDetailsQueryHandler
  * Type: Query

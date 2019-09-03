@@ -1,15 +1,15 @@
-import { ICommandService } from "../../../../engine/command/api/ICommandService";
-import { IEventService } from "../../../../engine/event/IEventService";
-import { Inject } from "../../../../engine/ioc/Create";
+import { ICommandService } from "../../../../core/command";
+import { IEventService } from "../../../../core/event";
+import { IGuid } from "../../../../core/guid/IGuid";
+import { Inject } from "../../../../core/ioc";
+import { ILogger } from "../../../../core/logger";
+import { createLogger } from "../../../../core/logger";
+import { IQueryService } from "../../../../core/query";
 import { IInitializable } from "../../../../engine/lifecycle/IInitializable";
 import { IRegisterDisposable } from "../../../../engine/lifecycle/register/IRegisterDisposable";
 import { IRegisterInitializable } from "../../../../engine/lifecycle/register/IRegisterInitializable";
 import { IRegisterUpdatable } from "../../../../engine/lifecycle/register/IRegisterUpdatable";
-import { createLogger } from "../../../../engine/logger/InjectLoggerDecorator";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
-import { IGuid } from "../../../../engine/math/guid/IGuid";
 import { ServerVector3Mapper } from "../../../../engine/math/ServerVectors";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { IClientAsset } from "../../../../engine/system/client/assets/api/IClientAsset";
 import { createBuildClientAssetInstanceCommand } from "../../../../engine/system/client/assets/builder/BuildClientAssetInstanceCommand";
 import { createDisposeOfClientAssetInstanceCommand } from "../../../../engine/system/client/assets/dispose/DisposeOfClientAssetInstanceCommand";
@@ -62,7 +62,7 @@ export class ClientEntityInstanced extends BasicEntity
             },
         });
         this._assetInstanceId = guid.guid();
-        _eventService.addEventListener(
+        _eventService.on(
             CLIENT_ASSET_INSTANCE_REGISTERED_EVENT,
             this.onClientAssetInstanceRegistered,
             this
@@ -90,7 +90,7 @@ export class ClientEntityInstanced extends BasicEntity
         this.setupEntityAsset(clientAssetQuery.result);
     }
     public onDispose(): void {
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLIENT_ASSET_INSTANCE_REGISTERED_EVENT,
             this.onClientAssetInstanceRegistered,
             this

@@ -1,5 +1,5 @@
-import { II18nMap } from "../../../../engine/i18n/model/II18nMap";
-import { ILogger } from "../../../../engine/logger/LoggerFactory";
+import { II18nMap } from "../../../../core/i18n/model/II18nMap";
+import { ILogger } from "../../../../core/logger";
 import { ServerVector3 } from "../../../../engine/math/ServerVectors";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { ParticleEmitter } from "../../../particle/model/ParticleEmitter";

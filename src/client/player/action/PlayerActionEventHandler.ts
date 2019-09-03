@@ -1,12 +1,8 @@
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { IEventType } from "../../../engine/event/EventType";
-import { IEventHandler } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandService } from "../../../core/command";
+import { IEventHandler, IEventType } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { createInvokeMethodOnZoneConnectionCommand } from "../../server/zone/invoke/InvokeMethodOnZoneConnectionCommand";
-import {
-    PLAYER_ACTION_EVENT,
-    PlayerActionEventData,
-} from "./PlayerActionEvent";
+import { PlayerActionEventData, PLAYER_ACTION_EVENT } from "./PlayerActionEvent";
 
 /**
  * Event Name: PlayerActionEvent

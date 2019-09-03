@@ -1,6 +1,6 @@
-import { Inject } from "../../../../engine/ioc/Create";
+import { Inject } from "../../../../core/ioc";
+import { IQueryService } from "../../../../core/query";
 import { ServerVector3 } from "../../../../engine/math/ServerVectors";
-import { IQueryService } from "../../../../engine/query/IQueryService";
 import { extendScriptServices } from "../../../../engine/system/script/extend/ExtendScriptServices";
 import { IObjectEntity } from "../../../entity/api/IObjectEntity";
 import { createQueryForEntity } from "../../../entity/tracked/query/QueryForEntity";

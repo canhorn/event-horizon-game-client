@@ -1,4 +1,5 @@
-import { EventType, IEvent, IEventType } from "../../../engine/event/EventType";
+import { EventType, IEvent, IEventType } from "../../../core/event";
+
 /**
  * Type: AccountChangedEvent
  * NameSpace: Account

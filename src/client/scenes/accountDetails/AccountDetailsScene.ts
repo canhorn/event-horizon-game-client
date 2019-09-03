@@ -1,8 +1,8 @@
-import { ICommandService } from "../../../engine/command/api/ICommandService";
-import { IEventService } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { ICommandService } from "../../../core/command";
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
+import { IQueryService } from "../../../core/query";
 import { LifeCycleEntity } from "../../../engine/lifecycle/model/LifeCycleEntity";
-import { IQueryService } from "../../../engine/query/IQueryService";
 import { IGameScene } from "../../../engine/scene/GameScene";
 import { createGetAccountQuery } from "../../account/get/GetAccountQuery";
 import { createStartSceneCommand } from "../start/StartSceneCommand";
@@ -24,7 +24,7 @@ export class AccountDetailsScene extends LifeCycleEntity implements IGameScene {
     }
     public initialize(): void {
         // On Account Details Gui Close
-        this._eventService.addEventListener(
+        this._eventService.on(
             CLOSE_ACCOUNT_DETAILS_GUI_EVENT,
             this.onGuiClose,
             this
@@ -49,7 +49,7 @@ export class AccountDetailsScene extends LifeCycleEntity implements IGameScene {
         if (this.accountNotLoaded) {
             this.accountNotLoaded.dispose();
         }
-        this._eventService.removeEventListener(
+        this._eventService.off(
             CLOSE_ACCOUNT_DETAILS_GUI_EVENT,
             this.onGuiClose,
             this

@@ -1,6 +1,6 @@
 import { Mesh, MeshBuilder } from "babylonjs";
-import { IEventService } from "../../../engine/event/IEventService";
-import { Inject } from "../../../engine/ioc/Create";
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { IDisposable } from "../../../engine/lifecycle/IDisposable";
 import { IInitializable } from "../../../engine/lifecycle/IInitializable";
 import { IUpdatable } from "../../../engine/lifecycle/IUpdatable";

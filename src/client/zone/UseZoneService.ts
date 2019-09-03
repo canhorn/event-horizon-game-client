@@ -1,6 +1,6 @@
-import { IEventHandlerRegister } from "../../engine/event/IEventService";
-import { Inject } from "../../engine/ioc/Create";
-import { IQueryHandlerRegister } from "../../engine/query/IQueryService";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
+import { IQueryHandlerRegister } from "../../core/query";
 import { AccountConnectedUpdateZoneEventHandler } from "./connected/AccountConnectedUpdateZoneEventHandler";
 import { ZonePlayerInfoReceivedEventHandler } from "./playerInfoReceived/ZonePlayerInfoReceivedEventHandler";
 import { ZoneDetailsQueryHandler } from "./query/ZoneDetailsQueryHandler";
