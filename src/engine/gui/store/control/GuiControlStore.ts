@@ -1,18 +1,31 @@
 import { Dictionary } from "../../../../core/collection/Dictionary";
-import { GuiControl } from "../../model/GuiControl";
-import { IGuiControlState } from "./IGuiControlState";
+import { IDictionary } from "../../../../core/collection/IDictionary";
+import { IGuiControl } from "../../api/IGuiControl";
+import { generateGuiControlId } from "../../utils/GenerateGuiControlId";
+
+interface IGuiControlState {
+    controlMap: IDictionary<string, IGuiControl>;
+}
 
 const STATE: IGuiControlState = {
     controlMap: new Dictionary(),
 };
 
-export const guiControlStore = {
-    get state(): IGuiControlState {
-        return STATE;
-    },
-};
+export const setGuiControlInStore = (guiId: string, control: IGuiControl) =>
+    STATE.controlMap.setValue(generateGuiControlId(guiId, control.id), control);
 
-export const addGuiControl = (control: GuiControl) =>
-    STATE.controlMap.setValue(control.id, control);
-export const getGuiControl = (id: string) => STATE.controlMap.getValue(id);
-export const removeGuiControl = (id: string) => STATE.controlMap.remove(id);
+export const getGuiControlFromStore = (
+    guiId: string,
+    controlId: string
+): IGuiControl | undefined =>
+    STATE.controlMap.getValue(generateGuiControlId(guiId, controlId));
+
+export const removeGuiControlFromStore = (
+    guiId: string,
+    controlId: string
+): IGuiControl | undefined =>
+    STATE.controlMap.remove(generateGuiControlId(guiId, controlId));
+
+export const getGuiControlFromStoreByGeneratedId = (
+    id: string
+): IGuiControl | undefined => STATE.controlMap.getValue(id);

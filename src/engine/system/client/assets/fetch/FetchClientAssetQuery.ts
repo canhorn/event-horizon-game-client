@@ -1,4 +1,4 @@
-import { IQuery } from "../../../../query/IQueryService";
+import { IQuery } from "../../../../../core/query";
 import { IClientAsset } from "../api/IClientAsset";
 
 /**

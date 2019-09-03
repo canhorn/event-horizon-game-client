@@ -1,6 +1,4 @@
-import { ICommand } from "../../command/api/ICommand";
-import { ICommandType } from "../../command/api/ICommandType";
-import { CommandType } from "../../command/model/CommandType";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
 
 /**
  * Type: CloseDebuggingWindowCommand
@@ -10,15 +8,24 @@ import { CommandType } from "../../command/model/CommandType";
 export const CLOSE_DEBUGGING_WINDOW_COMMAND = new CommandType(
     "Engine.Debugging.CLOSE_DEBUGGING_WINDOW_COMMAND"
 );
-class CommandClass implements ICommand {
+class CommandClass
+    implements
+        ICommand<
+            CloseDebuggingWindowCommandData,
+            CloseDebuggingWindowCommandResultType
+        > {
     public type: ICommandType = CLOSE_DEBUGGING_WINDOW_COMMAND;
     public data?: CloseDebuggingWindowCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createCloseDebuggingWindowCommand = (
     data: CloseDebuggingWindowCommandData
-): ICommand => {
+): ICommand<
+    CloseDebuggingWindowCommandData,
+    CloseDebuggingWindowCommandResultType
+> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
 export interface CloseDebuggingWindowCommandData {}
+export type CloseDebuggingWindowCommandResultType = undefined;

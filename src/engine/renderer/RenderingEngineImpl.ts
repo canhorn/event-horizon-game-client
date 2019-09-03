@@ -1,7 +1,7 @@
 import { Engine } from "babylonjs";
-import { assert } from "../assert/Assert";
+import { assert } from "../../core/assert/Assert";
+import { Inject } from "../../core/ioc";
 import { ICanvas } from "../canvas/ICanvas";
-import { Inject } from "../ioc/Create";
 import { IRenderingEngine } from "./api/IRenderingEngine";
 
 export class RenderingEngineImpl implements IRenderingEngine {

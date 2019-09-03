@@ -1,4 +1,4 @@
-import { createSingletonService } from "../ioc/Create";
+import { createSingletonService } from "../../core/ioc";
 import {
     IInputPressedEventSender,
     IInputReleasedEventSender,

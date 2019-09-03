@@ -1,5 +1,5 @@
 import * as KeyboardJS from "keyboardjs";
-import { Inject } from "../../ioc/Create";
+import { Inject } from "../../../core/ioc";
 import {
     IInputPressedEventSender,
     IInputReleasedEventSender,
@@ -7,7 +7,9 @@ import {
 import { InputOptions } from "../InputModel";
 import { IRegisterInput } from "../IRegisterInput";
 
-export const EMPTY_PRESSED = () => {};
+export const EMPTY_PRESSED = () => {
+    // NoOp
+};
 
 export class RegisterInput implements IRegisterInput {
     constructor(

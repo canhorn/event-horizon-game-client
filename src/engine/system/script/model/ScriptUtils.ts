@@ -1,7 +1,7 @@
+import { createEvent } from "../../../../core/event/builder/CreateEvent";
+import { sendEvent } from "../../../../core/event/builder/SendEvent";
 import { isObjectDefined } from "../../../../core/object/ObjectCheck";
 import { resolveTemplate } from "../../../../core/string/ResolveTemplate";
-import { createEvent } from "../../../event/builder/CreateEvent";
-import { sendEvent } from "../../../event/builder/SendEvent";
 import { runClientScript } from "../../client/scripts/run/RunClientScript";
 import { IScriptUtils } from "../api/IScriptUtils";
 

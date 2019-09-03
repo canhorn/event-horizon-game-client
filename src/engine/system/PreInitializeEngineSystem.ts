@@ -1,7 +1,7 @@
-import { ICommandHandlerRegister } from "../command/api/ICommandHandlerRegister";
-import { IEventHandlerRegister } from "../event/IEventService";
-import { Inject } from "../ioc/Create";
-import { IQueryHandlerRegister } from "../query/IQueryService";
+import { ICommandHandlerRegister } from "../../core/command";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
+import { IQueryHandlerRegister } from "../../core/query";
 import { BuildClientAssetInstanceCommandHandler } from "./client/assets/builder/BuildClientAssetInstanceCommandHandler";
 import { DisposeOfClientAssetInstanceCommandHandler } from "./client/assets/dispose/DisposeOfClientAssetInstanceCommandHandler";
 import { FetchClientAssetQueryHandler } from "./client/assets/fetch/FetchClientAssetQueryHandler";

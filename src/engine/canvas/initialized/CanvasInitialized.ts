@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../event/EventType";
+import { EventType, IEvent } from "../../../core/event";
 
 export const CANVAS_INITIALIZED = new EventType("canvas.CANVAS_INITIALIZED");
 export const canvasInitialized: IEvent = {

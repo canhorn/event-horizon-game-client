@@ -1,5 +1,6 @@
-import { EventType, IEvent, IEventType } from "../../event/EventType";
+import { EventType, IEvent, IEventType } from "../../../core/event";
 import { IEntity } from "../api/IEntity";
+
 /**
  * Type: UnTrackEntityEvent
  * NameSpace: Entity

@@ -1,8 +1,8 @@
 import { Mesh, MeshBuilder } from "babylonjs";
 import "babylonjs-loaders";
-import { ErrorCode } from "../../../../../assert/Assert";
-import { Inject } from "../../../../../ioc/Create";
-import { IGuid } from "../../../../../math/guid/IGuid";
+import { ErrorCode } from "../../../../../../core/assert/Assert";
+import { IGuid } from "../../../../../../core/guid/IGuid";
+import { Inject } from "../../../../../../core/ioc";
 import { IRenderingScene } from "../../../../../renderer/api/IRenderingScene";
 import { IBoxMeshConfig } from "../../api/configs/IBoxMeshConfig";
 import { IGLTFMeshConfig } from "../../api/configs/IGLTFMeshConfig";

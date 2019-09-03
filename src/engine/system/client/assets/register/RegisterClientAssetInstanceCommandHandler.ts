@@ -1,11 +1,12 @@
-import { ICommandHandler } from "../../../../command/api/ICommandHandler";
-import { ICommandResult } from "../../../../command/api/ICommandResult";
-import { ICommandType } from "../../../../command/api/ICommandType";
-import { IEventService } from "../../../../event/IEventService";
-import { Inject } from "../../../../ioc/Create";
+import { ICommandHandler } from "../../../../../core/command";
+import { ICommandResult } from "../../../../../core/command";
+import { ICommandType } from "../../../../../core/command";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { ClientAssetInstance } from "../model/ClientAssetInstance";
 import { setClientAssetInstance } from "../store/ClientAssetStore";
 import { createClientAssetInstanceRegisteredEvent } from "./ClientAssetInstanceRegisteredEvent";
+import { RegisterClientAssetInstanceCommandResultType } from "./RegisterClientAssetInstanceCommand";
 import {
     REGISTER_CLIENT_ASSET_INSTANCE_COMMAND,
     RegisterClientAssetInstanceCommandData,
@@ -25,7 +26,9 @@ export class RegisterClientAssetInstanceCommandHandler
         assetInstanceId,
         mesh,
         position,
-    }: RegisterClientAssetInstanceCommandData): ICommandResult {
+    }: RegisterClientAssetInstanceCommandData): ICommandResult<
+        RegisterClientAssetInstanceCommandResultType
+    > {
         const clientAssetInstance = new ClientAssetInstance(
             assetInstanceId,
             mesh,

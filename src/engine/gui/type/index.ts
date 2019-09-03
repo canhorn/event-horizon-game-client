@@ -7,3 +7,4 @@ export * from "./GuiLabel";
 export * from "./GuiPanel";
 export * from "./GuiSpacer";
 export * from "./GuiText";
+export * from "./GuiScrollViewer";

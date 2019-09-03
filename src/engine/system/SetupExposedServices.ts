@@ -1,6 +1,6 @@
 import { parse, ParsedQuery } from "query-string";
-import { IEventService } from "../event/IEventService";
-import { Container } from "../ioc/typescript-ioc";
+import { IEventService } from "../../core/event";
+import { Container } from '../../core/ioc/model/Container';
 
 export const setupExposedServices = () => {
     const queryParams: IExposedQueryParams = parse(

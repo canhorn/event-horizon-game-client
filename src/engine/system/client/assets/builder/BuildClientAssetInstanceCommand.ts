@@ -1,7 +1,9 @@
 import { Vector3 } from "babylonjs";
-import { ICommand } from "../../../../command/api/ICommand";
-import { ICommandType } from "../../../../command/api/ICommandType";
-import { CommandType } from "../../../../command/model/CommandType";
+import {
+    CommandType,
+    ICommand,
+    ICommandType,
+} from "../../../../../core/command";
 import { IClientAsset } from "../api/IClientAsset";
 
 /**
@@ -12,14 +14,22 @@ import { IClientAsset } from "../api/IClientAsset";
 export const BUILD_CLIENT_ASSET_INSTANCE_COMMAND = new CommandType(
     "Engine.System.Client.Assets.BUILD_CLIENT_ASSET_INSTANCE_COMMAND"
 );
-class CommandClass implements ICommand {
+class CommandClass
+    implements
+        ICommand<
+            BuildClientAssetInstanceCommandData,
+            BuildClientAssetInstanceCommandResultType
+        > {
     public type: ICommandType = BUILD_CLIENT_ASSET_INSTANCE_COMMAND;
     public data?: BuildClientAssetInstanceCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createBuildClientAssetInstanceCommand = (
     data: BuildClientAssetInstanceCommandData
-): ICommand => {
+): ICommand<
+    BuildClientAssetInstanceCommandData,
+    BuildClientAssetInstanceCommandResultType
+> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
@@ -28,3 +38,6 @@ export interface BuildClientAssetInstanceCommandData {
     clientAsset: IClientAsset;
     position: Vector3;
 }
+export type BuildClientAssetInstanceCommandResultType =
+    | "invalid_type"
+    | undefined;

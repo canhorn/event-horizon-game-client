@@ -1,11 +1,14 @@
-import { ICommandHandler } from "../../command/api/ICommandHandler";
-import { ICommandResult } from "../../command/api/ICommandResult";
-import { ICommandType } from "../../command/api/ICommandType";
-import { Inject } from "../../ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../core/command";
+import { Inject } from "../../../core/ioc";
 import { IRegisterInput } from "../IRegisterInput";
 import {
-    IRegisterInputCommandData,
     REGISTER_INPUT_COMMAND,
+    RegisterInputCommandData,
+    RegisterInputCommandResultType,
 } from "./RegisterInputCommand";
 
 export class RegisterInputCommandHandler implements ICommandHandler {
@@ -15,7 +18,9 @@ export class RegisterInputCommandHandler implements ICommandHandler {
         private readonly _registerInput: IRegisterInput = Inject(IRegisterInput)
     ) {}
 
-    public handle(data: IRegisterInputCommandData): ICommandResult {
+    public handle(
+        data: RegisterInputCommandData
+    ): ICommandResult<RegisterInputCommandResultType> {
         this._registerInput.register(data);
         return { success: true };
     }

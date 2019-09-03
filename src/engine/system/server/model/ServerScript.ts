@@ -1,6 +1,6 @@
+import { Inject } from "../../../../core/ioc";
+import { ILogger } from "../../../../core/logger";
 import { isObjectDefined } from "../../../../core/object/ObjectCheck";
-import { Inject } from "../../../ioc/Create";
-import { ILogger } from "../../../logger/LoggerFactory";
 import { IScriptServices } from "../../script/api/IScriptServices";
 import { IScriptUtils } from "../../script/api/IScriptUtils";
 import { IServerScript } from "../api/IServerScript";

@@ -1,6 +1,4 @@
-import { ICommand } from "../../command/api/ICommand";
-import { ICommandType } from "../../command/api/ICommandType";
-import { CommandType } from "../../command/model/CommandType";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
 
 /**
  * Type: OpenDebuggingWindowCommand
@@ -10,15 +8,24 @@ import { CommandType } from "../../command/model/CommandType";
 export const OPEN_DEBUGGING_WINDOW_COMMAND = new CommandType(
     "Engine.Debugging.OPEN_DEBUGGING_WINDOW_COMMAND"
 );
-class CommandClass implements ICommand {
+class CommandClass
+    implements
+        ICommand<
+            OpenDebuggingWindowCommandData,
+            OpenDebuggingWindowCommandResultType
+        > {
     public type: ICommandType = OPEN_DEBUGGING_WINDOW_COMMAND;
     public data?: OpenDebuggingWindowCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createOpenDebuggingWindowCommand = (
     data: OpenDebuggingWindowCommandData
-): ICommand => {
+): ICommand<
+    OpenDebuggingWindowCommandData,
+    OpenDebuggingWindowCommandResultType
+> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
 export interface OpenDebuggingWindowCommandData {}
+export type OpenDebuggingWindowCommandResultType = undefined;

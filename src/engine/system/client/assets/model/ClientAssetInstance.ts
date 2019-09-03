@@ -1,6 +1,6 @@
 import { Mesh, Vector3 } from "babylonjs";
-import { IEventService } from "../../../../event/IEventService";
-import { Inject } from "../../../../ioc/Create";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { LifeCycleEntity } from "../../../../lifecycle/model/LifeCycleEntity";
 import {
     EngineMesh,

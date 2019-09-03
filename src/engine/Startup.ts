@@ -1,16 +1,17 @@
+import { createSingletonProviderService } from "../core/ioc";
+import { createLogger, ILogger } from "../core/logger";
+import { setupCoreServices } from "../core/SetupCoreServices";
 import { performanceTimer, performanceTimerEnd } from "./debugging/Performance";
 import { Engine } from "./Engine";
 import { Game } from "./Game";
-import { createSingletonProviderService } from "./ioc/Create";
 import { IStartup } from "./IStartup";
-import { createLogger } from "./logger/InjectLoggerDecorator";
-import { ILogger } from "./logger/LoggerFactory";
 import { GameSettingsWrapper } from "./settings/GameSettingsWrapper";
 import { IGameConfiguration } from "./settings/IGameSettings";
 import { cleanUpSystemServices } from "./system/CleanUpSystemServices";
 import { setupExposedServices } from "./system/SetupExposedServices";
 import { setupGlobalSystemServices } from "./system/SetupGlobalSystemServices";
 
+setupCoreServices();
 setupGlobalSystemServices();
 setupExposedServices();
 

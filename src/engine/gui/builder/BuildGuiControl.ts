@@ -1,12 +1,10 @@
+import { assert } from "../../../core/assert/Assert";
 import { objectMergeNew } from "../../../core/object/ObjectMergeNew";
-import { assert } from "../../assert/Assert";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-    GuiTemplate,
-} from "../model";
+import { IGuiControl } from "../api/IGuiControl";
+import { IGuiControlOptions } from "../api/IGuiControlOptions";
+import { IGuiControlTemplate } from "../api/IGuiControlTemplate";
+import { IGuiGridLocation } from "../api/IGuiGridLocation";
+import { GuiControlType } from "../model/GuiControlType";
 import {
     GuiBar,
     GuiButton,
@@ -15,16 +13,17 @@ import {
     GuiInput,
     GuiLabel,
     GuiPanel,
+    GuiScrollViewer,
     GuiSpacer,
     GuiText,
 } from "../type";
 
 export const buildGuiControl = (
     id: string,
-    template: GuiTemplate,
-    options?: GuiControlOptions,
-    gridLocation?: GuiGridLocation
-): GuiControl => {
+    template: IGuiControlTemplate,
+    options?: IGuiControlOptions,
+    gridLocation?: IGuiGridLocation
+): IGuiControl => {
     assert(id, "Control has to have Id.", "gui_control_needs_id");
     const mergedOptions = objectMergeNew(template.options, options);
     const mergedGridLocation = objectMergeNew(
@@ -32,24 +31,26 @@ export const buildGuiControl = (
         gridLocation
     );
     switch (template.type) {
-        case GuiControlType.Bar:
+        case GuiControlType.BAR:
             return new GuiBar(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Grid:
+        case GuiControlType.GRID:
             return new GuiGrid(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Label:
+        case GuiControlType.LABEL:
             return new GuiLabel(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Container:
+        case GuiControlType.CONTAINER:
             return new GuiContainer(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Panel:
+        case GuiControlType.PANEL:
             return new GuiPanel(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Spacer:
+        case GuiControlType.SPACER:
             return new GuiSpacer(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Button:
+        case GuiControlType.BUTTON:
             return new GuiButton(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Input:
+        case GuiControlType.INPUT:
             return new GuiInput(id, mergedOptions, mergedGridLocation);
-        case GuiControlType.Text:
+        case GuiControlType.TEXT:
             return new GuiText(id, mergedOptions, mergedGridLocation);
+        case GuiControlType.SCROLL_VIEWER:
+            return new GuiScrollViewer(id, mergedOptions, mergedGridLocation);
     }
 
     throw {

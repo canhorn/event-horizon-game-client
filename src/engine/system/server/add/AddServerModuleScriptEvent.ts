@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../../event/EventType";
+import { EventType, IEvent } from "../../../../core/event";
 import { IServerModuleScripts } from "../api/IServerModuleScripts";
 
 export const ADD_SERVER_MODULE_SCRIPT_EVENT = new EventType(

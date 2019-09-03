@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../event/EventType";
+import { EventType, IEvent } from "../../../core/event";
 
 export const TAKE_SCREENSHOT_EVENT = new EventType(
     "Debugging.TAKE_SCREENSHOT_EVENT"

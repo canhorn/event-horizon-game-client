@@ -2,21 +2,17 @@ import { Mesh } from "babylonjs";
 import { InputText } from "babylonjs-gui";
 import { autobind } from "../../../core/autobind/autobind";
 import objectMerge from "../../../core/object/ObjectMerge";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { GuiControlType } from "../model/GuiControlType";
 
-export class GuiInput implements GuiControl {
+export class GuiInput implements IGuiControl {
     public id: string;
     public options: GuiInputControlOptions;
     public control: InputText;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Input;
+        return GuiControlType.INPUT;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -27,8 +23,8 @@ export class GuiInput implements GuiControl {
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options as GuiInputControlOptions;
@@ -38,13 +34,13 @@ export class GuiInput implements GuiControl {
             this.control.processKey = this.processEnterKey;
         }
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         throw new Error("GuiInput does not support adding of Control.");
     }
-    public update(options: GuiControlOptions) {
+    public update(options: IGuiControlOptions) {
         throw new Error("Method not implemented.");
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -56,7 +52,7 @@ export class GuiInput implements GuiControl {
         if (keyCode === 13) {
             this.options.onClick(this.control.text);
         }
-        InputText.prototype.processKey.call(this.control, keyCode, key); // , evt);
+        InputText.prototype.processKey.call(this.control, keyCode, key);
     }
 }
 
@@ -68,7 +64,7 @@ const createControl = (options: GuiInputControlOptions): InputText => {
     return padding;
 };
 
-export interface GuiInputControlOptions extends GuiControlOptions {
+export interface GuiInputControlOptions extends IGuiControlOptions {
     alpha: number;
     autoStretchWidth: boolean;
     width: string;

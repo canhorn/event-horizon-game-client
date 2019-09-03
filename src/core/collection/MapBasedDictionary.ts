@@ -159,14 +159,6 @@ export class MapBasedDictionary<K, V> implements IDictionary<K, V> {
         return this.map.size <= 0;
     }
 
-    public toString(): string {
-        let toret = "{";
-        this.forEach((k, v) => {
-            toret = toret + "\n\t" + k.toString() + " : " + v.toString();
-        });
-        return toret + "\n}";
-    }
-
     /**
      * This is the override for JSON.stringify to display a JSON representation of a Dictionary.
      *

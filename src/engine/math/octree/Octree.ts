@@ -1,4 +1,4 @@
-import { Vector3 } from 'babylonjs';
+import { Vector3 } from "babylonjs";
 
 export interface IOctreeEntity {
     position: Vector3;
@@ -48,7 +48,7 @@ export class Octree<T extends IOctreeEntity> {
         r: number,
         options: IOctreeOptions
     ): T[] {
-        options = options || { maxDist: 1 };
+        options = options || {};
         const result: T[] = [];
         this.root.findNearbyPoints(p, r, result, options);
         return result;
@@ -58,7 +58,7 @@ export class Octree<T extends IOctreeEntity> {
         level: Cell<T>,
         result: Array<Cell<T>>
     ) {
-        if (typeof level === 'undefined') {
+        if (typeof level === "undefined") {
             level = cell;
             cell = this.root;
         }

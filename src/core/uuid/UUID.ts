@@ -1,23 +1,22 @@
 export class UUIDImpl {
     // Private array of chars to use
-    public CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(
+    CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(
         ""
     );
 
-    public uuid(len?: number, radix?: number) {
-        let chars = this.CHARS,
+    uuid(len?: number, radix?: number) {
+        var chars = this.CHARS,
             uuid = [],
             i;
         radix = radix || chars.length;
 
         if (len) {
             // Compact form
-            for (i = 0; i < len; i++) {
+            for (i = 0; i < len; i++)
                 uuid[i] = chars[0 | (Math.random() * radix)];
-            }
         } else {
             // rfc4122, version 4 form
-            let r;
+            var r;
 
             // rfc4122 requires these characters
             uuid[8] = uuid[13] = uuid[18] = uuid[23] = "-";
@@ -38,20 +37,19 @@ export class UUIDImpl {
 
     // A more performant, but slightly bulkier, RFC4122v4 solution.  We boost performance
     // by minimizing calls to random()
-    public uuidFast() {
-        let chars = this.CHARS,
+    uuidFast() {
+        var chars = this.CHARS,
             uuid = new Array(36),
             rnd = 0,
             r;
-        for (let i = 0; i < 36; i++) {
+        for (var i = 0; i < 36; i++) {
             if (i == 8 || i == 13 || i == 18 || i == 23) {
                 uuid[i] = "-";
             } else if (i == 14) {
                 uuid[i] = "4";
             } else {
-                if (rnd <= 0x02) {
+                if (rnd <= 0x02)
                     rnd = (0x2000000 + Math.random() * 0x1000000) | 0;
-                }
                 r = rnd & 0xf;
                 rnd = rnd >> 4;
                 uuid[i] = chars[i == 19 ? (r & 0x3) | 0x8 : r];
@@ -61,15 +59,15 @@ export class UUIDImpl {
     }
 
     // A more compact, but less performant, RFC4122v4 solution:
-    public uuidCompact() {
+    uuidCompact() {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
             c
         ) {
-            const r = (Math.random() * 16) | 0,
+            var r = (Math.random() * 16) | 0,
                 v = c == "x" ? r : (r & 0x3) | 0x8;
             return v.toString(16);
         });
     }
 }
 
-export let UUID = new UUIDImpl();
+export var UUID = new UUIDImpl();

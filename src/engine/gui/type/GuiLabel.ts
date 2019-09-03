@@ -1,20 +1,16 @@
 import { Mesh } from "babylonjs";
 import { Rectangle, TextBlock } from "babylonjs-gui";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { GuiControlType } from "../model/GuiControlType";
 
-export class GuiLabel implements GuiControl {
+export class GuiLabel implements IGuiControl {
     public id: string;
-    public options: GuiControlOptions;
+    public options: IGuiControlOptions;
     public control: Rectangle;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Label;
+        return GuiControlType.LABEL;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -25,15 +21,15 @@ export class GuiLabel implements GuiControl {
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options;
         this.control = createControl(id, options as GuiLabelControlOptions);
         this.gridLocation = gridLocation;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         throw new Error("GuiLabel does not support adding of Control.");
     }
     public update(options: GuiLabelControlOptions) {
@@ -42,7 +38,7 @@ export class GuiLabel implements GuiControl {
         ) as TextBlock;
         text.text = options.text;
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -75,7 +71,7 @@ const createControl = (
 
     return background;
 };
-export interface GuiLabelControlOptions extends GuiControlOptions {
+export interface GuiLabelControlOptions extends IGuiControlOptions {
     width: number;
     height: number;
     text: string;

@@ -1,4 +1,4 @@
-import { EventType, IEvent, IEventType } from "../../../../event/EventType";
+import { EventType, IEvent, IEventType } from "../../../../../core/event";
 import { IClientAssetInstance } from "../api/IClientAssetInstance";
 
 /**

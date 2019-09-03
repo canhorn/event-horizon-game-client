@@ -1,9 +1,8 @@
 import { KeyEvent } from "keyboardjs";
 import { autobind } from "../../../core/autobind/autobind";
+import { EventType, IEvent, IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { throttleMethod } from "../../../core/throttle/ThrottleDecorator";
-import { EventType, IEvent } from "../../event/EventType";
-import { IEventService } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
 import {
     IInputPressedEventSender,
     IInputReleasedEventSender,

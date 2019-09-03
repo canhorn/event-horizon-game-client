@@ -1,21 +1,19 @@
 import { Mesh } from "babylonjs";
 import { Rectangle, TextBlock } from "babylonjs-gui";
 import { isObjectDefined } from "../../../core/object/ObjectCheck";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import { IGuiControl } from "../api/IGuiControl";
+import { IGuiControlOptions } from "../api/IGuiControlOptions";
+import { IGuiGridLocation } from "../api/IGuiGridLocation";
+import { GuiControlType } from "../model/GuiControlType";
 
-export class GuiBar implements GuiControl {
+export class GuiBar implements IGuiControl {
     public id: string;
     public options: GuiBarControlOptions;
     public control: Rectangle;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Bar;
+        return GuiControlType.BAR;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -26,15 +24,15 @@ export class GuiBar implements GuiControl {
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options as GuiBarControlOptions;
         this.control = createControl(id, options as GuiBarControlOptions);
         this.gridLocation = gridLocation;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         throw new Error("GuiBar does not support adding of Control.");
     }
     public update(options: GuiBarControlOptions) {
@@ -55,7 +53,7 @@ export class GuiBar implements GuiControl {
         ) as TextBlock;
         text.text = options.text;
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -98,7 +96,7 @@ const createControl = (
     return background;
 };
 
-export interface GuiBarControlOptions extends GuiControlOptions {
+export interface GuiBarControlOptions extends IGuiControlOptions {
     width: number;
     height: number;
     alignment: number;

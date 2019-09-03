@@ -1,4 +1,4 @@
-import { createSingletonService } from "../ioc/Create";
+import { createSingletonService } from "../../core/ioc";
 import { IClientScriptBuilder } from "./client/scripts/api/IClientScriptBuilder";
 import { ClientScriptBuilder } from "./client/scripts/create/ClientScriptBuilder";
 import { IScriptServices } from "./script/api/IScriptServices";

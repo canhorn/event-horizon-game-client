@@ -1,4 +1,4 @@
-import { Inject } from "../../ioc/Create";
+import { Inject } from "../../../core/ioc";
 import { IRenderingEngine } from "../../renderer/api/IRenderingEngine";
 
 export const getFPS = (

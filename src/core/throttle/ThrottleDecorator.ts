@@ -7,7 +7,7 @@ export function throttleMethod(threshold: number) {
         propertyKey: string,
         descriptor: PropertyDescriptor
     ) {
-        const method = descriptor.value;
+        let method = descriptor.value;
         descriptor.value = throttle(function(this: any) {
             return method.apply(this, arguments);
         }, threshold);

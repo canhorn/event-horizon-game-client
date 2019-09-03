@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../event/EventType";
+import { EventType, IEvent } from "../../../core/event";
 import { ParticleTemplate } from "../model/ParticleTemplate";
 
 export const ADD_PARTICLE_TEMPLATE_EVENT = new EventType(

@@ -1,22 +1,18 @@
 import { autobind } from "../../../core/autobind/autobind";
-import { ICommandResult } from "../../command/api/ICommandResult";
-import { ICommandService } from "../../command/api/ICommandService";
-import { IEventService } from "../../event/IEventService";
-import { activateGuiLayoutCommand } from "../../gui/activate/ActivateLayoutCommand";
+import { ICommandResult, ICommandService } from "../../../core/command";
+import { IEventService } from "../../../core/event";
+import { IGuid } from "../../../core/guid/IGuid";
+import { Inject } from "../../../core/ioc";
+import { createLogger, ILogger } from "../../../core/logger";
+import { IQueryService } from "../../../core/query/api/IQueryService";
+import { createActivateGuiCommand } from "../../gui/activate/ActivateGuiCommand";
 import { createCreateGuiCommand } from "../../gui/create/CreateGuiCommand";
-import { createDisposeOfGuiLayoutCommand } from "../../gui/dispose/DisposeOfGuiLayoutCommand";
-import { createHideLayoutCommand } from "../../gui/hide/HideLayoutCommand";
-import { GuiControlLayout } from "../../gui/model";
-import {
-    RegisterControlCommandData,
-    registerGuiControlCommand,
-} from "../../gui/register/RegisterControlCommand";
-import { createShowLayoutCommand } from "../../gui/show/ShowLayoutCommand";
-import { Inject } from "../../ioc/Create";
+import { createDisposeOfGuiCommand } from "../../gui/dispose/DisposeOfGuiCommand";
+import { createHideGuiCommand } from "../../gui/hide/HideGuiCommand";
+import { createQueryForGenerateGuiControlId } from "../../gui/query/QueryForGenerateGuiControlId";
+import { createRegisterGuiLayoutDataCommand } from "../../gui/register/RegisterGuiLayoutDataCommand";
+import { createShowGuiCommand } from "../../gui/show/ShowGuiCommand";
 import { LifeCycleEntity } from "../../lifecycle/model/LifeCycleEntity";
-import { createLogger } from "../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../logger/LoggerFactory";
-import { IGuid } from "../../math/guid/IGuid";
 import {
     SHOW_DEBUGGING_MESSAGE_EVENT,
     ShowDebuggingMessageEventData,
@@ -24,11 +20,15 @@ import {
 import {
     CLOSE_DEBUGGING_WINDOW_COMMAND,
     CloseDebuggingWindowCommandData,
+    CloseDebuggingWindowCommandResultType,
 } from "../open/CloseDebuggingWindowCommand";
 import {
     OPEN_DEBUGGING_WINDOW_COMMAND,
     OpenDebuggingWindowCommandData,
+    OpenDebuggingWindowCommandResultType,
 } from "../open/OpenDebuggingWindowCommand";
+import DebuggingGuiJson from "./Debugging.Gui.json";
+import DebuggingMessageGuiJson from "./Debugging.Gui_Message.json";
 
 const PENDING_MESSAGES: string[] = [];
 export class DebuggingGui extends LifeCycleEntity {
@@ -38,15 +38,43 @@ export class DebuggingGui extends LifeCycleEntity {
             ICommandService
         ),
         private readonly _eventService: IEventService = Inject(IEventService),
+        private readonly _queryService: IQueryService = Inject(IQueryService),
         private readonly _guid: IGuid = Inject(IGuid)
     ) {
         super();
-        _eventService.addEventListener(
+    }
+    public initialize(): void {
+        // Register GUI Layout Data
+        this._commandService.send(
+            createRegisterGuiLayoutDataCommand({
+                layoutData: DebuggingGuiJson,
+            })
+        );
+        this._commandService.send(
+            createRegisterGuiLayoutDataCommand({
+                layoutData: DebuggingMessageGuiJson,
+            })
+        );
+        // Create GUI
+        this._commandService.send(
+            createCreateGuiCommand({
+                id: DebuggingGuiJson.id,
+                layoutId: DebuggingGuiJson.id,
+            })
+        );
+        // Activate GUI
+        this._commandService.send(
+            createActivateGuiCommand({
+                id: DebuggingGuiJson.id,
+            })
+        );
+
+        this._eventService.on(
             SHOW_DEBUGGING_MESSAGE_EVENT,
             this.showMessage,
             this
         );
-        _commandService.addListener(
+        this._commandService.addListener(
             OPEN_DEBUGGING_WINDOW_COMMAND,
             this.openDebuggingWindow,
             this
@@ -56,39 +84,18 @@ export class DebuggingGui extends LifeCycleEntity {
             this.closeDebuggingWindow,
             this
         );
-    }
-    public initialize(): void {
-        this._commandService.send(
-            createCreateGuiCommand({
-                layoutList: this.createGuiLayout(),
-                templateList: this.createGuiTemplates(),
-            })
-        );
-
-        this.getControlsWithData().forEach(control =>
-            this._commandService.send(registerGuiControlCommand(control))
-        );
-        this._commandService.send(
-            activateGuiLayoutCommand({
-                layoutId: "debugging_console",
-            })
-        );
-        this._commandService.send(
-            createHideLayoutCommand({
-                layoutId: "debugging_console",
-            })
-        );
         this.postPendingMessages();
     }
     public start(): void {}
     public update(): void {}
     public onDispose(): void {
         this._commandService.send(
-            createDisposeOfGuiLayoutCommand({
-                layoutId: "debugging_console",
+            createDisposeOfGuiCommand({
+                id: DebuggingGuiJson.id,
             })
         );
-        this._eventService.removeEventListener(
+
+        this._eventService.off(
             SHOW_DEBUGGING_MESSAGE_EVENT,
             this.showMessage,
             this
@@ -108,10 +115,10 @@ export class DebuggingGui extends LifeCycleEntity {
 
     private openDebuggingWindow(
         _: OpenDebuggingWindowCommandData
-    ): ICommandResult {
+    ): ICommandResult<OpenDebuggingWindowCommandResultType> {
         this._commandService.send(
-            createShowLayoutCommand({
-                layoutId: "debugging_console",
+            createShowGuiCommand({
+                id: DebuggingGuiJson.id,
             })
         );
         return {
@@ -121,10 +128,10 @@ export class DebuggingGui extends LifeCycleEntity {
 
     private closeDebuggingWindow(
         _: CloseDebuggingWindowCommandData
-    ): ICommandResult {
+    ): ICommandResult<CloseDebuggingWindowCommandResultType> {
         this._commandService.send(
-            createHideLayoutCommand({
-                layoutId: "debugging_console",
+            createHideGuiCommand({
+                id: DebuggingGuiJson.id,
             })
         );
         return {
@@ -132,119 +139,6 @@ export class DebuggingGui extends LifeCycleEntity {
         };
     }
 
-    private createGuiTemplates() {
-        return [
-            {
-                id: "debugging_console-Grid",
-                type: "Grid",
-                options: {
-                    column: 3,
-                    row: 3,
-                    backgroundColor: "transparent",
-                    paddingBottom: 5,
-                    paddingTop: 5,
-                    paddingLeft: 5,
-                    paddingRight: 5,
-                },
-            },
-            {
-                id: "debugging_console-Container",
-                type: "Container",
-                options: {
-                    width: "66%",
-                    height: "50%",
-                    alpha: 0.5,
-                    horizontalAlignment: 0,
-                    verticalAlignment: 0,
-                    background: "black",
-                    cornerRadius: 20,
-                    left: 20,
-                    top: 20,
-                    thickness: 0,
-                },
-            },
-            {
-                id: "debugging_console-Panel",
-                type: "Panel",
-                options: {
-                    verticalAlignment: 1,
-                    horizontalAlignment: 0,
-                    top: -15,
-                    left: 15,
-                    enableScrolling: true,
-                },
-            },
-            {
-                // Stack Panel, horizontal
-                id: "debugging_console-Log_Panel",
-                type: "Panel",
-                options: {
-                    top: -45,
-                    isVertical: false,
-                    verticalAlignment: 1,
-                    horizontalAlignment: 0,
-                    isPointerBlocker: false,
-                },
-            },
-            {
-                // Message Text
-                id: "debugging_console-Log_Message",
-                type: "Text",
-                options: {
-                    alpha: 1,
-                    color: "white",
-                    width: "600px",
-                    height: "20px",
-                    fontSize: "14px",
-                    textHorizontalAlignment: 0,
-
-                    text: "message_text",
-                },
-            },
-        ];
-    }
-
-    private getControlsWithData(): RegisterControlCommandData[] {
-        return [
-            {
-                controlId: "debugging_console-Grid",
-                templateId: "debugging_console-Grid",
-            },
-            {
-                controlId: "debugging_console-Container",
-                templateId: "debugging_console-Container",
-            },
-            {
-                controlId: "debugging_console-Panel",
-                templateId: "debugging_console-Panel",
-            },
-        ];
-    }
-
-    private createGuiLayout(): GuiControlLayout[] {
-        return [
-            {
-                id: "debugging_console",
-                sort: 0,
-                controlList: [
-                    {
-                        id: "debugging_console-Grid",
-                        sort: 0,
-                    },
-                    {
-                        id: "debugging_console-Container",
-                        sort: 1,
-                        controlList: [
-                            {
-                                id: "debugging_console-Panel",
-                                sort: 0,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ];
-    }
     private showMessage({ message }: ShowDebuggingMessageEventData) {
         PENDING_MESSAGES.push(message);
     }
@@ -258,45 +152,31 @@ export class DebuggingGui extends LifeCycleEntity {
         window.setTimeout(this.postPendingMessages, 1000);
     }
     private postMessage(index: string, message: string) {
-        this._commandService.send({
-            type: {
-                key: "GUI.ADD_LAYOUT_TO_CONTROL_COMMAND",
-            },
-            data: {
-                targetControlId: "debugging_console-Panel",
-                registerControlList: [
+        const newMessageGuiId = `GUI_Debugging-Message_${index}`;
+        this._commandService.send(
+            createCreateGuiCommand({
+                id: newMessageGuiId,
+                layoutId: DebuggingMessageGuiJson.id,
+                parentControlId: this._queryService.query(
+                    createQueryForGenerateGuiControlId({
+                        guiId: DebuggingGuiJson.id,
+                        controlId: "debugging_console-Panel",
+                    })
+                ).result,
+                controlDataList: [
                     {
-                        controlId: "debugging_console-Log_Panel-" + index,
-                        templateId: "debugging_console-Log_Panel",
-                    },
-                    {
-                        controlId: "debugging_console-Log_Message-" + index,
-                        templateId: "debugging_console-Log_Message",
+                        controlId: "debugging_console_message-text",
                         options: {
                             text: message,
                         },
                     },
                 ],
-                templateList: [],
-                layout: {
-                    id: "debugging_console-Panel-" + index,
-                    count: 0,
-                    controlList: [
-                        {
-                            id: "debugging_console-Log_Panel-" + index,
-                            sort: 0,
-                            controlList: [
-                                {
-                                    id:
-                                        "debugging_console-Log_Message-" +
-                                        index,
-                                    sort: 0,
-                                },
-                            ],
-                        },
-                    ],
-                },
-            },
-        });
+            })
+        );
+        this._commandService.send(
+            createActivateGuiCommand({
+                id: newMessageGuiId,
+            })
+        );
     }
 }

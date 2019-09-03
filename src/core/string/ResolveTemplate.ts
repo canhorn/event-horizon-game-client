@@ -7,8 +7,8 @@ const getPropertyFromData = (data: any, is: string | string[]): any => {
     } else if (is.length == 0) {
         return data;
     } else {
-        const prop = is.shift() || "";
-        // Forge a path of nested objects if there is a value to set
+        var prop = is.shift() || "";
+        //Forge a path of nested objects if there is a value to set
         if (data[prop] == undefined) {
             data[prop] = {};
         }

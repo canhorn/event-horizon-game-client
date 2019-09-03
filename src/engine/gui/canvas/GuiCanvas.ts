@@ -1,6 +1,6 @@
 import { AdvancedDynamicTexture } from "babylonjs-gui";
-import { ErrorCode } from "../../assert/Assert";
-import { Inject } from "../../ioc/Create";
+import { ErrorCode } from "../../../core/assert/Assert";
+import { Inject } from "../../../core/ioc";
 import { IRenderingScene } from "../../renderer/api/IRenderingScene";
 import { IGuiCanvas } from "../IGuiCanvas";
 

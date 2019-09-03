@@ -1,8 +1,10 @@
-import { ICommandHandler } from "../../../../command/api/ICommandHandler";
-import { ICommandResult } from "../../../../command/api/ICommandResult";
-import { ICommandService } from "../../../../command/api/ICommandService";
-import { ICommandType } from "../../../../command/api/ICommandType";
-import { Inject } from "../../../../ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandService,
+    ICommandType,
+} from "../../../../../core/command";
+import { Inject } from "../../../../../core/ioc";
 import { IAssetScriptConfig } from "../api/configs/IAssetScriptConfig";
 import { IBoxMeshConfig } from "../api/configs/IBoxMeshConfig";
 import { IGLTFMeshConfig } from "../api/configs/IGLTFMeshConfig";
@@ -12,6 +14,7 @@ import { createRegisterClientAssetInstanceCommand } from "../register/RegisterCl
 import {
     BUILD_CLIENT_ASSET_INSTANCE_COMMAND,
     BuildClientAssetInstanceCommandData,
+    BuildClientAssetInstanceCommandResultType,
 } from "./BuildClientAssetInstanceCommand";
 import {
     getClientAssetMeshFromCache,
@@ -35,7 +38,9 @@ export class BuildClientAssetInstanceCommandHandler implements ICommandHandler {
         assetInstanceId,
         clientAsset,
         position,
-    }: BuildClientAssetInstanceCommandData): ICommandResult {
+    }: BuildClientAssetInstanceCommandData): ICommandResult<
+        BuildClientAssetInstanceCommandResultType
+    > {
         // Create the ClientAsset Instance
         if (clientAsset.type === "MESH") {
             const cacheMesh = getClientAssetMeshFromCache(clientAsset.id);

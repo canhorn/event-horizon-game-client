@@ -1,6 +1,5 @@
-import { EventType } from "../../event/EventType";
-import { IEventHandler } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
+import { EventType, IEventHandler } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { IRenderingEngine } from "../../renderer/api/IRenderingEngine";
 import { SHOW_LOADING_UI_EVENT } from "./ShowLoadingUiEvent";
 

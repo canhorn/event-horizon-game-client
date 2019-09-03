@@ -1,26 +1,34 @@
-import { ICommand } from "../../command/api/ICommand";
-import { ICommandType } from "../../command/api/ICommandType";
-import { CommandType } from "../../command/model/CommandType";
-import { GuiControlLayout, GuiTemplate } from "../model";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
+import { IGuiControlData } from "../api/IGuiControlData";
 
 /**
  * Type: CreateGuiCommand
- * NameSpace: Gui
+ * NameSpace: Engine.Gui
  * Type: Command
  */
-export const CREATE_GUI_COMMAND = new CommandType("Gui.CREATE_GUI_COMMAND");
-export class CommandClass implements ICommand {
+export const CREATE_GUI_COMMAND = new CommandType(
+    "Engine.Gui.CREATE_GUI_COMMAND"
+);
+export class CommandClass
+    implements ICommand<CreateGuiCommandData, CreateGuiCommandResultType> {
     public type: ICommandType = CREATE_GUI_COMMAND;
     public data?: CreateGuiCommandData;
 }
 const instanceOfCommand = new CommandClass();
 export const createCreateGuiCommand = (
     data: CreateGuiCommandData
-): ICommand => {
+): ICommand<CreateGuiCommandData, CreateGuiCommandResultType> => {
     instanceOfCommand.data = data;
     return instanceOfCommand;
 };
 export interface CreateGuiCommandData {
-    layoutList: GuiControlLayout[];
-    templateList: GuiTemplate[];
+    id: string;
+    layoutId: string;
+    controlDataList?: IGuiControlData[];
+    parentControlId?: string;
 }
+
+export type CreateGuiCommandResultType =
+    | "invalid_command_data"
+    | "layout_data_not_registered"
+    | undefined;

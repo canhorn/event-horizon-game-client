@@ -1,4 +1,4 @@
-import { ErrorCode } from "../../assert/Assert";
+import { ErrorCode } from "../../../core/assert/Assert";
 import { IRenderingGui } from "../../renderer/api/IRenderingGui";
 import { GuiCanvas } from "../canvas/GuiCanvas";
 import { IGuiCanvas } from "../IGuiCanvas";

@@ -1,7 +1,9 @@
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../../core/command";
 import { isObjectDefined } from "../../../../../core/object/ObjectCheck";
-import { ICommandHandler } from "../../../../command/api/ICommandHandler";
-import { ICommandResult } from "../../../../command/api/ICommandResult";
-import { ICommandType } from "../../../../command/api/ICommandType";
 import {
     getClientAssetInstance,
     removeClientAssetInstance,
@@ -9,6 +11,7 @@ import {
 import {
     DISPOSE_OF_CLIENT_ASSET_INSTANCE_COMMAND,
     DisposeOfClientAssetInstanceCommandData,
+    DisposeOfClientAssetInstanceCommandResultType,
 } from "./DisposeOfClientAssetInstanceCommand";
 
 /**
@@ -21,7 +24,9 @@ export class DisposeOfClientAssetInstanceCommandHandler
     constructor() {}
     public handle({
         assetInstanceId,
-    }: DisposeOfClientAssetInstanceCommandData): ICommandResult {
+    }: DisposeOfClientAssetInstanceCommandData): ICommandResult<
+        DisposeOfClientAssetInstanceCommandResultType
+    > {
         const asset = getClientAssetInstance(assetInstanceId);
         if (isObjectDefined(asset)) {
             asset.dispose();

@@ -1,7 +1,7 @@
 import { Mesh } from "babylonjs";
 import "babylonjs-loaders";
-import { Inject } from "../../../../../ioc/Create";
-import { IGuid } from "../../../../../math/guid/IGuid";
+import { IGuid } from "../../../../../../core/guid/IGuid";
+import { Inject } from "../../../../../../core/ioc";
 import { IRenderingScene } from "../../../../../renderer/api/IRenderingScene";
 import { runClientScriptWithReturn } from "../../../scripts/run/RunClientScript";
 import { IAssetScriptConfig } from "../../api/configs/IAssetScriptConfig";

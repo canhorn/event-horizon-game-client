@@ -1,5 +1,5 @@
 import { isObjectNotDefined } from "../../../../../core/object/ObjectCheck";
-import { IQueryHandler, IQueryResult } from "../../../../query/IQueryService";
+import { IQueryHandler, IQueryResult } from "../../../../../core/query";
 import { getClientAsset } from "../store/ClientAssetStore";
 import {
     FETCH_CLIENT_ASSET_QUERY,

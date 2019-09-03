@@ -1,10 +1,9 @@
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { Entity } from "../../../entity/model/Entity";
-import { Inject } from "../../../ioc/Create";
 import { IRegisterDisposable } from "../../../lifecycle/register/IRegisterDisposable";
 import { IRegisterInitializable } from "../../../lifecycle/register/IRegisterInitializable";
 import { IRegisterUpdatable } from "../../../lifecycle/register/IRegisterUpdatable";
-import { createLogger } from "../../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../../logger/LoggerFactory";
 import { createClientScriptFromTemplate } from "../../client/scripts/create/CreateScriptFromTemplate";
 import { IServerModule } from "../api/IServerModule";
 import { IServerModuleScripts } from "../api/IServerModuleScripts";

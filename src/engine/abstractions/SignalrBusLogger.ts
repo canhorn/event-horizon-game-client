@@ -1,5 +1,5 @@
 import { LogLevel } from "@aspnet/signalr";
-import { ILogger } from "../logger/LoggerFactory";
+import { ILogger } from "../../core/logger";
 
 export class SignalrBusLogger {
     constructor(private _logger: ILogger) {}

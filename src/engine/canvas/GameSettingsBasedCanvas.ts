@@ -1,5 +1,5 @@
-import { IEventService } from "../event/IEventService";
-import { Inject } from "../ioc/Create";
+import { IEventService } from "../../core/event";
+import { Inject } from "../../core/ioc";
 import { IGameConfiguration } from "../settings/IGameSettings";
 import { ICanvas } from "./ICanvas";
 import { canvasInitialized } from "./initialized/CanvasInitialized";
@@ -25,7 +25,7 @@ export class GameSettingsBasedCanvas implements ICanvas {
         )
     ) {}
     public initialize() {
-        this._eventService.addEventListener(CANVAS_RESET, this.reset, this);
+        this._eventService.on(CANVAS_RESET, this.reset, this);
         const drawCanvas = this.getDrawCanvas();
         const appendToElement = this.getAppendToElement();
         this._drawCanvas = drawCanvas;
@@ -34,7 +34,7 @@ export class GameSettingsBasedCanvas implements ICanvas {
         this._eventService.publish(canvasInitialized);
     }
     public dispose() {
-        this._eventService.removeEventListener(CANVAS_RESET, this.reset, this);
+        this._eventService.off(CANVAS_RESET, this.reset, this);
         if (this._drawCanvas) {
             this._drawCanvas.remove();
             this._drawCanvas = undefined;

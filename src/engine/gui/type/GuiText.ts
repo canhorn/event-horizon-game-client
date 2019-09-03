@@ -1,21 +1,17 @@
 import { Mesh } from "babylonjs";
 import { TextBlock } from "babylonjs-gui";
 import objectMerge from "../../../core/object/ObjectMerge";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { GuiControlType } from "../model/GuiControlType";
 
-export class GuiText implements GuiControl {
+export class GuiText implements IGuiControl {
     public id: string;
-    public options: GuiControlOptions;
+    public options: IGuiControlOptions;
     public control: TextBlock;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Text;
+        return GuiControlType.TEXT;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -26,21 +22,21 @@ export class GuiText implements GuiControl {
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options;
         this.control = createControl(id, options as GuiTextControlOptions);
         this.gridLocation = gridLocation;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         throw new Error("GuiLabel does not support adding of Control.");
     }
     public update(options: GuiTextControlOptions) {
         this.control.text = options.text;
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -52,15 +48,10 @@ const createControl = (
     idPrefix: string,
     options: GuiTextControlOptions
 ): TextBlock => {
-    const text = new TextBlock(`${idPrefix}-Text`);
-    text.isHitTestVisible = false;
-    text.textWrapping = true;
-
-    objectMerge(text, options);
-
-    return text;
+    return objectMerge(new TextBlock(`${idPrefix}-Text`), options);
 };
-export interface GuiTextControlOptions extends GuiControlOptions {
+
+export interface GuiTextControlOptions extends IGuiControlOptions {
     width: string;
     height: string;
     text: string;

@@ -1,8 +1,10 @@
-import { EventType } from "../../../event/EventType";
-import { IEventHandler, IEventService } from "../../../event/IEventService";
-import { Inject } from "../../../ioc/Create";
-import { createLogger } from "../../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../../logger/LoggerFactory";
+import {
+    EventType,
+    IEventHandler,
+    IEventService,
+} from "../../../../core/event";
+import { Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
 import { IServerModuleScripts } from "../api/IServerModuleScripts";
 import { ServerModule } from "../model/ServerModule";
 import { ADD_SERVER_MODULE_SCRIPT_EVENT } from "./AddServerModuleScriptEvent";

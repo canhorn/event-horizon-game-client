@@ -1,4 +1,4 @@
-import { IEvent } from "../../../event/EventType";
+import { IEvent } from "../../../../core/event";
 
 export abstract class IScriptUtils {
     public abstract isObjectDefined(obj: any): boolean;

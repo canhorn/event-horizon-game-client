@@ -1,6 +1,5 @@
-import { EventType } from "../../event/EventType";
-import { IEventHandler } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
+import { EventType, IEventHandler } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { IParticleService } from "../IParticleService";
 import {
     ADD_PARTICLE_TEMPLATE_EVENT,

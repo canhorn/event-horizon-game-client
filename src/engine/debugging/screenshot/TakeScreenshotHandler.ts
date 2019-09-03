@@ -1,8 +1,7 @@
 import { Tools } from "babylonjs";
+import { EventType, IEventHandler } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { ICanvas } from "../../canvas/ICanvas";
-import { EventType } from "../../event/EventType";
-import { IEventHandler } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
 import { IRenderingEngine } from "../../renderer/api/IRenderingEngine";
 import { IRenderingScene } from "../../renderer/api/IRenderingScene";
 import { TAKE_SCREENSHOT_EVENT } from "./TakeScreenshotEvent";

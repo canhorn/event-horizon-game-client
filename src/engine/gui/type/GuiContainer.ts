@@ -1,19 +1,16 @@
 import { Mesh } from "babylonjs";
 import { Rectangle } from "babylonjs-gui";
+import { Inject } from "../../../core/ioc";
 import objectMerge from "../../../core/object/ObjectMerge";
-import { Inject } from "../../ioc/Create";
-import { ISystemWindow } from "../../system/window/api/ISystemWindow";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
-import { IGuiAnimationOptions, isValidAnimation } from "./GuiPanel";
+import { ISystemWindow } from "../../../core/window/api/ISystemWindow";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { IGuiAnimationOptions } from "../api/IGuiAnimationOptions";
+import { GuiControlType } from "../model/GuiControlType";
+import { isValidAnimation } from "./animation/IsValidAnimation";
 
-export class GuiContainer implements GuiControl {
+export class GuiContainer implements IGuiControl {
     get type(): GuiControlType {
-        return GuiControlType.Container;
+        return GuiControlType.CONTAINER;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -46,15 +43,15 @@ export class GuiContainer implements GuiControl {
     public options: GuiContainerControlOptions;
     public control: Rectangle;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
 
     private _originalAlpha: number = 1;
     private _alphaTransitionHandler: number = 1;
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation,
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation,
         private readonly _window: ISystemWindow = Inject(ISystemWindow)
     ) {
         this.id = id;
@@ -63,13 +60,13 @@ export class GuiContainer implements GuiControl {
         this.gridLocation = gridLocation;
         this._originalAlpha = this.control.alpha;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         this.control.addControl(guiControl.control);
     }
     public update(options: GuiContainerControlOptions) {
         throw new Error("GuiContainer does not support updating.");
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -112,7 +109,7 @@ const createControl = (
 
     return background;
 };
-export interface GuiContainerControlOptions extends GuiControlOptions {
+export interface GuiContainerControlOptions extends IGuiControlOptions {
     width: number | string;
     height: number | string;
     alpha: number;

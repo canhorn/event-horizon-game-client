@@ -1,5 +1,5 @@
+import { Inject } from "../../../core/ioc";
 import { Entity } from "../../entity/model/Entity";
-import { Inject } from "../../ioc/Create";
 import { IDisposable } from "../IDisposable";
 import { IDrawable } from "../IDrawable";
 import { IInitializable } from "../IInitializable";

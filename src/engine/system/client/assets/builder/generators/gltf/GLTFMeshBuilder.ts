@@ -6,8 +6,8 @@ import {
     Space,
     Vector3,
 } from "babylonjs";
-import { Inject } from "../../../../../../ioc/Create";
-import { IGuid } from "../../../../../../math/guid/IGuid";
+import { IGuid } from "../../../../../../../core/guid/IGuid";
+import { Inject } from "../../../../../../../core/ioc";
 import { convertToEngineMesh } from "../../../../../../renderer/EngineMesh";
 
 export const GLTFMeshBuilderLoader = (

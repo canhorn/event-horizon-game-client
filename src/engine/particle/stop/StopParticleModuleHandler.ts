@@ -1,7 +1,6 @@
+import { EventType, IEventHandler } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { Entity } from "../../entity/model/Entity";
-import { EventType } from "../../event/EventType";
-import { IEventHandler } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
 import { IParticleLifecycleService } from "../IParticleService";
 import { STOP_PARTICLE_MODULE_EVENT } from "./StopParticleModuleEvent";
 

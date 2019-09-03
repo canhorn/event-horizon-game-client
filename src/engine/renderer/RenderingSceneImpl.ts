@@ -1,7 +1,7 @@
 import { Scene } from "babylonjs";
+import { assert } from "../../core/assert/Assert";
+import { Inject } from "../../core/ioc";
 import { isObjectDefined } from "../../core/object/ObjectCheck";
-import { assert } from "../assert/Assert";
-import { Inject } from "../ioc/Create";
 import { IRenderingEngine } from "./api/IRenderingEngine";
 import { IRenderingScene } from "./api/IRenderingScene";
 

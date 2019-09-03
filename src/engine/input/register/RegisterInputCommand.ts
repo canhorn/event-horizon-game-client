@@ -1,20 +1,26 @@
-import { ICommand } from "../../command/api/ICommand";
-import { CommandType } from "../../command/model/CommandType";
+import { CommandType, ICommand, ICommandType } from "../../../core/command";
 import { InputOptions } from "../InputModel";
 
+/**
+ * Name: RegisterInputCommand
+ * NameSpace: Engine.Input
+ * Type: Command
+ */
 export const REGISTER_INPUT_COMMAND = new CommandType(
-    "INPUT.REGISTER_INPUT_COMMAND"
+    "Engine.Input.REGISTER_INPUT_COMMAND"
 );
-
-const registerInputCommand: ICommand = {
-    type: REGISTER_INPUT_COMMAND,
-};
-
+class CommandClass
+    implements
+        ICommand<RegisterInputCommandData, RegisterInputCommandResultType> {
+    public type: ICommandType = REGISTER_INPUT_COMMAND;
+    public data?: RegisterInputCommandData;
+}
+const instanceOfCommand = new CommandClass();
 export const createRegisterInputCommand = (
-    data: IRegisterInputCommandData
-): ICommand => {
-    registerInputCommand.data = data;
-    return registerInputCommand;
+    data: RegisterInputCommandData
+): ICommand<RegisterInputCommandData, RegisterInputCommandResultType> => {
+    instanceOfCommand.data = data;
+    return instanceOfCommand;
 };
-
-export interface IRegisterInputCommandData extends InputOptions {}
+export interface RegisterInputCommandData extends InputOptions {}
+export type RegisterInputCommandResultType = undefined;

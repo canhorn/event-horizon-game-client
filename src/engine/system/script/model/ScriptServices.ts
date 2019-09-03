@@ -1,10 +1,9 @@
-import { ICommandService } from "../../../command/api/ICommandService";
-import { IEventService } from "../../../event/IEventService";
-import { getI18nState } from "../../../i18n/store/I18nStore";
-import { Inject } from "../../../ioc/Create";
-import { Container } from "../../../ioc/typescript-ioc";
-import { createLogger } from "../../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../../logger/LoggerFactory";
+import { ICommandService } from "../../../../core/command";
+import { IEventService } from "../../../../core/event";
+import { getI18nState } from "../../../../core/i18n/store/I18nStore";
+import { Container, Inject } from "../../../../core/ioc";
+import { createLogger, ILogger } from "../../../../core/logger";
+import { IQueryService } from "../../../../core/query/api/IQueryService";
 import { IEngineRenderingAPI } from "../../../renderer/api/IEngineRenderingAPI";
 import { IScriptServices } from "../api/IScriptServices";
 
@@ -21,6 +20,9 @@ export class ScriptServices implements IScriptServices {
     }
     get commandService() {
         return Container.get(ICommandService);
+    }
+    get queryService() {
+        return Container.get(IQueryService);
     }
     get renderingApi() {
         return Inject<IEngineRenderingAPI>(IEngineRenderingAPI);

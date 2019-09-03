@@ -1,4 +1,4 @@
-import { ILogger } from "../../../../logger/LoggerFactory";
+import { ILogger } from "../../../../../core/logger";
 import { ServerScript } from "../../../server/model/ServerScript";
 import { IClientScript } from "../api/IClientScript";
 

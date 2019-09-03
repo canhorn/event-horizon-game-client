@@ -1,42 +1,41 @@
 import { Mesh } from "babylonjs";
 import { Container, Grid } from "babylonjs-gui";
+import { ErrorCode } from "../../../core/assert/Assert";
 import { isObjectNotDefined } from "../../../core/object/ObjectCheck";
 import objectMerge from "../../../core/object/ObjectMerge";
-import { ErrorCode } from "../../assert/Assert";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { GuiControlType } from "../model/GuiControlType";
+import { runGuiAnimation } from "./animation/RunGuiAnimation";
 
-export class GuiGrid implements GuiControl {
+export class GuiGrid implements IGuiControl {
     public id: string;
-    public options: GuiControlOptions;
+    public options: IGuiControlOptions;
     public control: Grid;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Grid;
+        return GuiControlType.GRID;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
     }
     set isVisible(value: boolean) {
-        this.control.isVisible = value;
+        if (!runGuiAnimation(this.control, this.options, value)) {
+            this.control.isVisible = value;
+        }
     }
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options;
         this.control = createControl(options as GuiGridControlOptions);
         this.gridLocation = gridLocation;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         if (!guiControl.gridLocation) {
             throw new ErrorCode(
                 "Grid Location is required in GuiGrid",
@@ -50,10 +49,10 @@ export class GuiGrid implements GuiControl {
         );
         correctCellsHitTestVisible((this.control as unknown) as IGridWithCells);
     }
-    public update(options: GuiControlOptions) {
+    public update(options: IGuiControlOptions) {
         throw new Error("Method not implemented.");
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -105,7 +104,7 @@ const createControl = (options: GuiGridControlOptions): Grid => {
     return grid;
 };
 
-export interface GuiGridControlOptions extends GuiControlOptions {
+export interface GuiGridControlOptions extends IGuiControlOptions {
     column: number;
     row: number;
     backgroundColor: string;

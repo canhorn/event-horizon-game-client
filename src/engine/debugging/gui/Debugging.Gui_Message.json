@@ -1,0 +1,33 @@
+{
+    "id": "debugging_console_message",
+    "sort": 0,
+    "controlList": [
+        {
+            "id": "debugging_console_message-panel",
+            "sort": 1,
+            "templateId": "platform-panel",
+            "options": {
+                "top": -45,
+                "isVertical": false,
+                "adaptHeightToChildren": true,
+                "adaptWidthToChildren": true,
+                "verticalAlignment": 1,
+                "horizontalAlignment": 0
+            },
+            "controlList": [
+                {
+                    "id": "debugging_console_message-text",
+                    "sort": 0,
+                    "templateId": "platform-text",
+                    "options": {
+                        "color": "white",
+                        "width": "600px",
+                        "height": "20px",
+                        "fontSize": "14px",
+                        "textHorizontalAlignment": 0
+                    }
+                }
+            ]
+        }
+    ]
+}

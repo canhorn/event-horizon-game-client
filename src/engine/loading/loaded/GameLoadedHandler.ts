@@ -1,7 +1,6 @@
-import { IEventHandler } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
+import { EventType, IEventHandler } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
 import { IRenderingEngine } from "../../renderer/api/IRenderingEngine";
-import { EventType } from "./../../event/EventType";
 import { GAME_LOADED_EVENT } from "./GameLoadedEvent";
 
 export class GameLoadedHandler implements IEventHandler {

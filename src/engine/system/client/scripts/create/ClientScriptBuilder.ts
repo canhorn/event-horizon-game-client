@@ -1,6 +1,9 @@
-import { Inject } from "../../../../ioc/Create";
-import { createLogger } from "../../../../logger/InjectLoggerDecorator";
-import { ILogger, ILoggerFactory } from "../../../../logger/LoggerFactory";
+import { Inject } from "../../../../../core/ioc";
+import {
+    createLogger,
+    ILogger,
+    ILoggerFactory,
+} from "../../../../../core/logger";
 import { IClientScript } from "../api/IClientScript";
 import { IClientScriptBuilder } from "../api/IClientScriptBuilder";
 import { ClientScript } from "../model/ClientScript";

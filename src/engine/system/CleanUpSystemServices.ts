@@ -1,4 +1,4 @@
-import { Inject } from "../ioc/Create";
+import { Inject } from "../../core/ioc";
 import { IRegisterBeforeRenderable } from "../lifecycle/register/IRegisterBeforeRenderable";
 import { IRegisterDisposable } from "../lifecycle/register/IRegisterDisposable";
 import { IRegisterDrawable } from "../lifecycle/register/IRegisterDrawable";

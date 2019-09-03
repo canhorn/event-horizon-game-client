@@ -1,4 +1,4 @@
-import { EventType, IEvent, IEventType } from "../../event/EventType";
+import { EventType, IEvent, IEventType } from "../../../core/event";
 
 /**
  * Type: ShowDebuggingMessageEvent
@@ -22,3 +22,4 @@ export const createShowDebuggingMessageEvent = (
 export interface ShowDebuggingMessageEventData {
     message: string;
 }
+export type ShowDebuggingMessageEventResultType = undefined;

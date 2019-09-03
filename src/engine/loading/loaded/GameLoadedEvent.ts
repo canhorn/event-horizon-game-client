@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../event/EventType";
+import { EventType, IEvent } from "../../../core/event";
 
 export const GAME_LOADED_EVENT = new EventType("ENGINE.GAME_LOADED");
 

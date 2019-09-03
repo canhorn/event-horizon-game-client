@@ -1,14 +1,20 @@
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandService,
+    ICommandType,
+} from "../../../core/command";
+import { Inject } from "../../../core/ioc";
+import { createLogger, ILogger } from "../../../core/logger";
 import { isObjectNotDefined } from "../../../core/object/ObjectCheck";
-import { ICommandHandler } from "../../command/api/ICommandHandler";
-import { ICommandResult } from "../../command/api/ICommandResult";
-import { ICommandService } from "../../command/api/ICommandService";
-import { ICommandType } from "../../command/api/ICommandType";
-import { Inject } from "../../ioc/Create";
-import { createLogger } from "../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../logger/LoggerFactory";
-import { addGuiLayoutCommand } from "../add/AddLayoutCommand";
-import { addGuiTemplateCommand } from "../add/AddTemplateCommand";
-import { CREATE_GUI_COMMAND, CreateGuiCommandData } from "./CreateGuiCommand";
+import { GuiFromData } from "../model/GuiFromData";
+import { setGuiInStore } from "../store/GuiStore";
+import { getGuiLayoutDataFromStore } from "../store/layout/GuiLayoutDataStore";
+import {
+    CREATE_GUI_COMMAND,
+    CreateGuiCommandData,
+    CreateGuiCommandResultType,
+} from "./CreateGuiCommand";
 
 export class CreateGuiCommandHandler implements ICommandHandler {
     public type: ICommandType = CREATE_GUI_COMMAND;
@@ -22,22 +28,21 @@ export class CreateGuiCommandHandler implements ICommandHandler {
         )
     ) {}
 
-    public handle(data: CreateGuiCommandData): ICommandResult {
-        if (isObjectNotDefined(data)) {
-            this._logger.error(
-                "Error Creating Gui from Layout. Ignoring Gui Creation."
-            );
+    public handle({
+        id,
+        layoutId,
+        controlDataList,
+        parentControlId,
+    }: CreateGuiCommandData): ICommandResult<CreateGuiCommandResultType> {
+        const layoutData = getGuiLayoutDataFromStore(layoutId);
+        if (isObjectNotDefined(layoutData)) {
             return {
                 success: false,
-                result: "invalid_command_data",
+                result: "layout_data_not_registered",
             };
         }
-        const { templateList, layoutList } = data;
-        templateList.forEach(template =>
-            this._commandService.send(addGuiTemplateCommand({ template }))
-        );
-        layoutList.forEach(layout =>
-            this._commandService.send(addGuiLayoutCommand({ layout }))
+        setGuiInStore(
+            new GuiFromData(id, layoutData, controlDataList, parentControlId)
         );
         return {
             success: true,

@@ -1,14 +1,13 @@
+import { ErrorCode } from "../../../core/assert/Assert";
 import { Dictionary } from "../../../core/collection/Dictionary";
 import { IDictionary } from "../../../core/collection/IDictionary";
-import { ErrorCode } from "../../assert/Assert";
+import { IEventService } from "../../../core/event";
+import { Inject } from "../../../core/ioc";
+import { createLogger, ILogger } from "../../../core/logger";
 import { Entity } from "../../entity/model/Entity";
-import { IEventService } from "../../event/IEventService";
-import { Inject } from "../../ioc/Create";
 import { IDisposable } from "../../lifecycle/IDisposable";
 import { IRegisterDisposable } from "../../lifecycle/register/IRegisterDisposable";
 import { IRegisterInitializable } from "../../lifecycle/register/IRegisterInitializable";
-import { createLogger } from "../../logger/InjectLoggerDecorator";
-import { ILogger } from "../../logger/LoggerFactory";
 import { IRenderingScene } from "../../renderer/api/IRenderingScene";
 import {
     IParticleLifecycleService,
@@ -69,7 +68,6 @@ export class TemplateParticleService extends Entity
     ): void {
         const template = this._particleTemplateList.getValue(templateId);
         if (!template) {
-            this._logger.error("Template not found", { id, templateId, settings });
             throw new ErrorCode("Template not found", "template_not_found");
         }
         this.createModuleBySettings(settings, template.defaultSettings, id);

@@ -1,4 +1,4 @@
-import { Inject } from "../../../../ioc/Create";
+import { Inject } from "../../../../../core/ioc";
 import { IClientScript } from "../api/IClientScript";
 import { IClientScriptBuilder } from "../api/IClientScriptBuilder";
 

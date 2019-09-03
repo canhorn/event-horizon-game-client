@@ -1,4 +1,4 @@
-import { EventType, IEvent } from "../../event/EventType";
+import { EventType, IEvent } from "../../../core/event";
 
 export const DISPOSE_PARTICLE_MODULE_EVENT = new EventType(
     "particle.DISPOSE_PARTICLE_MODULE_EVENT"

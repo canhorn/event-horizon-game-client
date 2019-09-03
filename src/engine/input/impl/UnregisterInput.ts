@@ -1,9 +1,6 @@
 import * as KeyboardJS from "keyboardjs";
-import { Inject } from "../../ioc/Create";
-import {
-    IInputPressedEventSender,
-    IInputReleasedEventSender,
-} from "../IInputEventSender";
+import { Inject } from "../../../core/ioc";
+import { IInputPressedEventSender, IInputReleasedEventSender } from "../IInputEventSender";
 import { InputOptions } from "../InputModel";
 import { IUnregisterInput } from "../IUnregisterInput";
 

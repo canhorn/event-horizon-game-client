@@ -1,14 +1,17 @@
-import { ICommandHandler } from "../../../../command/api/ICommandHandler";
-import { ICommandResult } from "../../../../command/api/ICommandResult";
-import { ICommandType } from "../../../../command/api/ICommandType";
-import { IEventService } from "../../../../event/IEventService";
-import { Inject } from "../../../../ioc/Create";
+import {
+    ICommandHandler,
+    ICommandResult,
+    ICommandType,
+} from "../../../../../core/command";
+import { IEventService } from "../../../../../core/event";
+import { Inject } from "../../../../../core/ioc";
 import { createClientEntityInstanceRegisteredEvent } from "../register/ClientEntityInstanceRegisteredEvent";
 import { createRegisteringClientEntityInstanceEvent } from "../register/RegisteringClientEntityInstanceEvent";
 import { setClientEntityInstance } from "../store/ClientEntityInstanceStore";
 import {
     SET_CLIENT_ENTITY_INSTANCE_COMMAND,
     SetClientEntityInstanceCommandData,
+    SetClientEntityInstanceCommandResultType,
 } from "./SetClientEntityInstanceCommand";
 
 /**
@@ -22,7 +25,9 @@ export class SetClientEntityInstanceCommandHandler implements ICommandHandler {
     ) {}
     public handle({
         clientEntityInstance,
-    }: SetClientEntityInstanceCommandData): ICommandResult {
+    }: SetClientEntityInstanceCommandData): ICommandResult<
+        SetClientEntityInstanceCommandResultType
+    > {
         this._eventService.publish(
             createRegisteringClientEntityInstanceEvent({
                 clientEntityInstance,

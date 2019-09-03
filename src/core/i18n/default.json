@@ -49,5 +49,6 @@
     "loggingInErrorAccessDeniedMessage": "Access Denied",
     "generalLoggingInError": "Login flow failed, redirecting to home page.",
     "invalidEntityIdError": "Entity not found.",
+    "dialog::bodyText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra bibendum lorem, non dictum orci. Ut pharetra venenatis odio at tempor. Duis vitae consectetur lectus. Nulla nec tincidunt metus. Aenean a eleifend massa. Nam placerat vitae ante non faucibus. Pellentesque egestas enim sed enim blandit, at sodales erat ornare. In dictum augue dolor, eu egestas odio elementum et. Mauris et orci fermentum, aliquam purus a, facilisis nibh. Proin erat quam, mollis vitae semper ac, aliquet vel tortor. Nam nec enim vitae sem convallis auctor. Nam vitae nisl nibh. Curabitur ac leo tortor. Fusce dui nisl, consectetur id nunc hendrerit, aliquet porta sem. Nunc suscipit ante eu blandit placerat. Vivamus non erat sed purus scelerisque fermentum aliquam sed elit. Donec et placerat nibh. Etiam elementum neque eget libero ultrices ultricies. Duis volutpat facilisis urna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras convallis eget diam et cursus. Fusce vulputate augue eget tempor dapibus. Phasellus eu fringilla augue.",
     "empty": ""
 }

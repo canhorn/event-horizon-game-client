@@ -1,5 +1,5 @@
-import { IEventHandlerRegister } from "../event/IEventService";
-import { Inject } from "../ioc/Create";
+import { IEventHandlerRegister } from "../../core/event";
+import { Inject } from "../../core/ioc";
 import { GameLoadedHandler } from "./loaded/GameLoadedHandler";
 import { ShowLoadingUiEventHandler } from "./show/ShowLoadingUiEventHandler";
 

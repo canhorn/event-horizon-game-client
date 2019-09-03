@@ -1,20 +1,17 @@
 import { Mesh } from "babylonjs";
 import { Control, Rectangle } from "babylonjs-gui";
-import {
-    GuiControl,
-    GuiControlOptions,
-    GuiControlType,
-    GuiGridLocation,
-} from "../model";
+import objectMerge from "../../../core/object/ObjectMerge";
+import { IGuiControl, IGuiControlOptions, IGuiGridLocation } from "../api";
+import { GuiControlType } from "../model/GuiControlType";
 
-export class GuiSpacer implements GuiControl {
+export class GuiSpacer implements IGuiControl {
     public id: string;
-    public options: GuiControlOptions;
+    public options: IGuiControlOptions;
     public control: Control;
     public parentId?: string;
-    public gridLocation?: GuiGridLocation;
+    public gridLocation?: IGuiGridLocation;
     get type(): GuiControlType {
-        return GuiControlType.Spacer;
+        return GuiControlType.SPACER;
     }
     get isVisible(): boolean {
         return this.control.isVisible;
@@ -25,21 +22,21 @@ export class GuiSpacer implements GuiControl {
 
     constructor(
         id: string,
-        options: GuiControlOptions,
-        gridLocation?: GuiGridLocation
+        options: IGuiControlOptions,
+        gridLocation?: IGuiGridLocation
     ) {
         this.id = id;
         this.options = options;
         this.control = createControl(options as GuiSpacerControlOptions);
         this.gridLocation = gridLocation;
     }
-    public addControl(guiControl: GuiControl) {
+    public addControl(guiControl: IGuiControl) {
         throw new Error("GuiSpacer does not support adding of Control.");
     }
-    public update(options: GuiControlOptions) {
+    public update(options: IGuiControlOptions) {
         throw new Error("Method not implemented.");
     }
-    public linkWithMesh(mesh: Mesh) {
+    public linkWith(mesh: Mesh) {
         this.control.linkWithMesh(mesh);
     }
     public dispose() {
@@ -53,9 +50,12 @@ const createControl = (options: GuiSpacerControlOptions): Control => {
     padding.width = `${options.padding}px`;
     padding.thickness = 0;
     padding.isHitTestVisible = false;
+
+    objectMerge(padding, options);
+
     return padding;
 };
 
-export interface GuiSpacerControlOptions extends GuiControlOptions {
+export interface GuiSpacerControlOptions extends IGuiControlOptions {
     padding: number;
 }

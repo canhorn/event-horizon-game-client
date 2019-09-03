@@ -1,5 +1,5 @@
+import { Inject } from "../../../../core/ioc";
 import objectMerge from "../../../../core/object/ObjectMerge";
-import { Inject } from "../../../ioc/Create";
 import { IScriptServices } from "../api/IScriptServices";
 
 /**

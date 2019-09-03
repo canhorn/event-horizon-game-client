@@ -1,9 +1,6 @@
-import { createSingletonServiceFactory } from "../ioc/Create";
+import { createSingletonServiceFactory } from "../../core/ioc";
 import { TemplateParticleService } from "./impl/TemplateParticleService";
-import {
-    IParticleLifecycleService,
-    IParticleService,
-} from "./IParticleService";
+import { IParticleLifecycleService, IParticleService } from "./IParticleService";
 
 let particleService: TemplateParticleService | undefined;
 const getParticleService = () => {

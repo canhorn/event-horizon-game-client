@@ -1,4 +1,4 @@
-import { Inject } from "../ioc/Create";
+import { Inject } from "../../core/ioc";
 import { IBeforeRendering } from "./api/IBeforeRendering";
 import { IRenderingScene } from "./api/IRenderingScene";
 

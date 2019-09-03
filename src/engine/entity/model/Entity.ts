@@ -1,6 +1,5 @@
-import { Inject } from "../../ioc/Create";
-import { IIndexPool } from "../../math/index/IIndexPool";
-import { IndexPool } from "../../math/index/impl/IndexPool";
+import { IIndexPool } from "../../../core/index/IIndexPool";
+import { Inject } from "../../../core/ioc";
 import { IEntity } from "../api/IEntity";
 
 export abstract class Entity implements IEntity {
@@ -10,7 +9,9 @@ export abstract class Entity implements IEntity {
         return this._id;
     }
 
-    constructor(protected readonly _indexPool: IndexPool = Inject(IIndexPool)) {
+    constructor(
+        protected readonly _indexPool: IIndexPool = Inject(IIndexPool)
+    ) {
         this._id = _indexPool.nextIndex();
     }
 }

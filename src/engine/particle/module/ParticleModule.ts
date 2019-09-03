@@ -1,5 +1,5 @@
 import { ParticleSystem } from "babylonjs";
-import { Inject } from "../../ioc/Create";
+import { Inject } from "../../../core/ioc";
 import { IRenderingScene } from "../../renderer/api/IRenderingScene";
 import { updateParticleSystem } from "../impl/ParticleSystem";
 import { IParticleSettings } from "../model/IParticleSettings";
